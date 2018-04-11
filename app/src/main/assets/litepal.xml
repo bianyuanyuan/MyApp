@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="LoginAndRegister" />
+    <version value="7" />
+    <list>
+        <mapping class="com.myapp.Data.User"/>
+    </list>
+</litepal>
