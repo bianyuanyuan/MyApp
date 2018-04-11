@@ -2,6 +2,7 @@ package com.myapp.Data;
 
 /**
  * Created by 540 on 2018/3/14.
+ * 学员类
  */
 
 import java.io.Serializable;

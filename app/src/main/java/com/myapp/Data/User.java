@@ -1,7 +1,9 @@
 package com.myapp.Data;
 
 import org.litepal.crud.DataSupport;
-
+/*
+*用户类
+ */
 public class User extends DataSupport {
     private int id;
     private String nickname;

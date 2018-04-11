@@ -2,27 +2,30 @@ package com.myapp.Data;
 
 import java.io.Serializable;
 
-
+//场地 类
 public class Class implements Serializable {
     private long id;
     private String name;
     private int number;
+    private int contain;
 
     public Class() {
         super();
     }
 
-    public Class(long id, String name, int number) {
+    public Class(long id, String name, int number, int contain) {
         super();
         this.id = id;
         this.name = name;
-        this.number=number;
+        this.number = number;
+        this.contain = contain;
     }
 
-    public Class(String name, int number) {
+    public Class(String name, int number, int contain) {
         super();
         this.name = name;
-        this.number=number;
+        this.number = number;
+        this.contain = contain;
     }
 
     public long getId() {
@@ -47,5 +50,13 @@ public class Class implements Serializable {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public int getContain() {
+        return contain;
+    }
+
+    public void setContain(int contain) {
+        this.contain = contain;
     }
 }

@@ -2,38 +2,43 @@ package com.myapp.Data;
 
 import java.io.Serializable;
 
-
+//教练 类
 public class Coach implements Serializable {
     private long id;
     private String name;
     private int age;
     private String sex;
-    private String like;
     private String phoneNumber;
-
+    private long teach_year;
+    private long charge;
+    private String teach_course;
 
     public Coach() {
         super();
     }
 
-    public Coach(long id, String name, int age, String sex, String like, String phoneNumber
+    public Coach(long id, String name, int age, String sex, String phoneNumber, long teach_year, long charge, String teach_course
     ) {
         super();
         this.id = id;
         this.name = name;
         this.age = age;
         this.sex = sex;
-        this.like = like;
         this.phoneNumber = phoneNumber;
+        this.teach_year = teach_year;
+        this.charge = charge;
+        this.teach_course = teach_course;
     }
 
-    public Coach(String name, int age, String sex, String like, String phoneNumber) {
+    public Coach(String name, int age, String sex, String phoneNumber, long teach_year, long charge, String teach_course) {
         super();
         this.name = name;
         this.age = age;
         this.sex = sex;
-        this.like = like;
         this.phoneNumber = phoneNumber;
+        this.teach_year = teach_year;
+        this.charge = charge;
+        this.teach_course = teach_course;
     }
 
     public long getId() {
@@ -69,19 +74,35 @@ public class Coach implements Serializable {
         this.sex = sex;
     }
 
-    public String getLike() {
-        return like;
-    }
-
-    public void setLike(String like) {
-        this.like = like;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public long getTeach_year() {
+        return teach_year;
+    }
+
+    public void setTeach_year(long teach_year) {
+        this.teach_year = teach_year;
+    }
+
+    public long getCharge() {
+        return charge;
+    }
+
+    public void setCharge(long charge) {
+        this.charge = charge;
+    }
+
+    public String getTeach_course() {
+        return teach_course;
+    }
+
+    public void setTeach_course(String teach_course) {
+        this.teach_course = teach_course;
     }
 }

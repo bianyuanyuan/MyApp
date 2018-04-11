@@ -62,7 +62,7 @@ public class StudentListActivity extends ListActivity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);////////////////////////
+        setContentView(R.layout.show_student);////////////////////////
         Log.e(TAG, "onCreate");
         list = new ArrayList<Long>();
         student = new Student();

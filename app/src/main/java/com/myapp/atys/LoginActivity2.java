@@ -122,7 +122,7 @@ public class LoginActivity2 extends BaseActivity {
                     visitor.save();
                 }
                 UserManager.setCurrentUser(visitor);
-                autoStartActivity(StudentListActivity.class);////////////////游客进入的主界面活动
+                autoStartActivity(MainMenuActivity.class);////////////////游客进入的主界面活动
             }
         });
     }
@@ -171,7 +171,7 @@ public class LoginActivity2 extends BaseActivity {
                     }
                     UserManager.setCurrentUser(user);// 设置当前用户
 
-                    autoStartActivity(StudentListActivity.class);///////////进入主界面活动//////////////
+                    autoStartActivity(MainMenuActivity.class);///////////进入主界面活动//////////////
                 }
                 showResponse(resMsg);
             }

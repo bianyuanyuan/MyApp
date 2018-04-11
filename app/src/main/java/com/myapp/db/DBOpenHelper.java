@@ -45,15 +45,18 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "name varchar(20)," +
                 "age Integer, " +
                 "sex varchar(2), " +
-                "likes varchar(60), " +
-                "phone_number varchar(11)" +
+                "phone_number varchar(11)," +
+                "teach_year Integer," +
+                "charge Integer," +
+                "teach_course varchr(20)" +
                 ")");
 
         //创建场地表
         db.execSQL("create table if not exists " + TableContanst.CLASS_TABLE +
                 "(_id Integer primary key AUTOINCREMENT," +
                 "name varchar(20), " +
-                "number Integer" +
+                "number Integer," +
+                "contain Integer" +
                 ")");
 
         //创建课程
@@ -62,8 +65,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "name varchar(20)," +
                 "times Integer," +
                 "timesweek Integer," +
-                "student_id Integer," +
-                "coach_id Integer" +
+                "coach_id Integer," +
+                "price Integer" +
                 ")");
 
         //创建教练课表

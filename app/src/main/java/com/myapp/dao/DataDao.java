@@ -66,8 +66,10 @@ public class DataDao {
         values.put(TableContanst.CoachColumns.NAME, c.getName());
         values.put(TableContanst.CoachColumns.AGE, c.getAge());
         values.put(TableContanst.CoachColumns.SEX, c.getSex());
-        values.put(TableContanst.CoachColumns.LIKES, c.getLike());
         values.put(TableContanst.CoachColumns.PHONE_NUMBER, c.getPhoneNumber());
+        values.put(TableContanst.CoachColumns.TEACH_YEAR, c.getTeach_year());
+        values.put(TableContanst.CoachColumns.TEACH_COURSE, c.getTeach_course());
+        values.put(TableContanst.CoachColumns.CHARGE, c.getCharge());
         return dbHelper.getWritableDatabase().insert(TableContanst.COACH_TABLE, null, values);
     }
 
@@ -76,6 +78,7 @@ public class DataDao {
         ContentValues values = new ContentValues();
         values.put(TableContanst.ClassColumns.NAME, cr.getName());
         values.put(TableContanst.ClassColumns.NUMBER, cr.getNumber());
+        values.put(TableContanst.ClassColumns.CONTAIN, cr.getContain());
         return dbHelper.getWritableDatabase().insert(TableContanst.CLASS_TABLE, null, values);
     }
 
@@ -83,10 +86,10 @@ public class DataDao {
     public long addCourse(Course cs) {
         ContentValues values = new ContentValues();
         values.put(TableContanst.CourseColumns.NAME, cs.getName());
-        values.put(TableContanst.CourseColumns.STUDENT_ID, cs.getStudent_id());
         values.put(TableContanst.CourseColumns.COACH_ID, cs.getCoach_id());
         values.put(TableContanst.CourseColumns.TIMESWEEK, cs.getTimesweek());
         values.put(TableContanst.CourseColumns.TIMES, cs.getTimes());
+        values.put(TableContanst.CourseColumns.PRICE, cs.getPrice());
         return dbHelper.getWritableDatabase().insert(TableContanst.COURSE_TABLE, null, values);
     }
 
@@ -98,10 +101,35 @@ public class DataDao {
         return dbHelper.getWritableDatabase().insert(TableContanst.TIMETABLE_TABLE, null, values);
     }
 
+
     // 删除一个id所对应的数据库表student的记录
     public int deleteStudentById(long id) {
         return dbHelper.getWritableDatabase().delete(TableContanst.STUDENT_TABLE,
                 TableContanst.StudentColumns.ID + "=?", new String[]{id + ""});
+    }
+
+    // 删除一个id所对应的数据库表coach的记录
+    public int deleteCoachById(long id) {
+        return dbHelper.getWritableDatabase().delete(TableContanst.COACH_TABLE,
+                TableContanst.CoachColumns.ID + "=?", new String[]{id + ""});
+    }
+
+    // 删除一个id所对应的数据库表Class的记录
+    public int deleteClassById(long id) {
+        return dbHelper.getWritableDatabase().delete(TableContanst.CLASS_TABLE,
+                TableContanst.ClassColumns.ID + "=?", new String[]{id + ""});
+    }
+
+    // 删除一个id所对应的数据库表Course的记录
+    public int deleteCourseById(long id) {
+        return dbHelper.getWritableDatabase().delete(TableContanst.COURSE_TABLE,
+                TableContanst.CourseColumns.ID + "=?", new String[]{id + ""});
+    }
+
+    // 删除一个id所对应的数据库表TimeTable的记录
+    public int deleteTimeTableById(long id) {
+        return dbHelper.getWritableDatabase().delete(TableContanst.TIMETABLE_TABLE,
+                TableContanst.TimeTableColumns.ID + "=?", new String[]{id + ""});
     }
 
     // 更新一个id所对应数据库表student的记录
@@ -118,7 +146,53 @@ public class DataDao {
                 TableContanst.StudentColumns.ID + "=?", new String[]{s.getId() + ""});
     }
 
-    // 查询所有的记录
+    // 更新一个id所对应数据库表course的记录
+    public int updateCoach(Coach c) {
+        ContentValues values = new ContentValues();
+        values.put(TableContanst.CoachColumns.NAME, c.getName());
+        values.put(TableContanst.CoachColumns.AGE, c.getAge());
+        values.put(TableContanst.CoachColumns.SEX, c.getSex());
+        values.put(TableContanst.CoachColumns.PHONE_NUMBER, c.getPhoneNumber());
+        values.put(TableContanst.CoachColumns.TEACH_YEAR, c.getTeach_year());
+        values.put(TableContanst.CoachColumns.TEACH_COURSE, c.getTeach_course());
+        values.put(TableContanst.CoachColumns.CHARGE, c.getCharge());
+        return dbHelper.getWritableDatabase().update(TableContanst.COACH_TABLE, values,
+                TableContanst.CoachColumns.ID + "=?", new String[]{c.getId() + ""});
+    }
+
+    // 更新一个id所对应数据库表Class的记录
+    public long updateClass(Class cr) {
+        ContentValues values = new ContentValues();
+        values.put(TableContanst.ClassColumns.NAME, cr.getName());
+        values.put(TableContanst.ClassColumns.NUMBER, cr.getNumber());
+        values.put(TableContanst.ClassColumns.CONTAIN, cr.getContain());
+        return dbHelper.getWritableDatabase().update(TableContanst.CLASS_TABLE, values,
+                TableContanst.ClassColumns.ID + "=?", new String[]{cr.getId() + ""});
+    }
+
+    // 更新一个id所对应数据库表Course的记录
+    public int updateCourse(Course cs) {
+        ContentValues values = new ContentValues();
+        values.put(TableContanst.CourseColumns.NAME, cs.getName());
+        values.put(TableContanst.CourseColumns.COACH_ID, cs.getCoach_id());
+        values.put(TableContanst.CourseColumns.TIMESWEEK, cs.getTimesweek());
+        values.put(TableContanst.CourseColumns.TIMES, cs.getTimes());
+        values.put(TableContanst.CourseColumns.PRICE, cs.getPrice());
+        return dbHelper.getWritableDatabase().update(TableContanst.COURSE_TABLE, values,
+                TableContanst.CourseColumns.ID + "=?", new String[]{cs.getId() + ""});
+    }
+
+    // 更新一个id所对应数据库表TimeTable的记录
+    public int updateTimeTable(TimeTable tt) {
+        ContentValues values = new ContentValues();
+        values.put(TableContanst.TimeTableColumns.TIME, tt.getTime());
+        values.put(TableContanst.TimeTableColumns.WEEK, tt.getWeek());
+        return dbHelper.getWritableDatabase().update(TableContanst.TIMETABLE_TABLE, values,
+                TableContanst.TimeTableColumns.ID + "=?", new String[]{tt.getId() + ""});
+    }
+
+
+    // 查询所有student的记录
     public List<Map<String, Object>> getAllStudents() {
         //modify_time desc
         List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
@@ -154,9 +228,143 @@ public class DataDao {
         return data;
     }
 
+    // 查询所有coach的记录
+    public List<Map<String, Object>> getAllCoachs() {
+        //id desc
+        List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+        Cursor cursor = dbHelper.getWritableDatabase().query(TableContanst.COACH_TABLE, null, null, null,
+                null, null, TableContanst.CoachColumns.ID + " desc");
+        while (cursor.moveToNext()) {
+            Map<String, Object> map = new HashMap<String, Object>(8);
+            long id = cursor.getInt(cursor.getColumnIndex(TableContanst.CoachColumns.ID));
+            map.put(TableContanst.CoachColumns.ID, id);
+
+            String name = cursor.getString(cursor.getColumnIndex(TableContanst.CoachColumns.NAME));
+            map.put(TableContanst.CoachColumns.NAME, name);
+
+            int age = cursor.getInt(cursor.getColumnIndex(TableContanst.CoachColumns.AGE));
+            map.put(TableContanst.CoachColumns.AGE, age);
+
+            String sex = cursor.getString(cursor.getColumnIndex(TableContanst.CoachColumns.SEX));
+            map.put(TableContanst.CoachColumns.SEX, sex);
+
+            String phone_number = cursor.getString(cursor.getColumnIndex(TableContanst.CoachColumns.PHONE_NUMBER));
+            map.put(TableContanst.CoachColumns.PHONE_NUMBER, phone_number);
+
+            int teach_year = cursor.getInt(cursor.getColumnIndex(TableContanst.CoachColumns.TEACH_YEAR));
+            map.put(TableContanst.CoachColumns.TEACH_YEAR, teach_year);
+
+            String teach_course = cursor.getString(cursor.getColumnIndex(TableContanst.CoachColumns.TEACH_COURSE));
+            map.put(TableContanst.CoachColumns.TEACH_COURSE, teach_course);
+
+            int charge = cursor.getInt(cursor.getColumnIndex(TableContanst.CoachColumns.CHARGE));
+            map.put(TableContanst.CoachColumns.CHARGE, charge);
+            data.add(map);
+        }
+        return data;
+    }
+
+    // 查询所有class的记录
+    public List<Map<String, Object>> getAllClasses() {
+        //id desc
+        List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+        Cursor cursor = dbHelper.getWritableDatabase().query(TableContanst.CLASS_TABLE, null, null, null,
+                null, null, TableContanst.ClassColumns.ID + " desc");
+        while (cursor.moveToNext()) {
+            Map<String, Object> map = new HashMap<String, Object>(4);
+            long id = cursor.getInt(cursor.getColumnIndex(TableContanst.ClassColumns.ID));
+            map.put(TableContanst.ClassColumns.ID, id);
+
+            String name = cursor.getString(cursor.getColumnIndex(TableContanst.ClassColumns.NAME));
+            map.put(TableContanst.ClassColumns.NAME, name);
+
+            int number = cursor.getInt(cursor.getColumnIndex(TableContanst.ClassColumns.NUMBER));
+            map.put(TableContanst.ClassColumns.NUMBER, number);
+
+            int contain = cursor.getInt(cursor.getColumnIndex(TableContanst.ClassColumns.CONTAIN));
+            map.put(TableContanst.ClassColumns.CONTAIN, contain);
+            data.add(map);
+        }
+        return data;
+    }
+
+    // 查询所有course的记录
+    public List<Map<String, Object>> getAllCoursees() {
+        //id desc
+        List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+        Cursor cursor = dbHelper.getWritableDatabase().query(TableContanst.COURSE_TABLE, null, null, null,
+                null, null, TableContanst.CourseColumns.ID + " desc");
+        while (cursor.moveToNext()) {
+            Map<String, Object> map = new HashMap<String, Object>(6);
+            long id = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.ID));
+            map.put(TableContanst.CourseColumns.ID, id);
+
+            String name = cursor.getString(cursor.getColumnIndex(TableContanst.CourseColumns.NAME));
+            map.put(TableContanst.CourseColumns.NAME, name);
+
+            long coach_id = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.COACH_ID));
+            map.put(TableContanst.CourseColumns.COACH_ID, coach_id);
+
+
+            long times = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.TIMES));
+            map.put(TableContanst.CourseColumns.TIMES, times);
+
+            long timesweek = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.TIMESWEEK));
+            map.put(TableContanst.CourseColumns.TIMESWEEK, timesweek);
+
+            long price = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.PRICE));
+            map.put(TableContanst.CourseColumns.PRICE, price);
+        }
+        return data;
+    }
+
+    // 查询所有TimeTable的记录
+    public List<Map<String, Object>> getAllTimeTables() {
+        //id desc
+        List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+        Cursor cursor = dbHelper.getWritableDatabase().query(TableContanst.TIMETABLE_TABLE, null, null, null,
+                null, null, TableContanst.TimeTableColumns.ID + " desc");
+        while (cursor.moveToNext()) {
+            Map<String, Object> map = new HashMap<String, Object>(3);
+            long id = cursor.getInt(cursor.getColumnIndex(TableContanst.TimeTableColumns.ID));
+            map.put(TableContanst.TimeTableColumns.ID, id);
+
+            String week = cursor.getString(cursor.getColumnIndex(TableContanst.TimeTableColumns.WEEK));
+            map.put(TableContanst.TimeTableColumns.WEEK, week);
+
+            String time = cursor.getString(cursor.getColumnIndex(TableContanst.TimeTableColumns.TIME));
+            map.put(TableContanst.TimeTableColumns.TIME, time);
+        }
+        return data;
+    }
+
     //模糊查询一条记录
     public Cursor findStudent(String name) {
         Cursor cursor = dbHelper.getWritableDatabase().query(TableContanst.STUDENT_TABLE, null, "name like ?",
+                new String[]{"%" + name + "%"}, null, null, null, null);
+        return cursor;
+    }
+
+    public Cursor findCoach(String name) {
+        Cursor cursor = dbHelper.getWritableDatabase().query(TableContanst.COACH_TABLE, null, "name like ?",
+                new String[]{"%" + name + "%"}, null, null, null, null);
+        return cursor;
+    }
+
+    public Cursor findClass(String name) {
+        Cursor cursor = dbHelper.getWritableDatabase().query(TableContanst.COACH_TABLE, null, "name like ?",
+                new String[]{"%" + name + "%"}, null, null, null, null);
+        return cursor;
+    }
+
+    public Cursor findTimeTable(String name) {
+        Cursor cursor = dbHelper.getWritableDatabase().query(TableContanst.TIMETABLE_TABLE, null, "name like ?",
+                new String[]{"%" + name + "%"}, null, null, null, null);
+        return cursor;
+    }
+
+    public Cursor findCourse(String name) {
+        Cursor cursor = dbHelper.getWritableDatabase().query(TableContanst.COURSE_TABLE, null, "name like ?",
                 new String[]{"%" + name + "%"}, null, null, null, null);
         return cursor;
     }
@@ -204,4 +412,67 @@ public class DataDao {
         Student student = new Student(id, name, age, sex, like, phone, data, null);
         return student;
     }
+
+    //自定义的方法通过View和Id得到一个coach对象
+    public Coach getCoachFromView(View view, long id) {
+        TextView nameView = (TextView) view.findViewById(R.id.tv_co_name);
+        TextView ageView = (TextView) view.findViewById(R.id.tv_co_age);
+        TextView sexView = (TextView) view.findViewById(R.id.tv_co_sex);
+        TextView phoneView = (TextView) view.findViewById(R.id.tv_co_phone);
+        TextView teachyearView = (TextView) view.findViewById(R.id.tv_co_teach_year);
+        TextView chargeView = (TextView) view.findViewById(R.id.tv_co_charge);
+        TextView teachcourseView = (TextView) view.findViewById(R.id.tv_co_teach_course);
+
+        String name = nameView.getText().toString();
+        int age = Integer.parseInt(ageView.getText().toString());
+        String sex = sexView.getText().toString();
+        String phone = phoneView.getText().toString();
+        int teachyear = Integer.parseInt(teachyearView.getText().toString());
+        int charge = Integer.parseInt(chargeView.getText().toString());
+        String teachcourse = teachcourseView.getText().toString();
+        Coach coach = new Coach(id, name, age, sex, phone, teachyear, charge, teachcourse);
+        return coach;
+    }
+
+    //自定义的方法通过View和Id得到一个class对象
+    public Class getClassFromView(View view, long id) {
+        TextView nameView = (TextView) view.findViewById(R.id.tv_cr_name);
+        TextView numberView = (TextView) view.findViewById(R.id.tv_cr_number);
+        TextView containView = (TextView) view.findViewById(R.id.tv_cr_contain);
+
+        String name = nameView.getText().toString();
+        int number = Integer.parseInt(numberView.getText().toString());
+        int concain = Integer.parseInt(containView.getText().toString());
+        Class cr = new Class(id, name, number, concain);
+        return cr;
+    }
+
+    //自定义的方法通过View和Id得到一个course对象
+    public Course getCourseFromView(View view, long id) {
+        TextView nameView = (TextView) view.findViewById(R.id.tv_cs_name);
+        TextView coachidView = (TextView) view.findViewById(R.id.tv_cs_coach_id);
+        TextView timesView = (TextView) view.findViewById(R.id.tv_cs_times);
+        TextView timesweekView = (TextView) view.findViewById(R.id.tv_cs_timesweek);
+        TextView priceView = (TextView) view.findViewById(R.id.tv_cs_price);
+
+        String name = nameView.getText().toString();
+        int coachid = Integer.parseInt(coachidView.getText().toString());
+        int times = Integer.parseInt(timesView.getText().toString());
+        int timesweek = Integer.parseInt(timesweekView.getText().toString());
+        int price = Integer.parseInt(priceView.getText().toString());
+        Course course = new Course(id, name, coachid, times, timesweek, price);
+        return course;
+    }
+
+    //自定义的方法通过View和Id得到一个timetable对象
+    public TimeTable getTimeTableFromView(View view, long id) {
+        TextView timeView = (TextView) view.findViewById(R.id.tv_tt_time);
+        TextView weekView = (TextView) view.findViewById(R.id.tv_tt_week);
+
+        String time = timeView.getText().toString();
+        String week = weekView.getText().toString();
+        TimeTable tb = new TimeTable(id, time, week);
+        return tb;
+    }
+
 }

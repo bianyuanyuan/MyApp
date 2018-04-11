@@ -37,7 +37,10 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_me);////////////////////////////
+
+        Intent i = new Intent(this,LoginActivity2.class);
+        startActivity(i);
+      //  setContentView(R.layout.activity_main);////////////////////////////
 
         mRgTab = (RadioGroup) findViewById(R.id.rg_main);
         mRgTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

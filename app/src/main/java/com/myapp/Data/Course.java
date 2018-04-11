@@ -1,36 +1,38 @@
 package com.myapp.Data;
 
 import java.io.Serializable;
-
+/*
+*课程 类
+ */
 public class Course implements Serializable {
     private long id;
     private String name;
-    private long student_id;
     private long coach_id;
     private long times;
     private long timesweek;
+    private long price;
 
     public Course() {
         super();
     }
 
-    public Course(long id, String name, long student_id, long coach_id, long times, long timesweek) {
+    public Course(long id, String name, long coach_id, long times, long timesweek, long price) {
         super();
         this.id = id;
         this.name = name;
-        this.student_id = student_id;
         this.coach_id = coach_id;
         this.times = times;
         this.timesweek = timesweek;
+        this.price = price;
     }
 
-    public Course(String name, long student_id, long coach_id, long times, long timesweek) {
+    public Course(String name, long coach_id, long times, long timesweek, long price) {
         super();
         this.name = name;
-        this.student_id = student_id;
         this.coach_id = coach_id;
         this.times = times;
         this.timesweek = timesweek;
+        this.price = price;
     }
 
     public long getId() {
@@ -47,14 +49,6 @@ public class Course implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public long getStudent_id() {
-        return student_id;
-    }
-
-    public void setStudent_id(long student_id) {
-        this.student_id = student_id;
     }
 
     public long getCoach_id() {
@@ -79,5 +73,13 @@ public class Course implements Serializable {
 
     public void setTimesweek(long timesweek) {
         this.timesweek = timesweek;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
     }
 }
