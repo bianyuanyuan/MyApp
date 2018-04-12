@@ -141,7 +141,7 @@ public class MainMenuActivity extends Activity {
         public void onClick(View v) {
             Intent intent = new Intent();
             //教练信息管理
-            //
+            intent.setClass(MainMenuActivity.this, CoachListActivity.class);
             startActivity(intent);
         }
     };

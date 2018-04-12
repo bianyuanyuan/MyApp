@@ -27,9 +27,6 @@
       <connection connection-id="613269e6-d6bc-4e46-9356-8b34f9fd86d6">
         <schema name="main" object-types="column, constraint, index, table, dataset trigger, view" />
       </connection>
-      <connection connection-id="8674363a-aa0a-4619-8d6b-59d6d87d2802">
-        <schema name="main" object-types="column, constraint, index, table, dataset trigger, view" />
-      </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">

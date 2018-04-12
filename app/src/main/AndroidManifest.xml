@@ -20,9 +20,13 @@
             </intent-filter>
         </activity>
         <activity android:name="com.myapp.atys.AddStudentActivity" />
+        <activity android:name="com.myapp.atys.AddCoachActivity" />
         <activity android:name="com.myapp.atys.ShowStudentActivity" />
+        <activity android:name="com.myapp.atys.ShowCoachActivity" />
         <activity android:name="com.myapp.atys.StudentSearch" />
+        <activity android:name="com.myapp.atys.CoachSearch" />
         <activity android:name="com.myapp.atys.StudentListActivity" />
+        <activity android:name="com.myapp.atys.CoachListActivity" />
         <activity android:name="com.myapp.atys.MainMenuActivity" />
         <activity
             android:name="com.myapp.atys.LoginActivity2"
