@@ -6,12 +6,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.TextView;
 
+
+import com.myapp.Util.ACache;
+import com.myapp.Util.PhotoUtil;
+import com.myapp.Util.Server;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import myapp.byy.com.myapp.R;
 
 /**
- *个人
+ * 个人中心
  */
 public class MeFragment extends Fragment {
 
@@ -27,15 +33,24 @@ public class MeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        initView();
+        setListeners();
+
         return inflater.inflate(R.layout.fragment_me, container, false);
 
     }
 
+    void initView() {
+
+    }
+
+    void setListeners() {
+
+    }
 }

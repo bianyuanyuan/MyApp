@@ -21,6 +21,7 @@
         </activity>
         <activity android:name="com.myapp.atys.AddStudentActivity" />
         <activity android:name="com.myapp.atys.AddCoachActivity" />
+        <activity android:name="com.myapp.atys.AddClassActivity" />
         <activity android:name="com.myapp.atys.ShowStudentActivity" />
         <activity android:name="com.myapp.atys.ShowCoachActivity" />
         <activity android:name="com.myapp.atys.StudentSearch" />
@@ -35,6 +36,7 @@
             android:name="com.myapp.atys.RegisterActivity"
             android:label="注册"></activity>
         <activity android:name="com.myapp.atys.MeActivity" />
+        <activity android:name="com.myapp.atys.ModifyPwdActivity" />
     </application>
 
 </manifest>

@@ -23,6 +23,7 @@
 
     <string name="login_success">登陆成功！</string>
     <string name="cancel_success">注销成功！</string>
+
     <string name="login_fail">登录失败！请输入正确的用户名与密码！</string>
     <string name="cancel_fail">注销失败！请输入正确的用户名与密码！</string>
     <string name="name_already_exist">用户名【<xliff:g example="tom" id="id1">%1$s</xliff:g>】已存在，请重新输入！</string>
@@ -48,7 +49,15 @@
     <string name="Exit">退出</string>
     <string name="modify_hint">点击修改</string>
 
+    <string name="uploadAvatar">上传头像</string>
+    <string name="takePhoto">拍照</string>
+    <string name="chooseFromGallery">从相册选择</string>
 
+    <string name="old_pwd_hint">请输入原密码</string>
+    <string name="new_pwd_hint">请输入新密码</string>
+    <string name="modify_not_null">原密码、新密码、确认密码均不能为空</string>
+    <string name="modify_not_equal">确认密码需与新密码保持一致</string>
+    <string name="modify_not_right">原密码错误</string>
     <string name="information_write">学员信息修改</string>
     <string name="button1">男</string>
     <string name="button2">女</string>

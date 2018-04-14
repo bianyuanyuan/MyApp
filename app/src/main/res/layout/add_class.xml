@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:scrollbarStyle="outsideInset">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="5dip">
+
+        <TextView
+            android:id="@+id/tv_cr_text_id"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginTop="5dip"
+            android:gravity="center_vertical|right"
+            android:text="场地 ID："
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_cr_id"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_cr_text_id"
+            android:layout_toRightOf="@id/tv_cr_text_id"
+            android:background="#ffffff"
+            android:gravity="center"
+            android:text="未分配ID"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_cr_name_text"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_alignLeft="@id/tv_cr_text_id"
+            android:layout_below="@id/tv_cr_text_id"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:gravity="center_vertical|right"
+            android:text="场地名："
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_cr_name"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_cr_name_text"
+            android:layout_toRightOf="@id/tv_cr_name_text"
+            android:hint="请输入场地名，如游泳馆"
+            android:paddingLeft="20dip" />
+
+        <TextView
+            android:id="@+id/tv_cr_position_text"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_below="@id/tv_cr_name_text"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:gravity="center_vertical|right"
+            android:text="场地位置："
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_cr_position"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_cr_position_text"
+            android:layout_toRightOf="@id/tv_cr_position_text"
+            android:hint="请输入场地位置"
+            android:paddingLeft="20dip" />
+
+        <TextView
+            android:id="@+id/tv_cr_contain_text"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_alignLeft="@id/tv_cr_position_text"
+            android:layout_below="@id/tv_cr_position_text"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:gravity="center_vertical|right"
+            android:text="场地人数上限(人)："
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_cr_contain"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_cr_contain_text"
+            android:layout_toRightOf="@id/tv_cr_contain_text"
+            android:hint="请输入场地人数上限"
+            android:inputType="number"
+            android:maxLength="11"
+            android:paddingLeft="20dip" />
+
+
+        <Button
+            android:id="@+id/btn_cr_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/et_cr_contain"
+            android:layout_below="@id/et_cr_contain"
+            android:text="保存"></Button>
+
+        <Button
+            android:id="@+id/btn_cr_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_cr_contain"
+            android:layout_marginRight="10dip"
+            android:layout_toLeftOf="@id/btn_cr_save"
+            android:text="重置"></Button>
+    </RelativeLayout>
+</ScrollView>

@@ -22,7 +22,7 @@ public class BaseActivity extends Activity {
         ActivityController.removeActivity(this);
     }
 
-    void autoStartActivity(Class T) {
+    protected void autoStartActivity(Class T) {
         Intent intent = new Intent(this, T);
         startActivity(intent);
     }

@@ -7,7 +7,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -15,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,9 +40,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
 import okhttp3.Response;
 import myapp.byy.com.myapp.R;
+
 public class MeActivity extends BaseActivity {
 
-    private ImageView back;
     private CircleImageView avatarImage;
     private TextView accountText;
     private Button nicknameBtn;
@@ -49,7 +50,6 @@ public class MeActivity extends BaseActivity {
 
     private Button exitBtn;
     private ACache aCache;
-
     private PhotoUtil photoUtil = new PhotoUtil();
     private Server server = new Server(this);
 
@@ -64,10 +64,15 @@ public class MeActivity extends BaseActivity {
 
     void initView() {
         aCache = ACache.get(MeActivity.this);
+
+
         avatarImage = findViewById(R.id.center_avatar);
         accountText = findViewById(R.id.center_account);
         nicknameBtn = findViewById(R.id.center_nickname_btn);
         pwdBtn = findViewById(R.id.center_pwd_btn);
+        exitBtn = findViewById(R.id.center_exit_btn);
+        //   collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+
     }
 
 
@@ -84,13 +89,13 @@ public class MeActivity extends BaseActivity {
         nicknameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                View nicknameView = LayoutInflater.from(MeActivity.this).inflate(R.layout.dialog_edittext,null);
+                View nicknameView = LayoutInflater.from(MeActivity.this).inflate(R.layout.dialog_edittext, null);
                 final EditText nicknameEdit = nicknameView.findViewById(R.id.edit);
                 // 弹昵称修改框
                 AlertDialog.Builder builder = new AlertDialog.Builder(MeActivity.this);
                 builder.setView(nicknameView);
                 builder.setTitle(getResources().getString(R.string.Nickname));
-                builder.setNegativeButton(getResources().getString(R.string.cancel),null);
+                builder.setNegativeButton(getResources().getString(R.string.cancel), null);
                 builder.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -99,21 +104,35 @@ public class MeActivity extends BaseActivity {
                         User user = UserManager.getCurrentUser();
                         user.setNickname(nickname);
                         user.save();
-                        if(!user.isVisitor())
+                        if (!user.isVisitor())
                             server.setNickname(nickname);
                         // 更改显示
-                        Util.makeToast(MeActivity.this,getResources().getString(R.string.modify_success));
+                        //       collapsingToolbar.setTitle(nickname);
+                        Util.makeToast(MeActivity.this, getResources().getString(R.string.modify_success));
                         // 通知MainActivity更新昵称
                         Message message = new Message();
                         message.what = 2;
                         message.obj = nickname;
-                       // handler.sendMessage(message);
+                        //handler.sendMessage(message);
                     }
                 });
                 builder.show();
             }
         });
 
+        // 修改密码
+        pwdBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                User user = UserManager.getCurrentUser();
+                if (!user.isVisitor()) {
+                    autoStartActivity(ModifyPwdActivity.class);
+                } else {
+                    showResponse("游客不开放此功能");
+                }
+
+            }
+        });
         // 更换头像
         avatarImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,7 +178,7 @@ public class MeActivity extends BaseActivity {
                                 Message msg = new Message();
                                 msg.obj = bitmap;
                                 msg.what = 1;
-                                //handler.sendMessage(msg);
+                           //     handler.sendMessage(msg);
                             }
                             showResponse(resMsg);
                         }
@@ -184,10 +203,12 @@ public class MeActivity extends BaseActivity {
 
         // 初始化昵称
         User user = UserManager.getCurrentUser();
-        if(user.getNickname() != null)
+        if (user.getNickname() != null)
+            //    collapsingToolbar.setTitle(user.getNickname());
             setTitle(user.getNickname());
         else
-           setTitle(getResources().getString(R.string.Center));
+            //    collapsingToolbar.setTitle(getResources().getString(R.string.Center));
+            setTitle(getResources().getString(R.string.Center));
         // 初始化用户名
         accountText.setText(user.getAccount());
 
@@ -203,7 +224,7 @@ public class MeActivity extends BaseActivity {
                             user.getAvatarImage().length);
                     avatarImage.setImageBitmap(bitmap);
                 } else {
-                    avatarImage.setImageResource(R.drawable.ic_launcher_background);// 默认头像
+                    avatarImage.setImageResource(R.drawable.icon_avatar);// 默认头像
                 }
                 return;
             }
@@ -301,7 +322,7 @@ public class MeActivity extends BaseActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    avatarImage.setImageResource(R.drawable.ic_launcher_background);
+                    avatarImage.setImageResource(R.drawable.icon_avatar);
                 }
             });
         }

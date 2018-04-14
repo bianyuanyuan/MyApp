@@ -77,7 +77,7 @@ public class DataDao {
     public long addClass(Class cr) {
         ContentValues values = new ContentValues();
         values.put(TableContanst.ClassColumns.NAME, cr.getName());
-        values.put(TableContanst.ClassColumns.NUMBER, cr.getNumber());
+        values.put(TableContanst.ClassColumns.POSITION, cr.getPosition());
         values.put(TableContanst.ClassColumns.CONTAIN, cr.getContain());
         return dbHelper.getWritableDatabase().insert(TableContanst.CLASS_TABLE, null, values);
     }
@@ -164,7 +164,7 @@ public class DataDao {
     public long updateClass(Class cr) {
         ContentValues values = new ContentValues();
         values.put(TableContanst.ClassColumns.NAME, cr.getName());
-        values.put(TableContanst.ClassColumns.NUMBER, cr.getNumber());
+        values.put(TableContanst.ClassColumns.POSITION, cr.getPosition());
         values.put(TableContanst.ClassColumns.CONTAIN, cr.getContain());
         return dbHelper.getWritableDatabase().update(TableContanst.CLASS_TABLE, values,
                 TableContanst.ClassColumns.ID + "=?", new String[]{cr.getId() + ""});
@@ -278,8 +278,8 @@ public class DataDao {
             String name = cursor.getString(cursor.getColumnIndex(TableContanst.ClassColumns.NAME));
             map.put(TableContanst.ClassColumns.NAME, name);
 
-            int number = cursor.getInt(cursor.getColumnIndex(TableContanst.ClassColumns.NUMBER));
-            map.put(TableContanst.ClassColumns.NUMBER, number);
+            String position= cursor.getString(cursor.getColumnIndex(TableContanst.ClassColumns.POSITION));
+            map.put(TableContanst.ClassColumns.POSITION,position);
 
             int contain = cursor.getInt(cursor.getColumnIndex(TableContanst.ClassColumns.CONTAIN));
             map.put(TableContanst.ClassColumns.CONTAIN, contain);
@@ -437,13 +437,13 @@ public class DataDao {
     //自定义的方法通过View和Id得到一个class对象
     public Class getClassFromView(View view, long id) {
         TextView nameView = (TextView) view.findViewById(R.id.tv_cr_name);
-        TextView numberView = (TextView) view.findViewById(R.id.tv_cr_number);
+        TextView positionView = (TextView) view.findViewById(R.id.tv_cr_position);
         TextView containView = (TextView) view.findViewById(R.id.tv_cr_contain);
 
         String name = nameView.getText().toString();
-        int number = Integer.parseInt(numberView.getText().toString());
+        String position = positionView.getText().toString();
         int concain = Integer.parseInt(containView.getText().toString());
-        Class cr = new Class(id, name, number, concain);
+        Class cr = new Class(id, name, position, concain);
         return cr;
     }
 

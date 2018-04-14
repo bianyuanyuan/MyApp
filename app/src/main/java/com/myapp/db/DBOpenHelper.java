@@ -55,7 +55,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL("create table if not exists " + TableContanst.CLASS_TABLE +
                 "(_id Integer primary key AUTOINCREMENT," +
                 "name varchar(20), " +
-                "number Integer," +
+                "position varchar(40)," +
                 "contain Integer" +
                 ")");
 

@@ -6,25 +6,25 @@ import java.io.Serializable;
 public class Class implements Serializable {
     private long id;
     private String name;
-    private int number;
+    private String  position;
     private int contain;
 
     public Class() {
         super();
     }
 
-    public Class(long id, String name, int number, int contain) {
+    public Class(long id, String name, String position, int contain) {
         super();
         this.id = id;
         this.name = name;
-        this.number = number;
+        this.position=position;
         this.contain = contain;
     }
 
-    public Class(String name, int number, int contain) {
+    public Class(String name, String position, int contain) {
         super();
         this.name = name;
-        this.number = number;
+        this.position=position;
         this.contain = contain;
     }
 
@@ -44,12 +44,12 @@ public class Class implements Serializable {
         this.name = name;
     }
 
-    public int getNumber() {
-        return number;
+    public String getPosition() {
+        return position;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public int getContain() {
