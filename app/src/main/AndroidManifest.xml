@@ -22,8 +22,10 @@
         <activity android:name="com.myapp.atys.AddStudentActivity" />
         <activity android:name="com.myapp.atys.AddCoachActivity" />
         <activity android:name="com.myapp.atys.AddClassActivity" />
+        <activity android:name="com.myapp.atys.AddCourseActivity" />
         <activity android:name="com.myapp.atys.ShowStudentActivity" />
         <activity android:name="com.myapp.atys.ShowCoachActivity" />
+        <activity android:name="com.myapp.atys.ShowClassActivity" />
         <activity android:name="com.myapp.atys.StudentSearch" />
         <activity android:name="com.myapp.atys.CoachSearch" />
         <activity android:name="com.myapp.atys.StudentListActivity" />

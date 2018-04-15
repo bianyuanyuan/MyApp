@@ -157,7 +157,7 @@ public class MainMenuActivity extends Activity {
         public void onClick(View v) {
             Intent intent = new Intent();
             //课程信息管理
-            //
+            intent.setClass(MainMenuActivity.this, AddCourseActivity.class);
             startActivity(intent);
         }
     };

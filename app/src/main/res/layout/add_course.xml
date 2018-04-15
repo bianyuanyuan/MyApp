@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:scrollbarStyle="outsideInset">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="5dip">
+
+        <TextView
+            android:id="@+id/tv_cs_text_id"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginTop="5dip"
+            android:gravity="center_vertical|right"
+            android:text="课程 ID："
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_cs_id"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_cs_text_id"
+            android:layout_toRightOf="@id/tv_cs_text_id"
+            android:background="#ffffff"
+            android:gravity="center"
+            android:text="未分配ID"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_cs_name_text"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_alignLeft="@id/tv_cs_text_id"
+            android:layout_below="@id/tv_cs_text_id"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:gravity="center_vertical|right"
+            android:text="课程名："
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_cs_name"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_cs_name_text"
+            android:layout_toRightOf="@id/tv_cs_name_text"
+            android:hint="请输入课程名，如游泳"
+            android:paddingLeft="20dip" />
+
+        <TextView
+            android:id="@+id/tv_cs_times_text"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_below="@id/tv_cs_name_text"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:gravity="center_vertical|right"
+            android:text="总课时数(节)："
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_cs_times"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_cs_times_text"
+            android:layout_toRightOf="@id/tv_cs_times_text"
+            android:hint="请输入总课时数"
+            android:inputType="number"
+            android:paddingLeft="20dip" />
+
+        <TextView
+            android:id="@+id/tv_cs_timesweek_text"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_alignLeft="@id/tv_cs_times_text"
+            android:layout_below="@id/tv_cs_times_text"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:gravity="center_vertical|right"
+            android:text="周课时数（节）："
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_cs_timesweek"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_cs_timesweek_text"
+            android:layout_toRightOf="@id/tv_cs_times_text"
+            android:hint="请输入周课时数"
+            android:inputType="number"
+            android:maxLength="11"
+            android:paddingLeft="20dip" />
+
+        <TextView
+            android:id="@+id/tv_cs_price_text"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_alignLeft="@id/tv_cs_timesweek_text"
+            android:layout_below="@id/tv_cs_timesweek_text"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:gravity="center_vertical|right"
+            android:text="价格（元/节）："
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_cs_price"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_cs_price_text"
+            android:layout_toRightOf="@id/tv_cs_price_text"
+            android:hint="请输入价格"
+            android:inputType="number"
+            android:maxLength="11"
+            android:paddingLeft="20dip" />
+
+        <Button
+            android:id="@+id/btn_cs_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/et_cs_price"
+            android:layout_below="@id/et_cs_price"
+            android:text="保存"></Button>
+
+        <Button
+            android:id="@+id/btn_cs_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_cs_price"
+            android:layout_marginRight="10dip"
+            android:layout_toLeftOf="@id/btn_cs_save"
+            android:text="重置"></Button>
+    </RelativeLayout>
+</ScrollView>

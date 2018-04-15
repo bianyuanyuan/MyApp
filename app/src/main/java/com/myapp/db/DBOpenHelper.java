@@ -65,7 +65,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "name varchar(20)," +
                 "times Integer," +
                 "timesweek Integer," +
-                "coach_id Integer," +
                 "price Integer" +
                 ")");
 

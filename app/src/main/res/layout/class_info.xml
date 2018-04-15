@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5dip">
+
+    <TextView
+        android:id="@+id/id2_cr_text_id"
+        android:layout_width="80dip"
+        android:layout_height="40dip"
+        android:layout_marginBottom="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="5dip"
+        android:gravity="left|center_vertical"
+        android:text="场地ID："
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_cr_info_id"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/id2_cr_text_id"
+        android:layout_toRightOf="@id/id2_cr_text_id"
+        android:gravity="left|center_vertical" />
+
+    <TextView
+        android:id="@+id/name2_cr_text_id"
+        android:layout_width="80dip"
+        android:layout_height="40dip"
+        android:layout_alignLeft="@id/id2_cr_text_id"
+        android:layout_below="@id/id2_cr_text_id"
+        android:layout_marginBottom="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="5dip"
+        android:gravity="left|center_vertical"
+        android:text="场地名："
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_cr_info_name"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/name2_cr_text_id"
+        android:layout_toRightOf="@id/name2_cr_text_id"
+        android:gravity="left|center_vertical" />
+
+    <TextView
+        android:id="@+id/position_cr_text_id"
+        android:layout_width="80dip"
+        android:layout_height="40dip"
+        android:layout_below="@id/name2_cr_text_id"
+        android:layout_marginBottom="5dip"
+        android:layout_marginRight="5dip"
+        android:gravity="left|center_vertical"
+        android:text="场地位置："
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_cr_info_position"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/position_cr_text_id"
+        android:layout_toRightOf="@id/position_cr_text_id"
+        android:gravity="left|center_vertical" />
+
+    <TextView
+        android:id="@+id/contain_cr_text_id"
+        android:layout_width="80dip"
+        android:layout_height="40dip"
+        android:layout_alignLeft="@id/position_cr_text_id"
+        android:layout_below="@id/position_cr_text_id"
+        android:layout_marginBottom="5dip"
+        android:layout_marginRight="5dip"
+        android:gravity="left|center_vertical"
+        android:text="场地人数上限(人)："
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_cr_info_contain"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/contain_cr_text_id"
+        android:layout_toRightOf="@id/contain_cr_text_id"
+        android:gravity="left|center_vertical" />
+
+    <Button
+        android:id="@+id/back_to_list_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tv_cr_info_contain"
+        android:onClick="goBack"
+        android:text="返回列表界面">
+    </Button>
+</RelativeLayout>

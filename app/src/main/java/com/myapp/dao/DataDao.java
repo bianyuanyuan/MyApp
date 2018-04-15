@@ -86,7 +86,6 @@ public class DataDao {
     public long addCourse(Course cs) {
         ContentValues values = new ContentValues();
         values.put(TableContanst.CourseColumns.NAME, cs.getName());
-        values.put(TableContanst.CourseColumns.COACH_ID, cs.getCoach_id());
         values.put(TableContanst.CourseColumns.TIMESWEEK, cs.getTimesweek());
         values.put(TableContanst.CourseColumns.TIMES, cs.getTimes());
         values.put(TableContanst.CourseColumns.PRICE, cs.getPrice());
@@ -174,7 +173,6 @@ public class DataDao {
     public int updateCourse(Course cs) {
         ContentValues values = new ContentValues();
         values.put(TableContanst.CourseColumns.NAME, cs.getName());
-        values.put(TableContanst.CourseColumns.COACH_ID, cs.getCoach_id());
         values.put(TableContanst.CourseColumns.TIMESWEEK, cs.getTimesweek());
         values.put(TableContanst.CourseColumns.TIMES, cs.getTimes());
         values.put(TableContanst.CourseColumns.PRICE, cs.getPrice());
@@ -278,8 +276,8 @@ public class DataDao {
             String name = cursor.getString(cursor.getColumnIndex(TableContanst.ClassColumns.NAME));
             map.put(TableContanst.ClassColumns.NAME, name);
 
-            String position= cursor.getString(cursor.getColumnIndex(TableContanst.ClassColumns.POSITION));
-            map.put(TableContanst.ClassColumns.POSITION,position);
+            String position = cursor.getString(cursor.getColumnIndex(TableContanst.ClassColumns.POSITION));
+            map.put(TableContanst.ClassColumns.POSITION, position);
 
             int contain = cursor.getInt(cursor.getColumnIndex(TableContanst.ClassColumns.CONTAIN));
             map.put(TableContanst.ClassColumns.CONTAIN, contain);
@@ -295,15 +293,12 @@ public class DataDao {
         Cursor cursor = dbHelper.getWritableDatabase().query(TableContanst.COURSE_TABLE, null, null, null,
                 null, null, TableContanst.CourseColumns.ID + " desc");
         while (cursor.moveToNext()) {
-            Map<String, Object> map = new HashMap<String, Object>(6);
+            Map<String, Object> map = new HashMap<String, Object>(5);
             long id = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.ID));
             map.put(TableContanst.CourseColumns.ID, id);
 
             String name = cursor.getString(cursor.getColumnIndex(TableContanst.CourseColumns.NAME));
             map.put(TableContanst.CourseColumns.NAME, name);
-
-            long coach_id = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.COACH_ID));
-            map.put(TableContanst.CourseColumns.COACH_ID, coach_id);
 
 
             long times = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.TIMES));
@@ -450,17 +445,15 @@ public class DataDao {
     //自定义的方法通过View和Id得到一个course对象
     public Course getCourseFromView(View view, long id) {
         TextView nameView = (TextView) view.findViewById(R.id.tv_cs_name);
-        TextView coachidView = (TextView) view.findViewById(R.id.tv_cs_coach_id);
         TextView timesView = (TextView) view.findViewById(R.id.tv_cs_times);
         TextView timesweekView = (TextView) view.findViewById(R.id.tv_cs_timesweek);
         TextView priceView = (TextView) view.findViewById(R.id.tv_cs_price);
 
         String name = nameView.getText().toString();
-        int coachid = Integer.parseInt(coachidView.getText().toString());
         int times = Integer.parseInt(timesView.getText().toString());
         int timesweek = Integer.parseInt(timesweekView.getText().toString());
         int price = Integer.parseInt(priceView.getText().toString());
-        Course course = new Course(id, name, coachid, times, timesweek, price);
+        Course course = new Course(id, name, times, timesweek, price);
         return course;
     }
 

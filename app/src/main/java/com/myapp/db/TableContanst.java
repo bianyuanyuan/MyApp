@@ -43,7 +43,6 @@ public final class TableContanst {
     public static final class CourseColumns {
         public static final String ID = "_id";
         public static final String NAME = "name";
-        public static final String COACH_ID = "coach_id";
         public static final String TIMESWEEK = "timesweek";
         public static final String TIMES = "times";
         public static final String PRICE = "price";

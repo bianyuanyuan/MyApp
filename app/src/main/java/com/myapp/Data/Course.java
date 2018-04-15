@@ -7,7 +7,6 @@ import java.io.Serializable;
 public class Course implements Serializable {
     private long id;
     private String name;
-    private long coach_id;
     private long times;
     private long timesweek;
     private long price;
@@ -16,20 +15,18 @@ public class Course implements Serializable {
         super();
     }
 
-    public Course(long id, String name, long coach_id, long times, long timesweek, long price) {
+    public Course(long id, String name, long times, long timesweek, long price) {
         super();
         this.id = id;
         this.name = name;
-        this.coach_id = coach_id;
         this.times = times;
         this.timesweek = timesweek;
         this.price = price;
     }
 
-    public Course(String name, long coach_id, long times, long timesweek, long price) {
+    public Course(String name, long times, long timesweek, long price) {
         super();
         this.name = name;
-        this.coach_id = coach_id;
         this.times = times;
         this.timesweek = timesweek;
         this.price = price;
@@ -51,13 +48,6 @@ public class Course implements Serializable {
         this.name = name;
     }
 
-    public long getCoach_id() {
-        return coach_id;
-    }
-
-    public void setCoach_id(long coach_id) {
-        this.coach_id = coach_id;
-    }
 
     public long getTimes() {
         return times;

@@ -13,12 +13,6 @@
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
-
-    <TextView android:id="@+id/tv_cs_coach_id"
-        android:layout_width="fill_parent"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
     <TextView android:id="@+id/tv_cs_times"
         android:layout_width="fill_parent"
         android:layout_gravity="center"
