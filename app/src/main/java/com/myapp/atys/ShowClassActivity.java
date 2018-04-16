@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.myapp.Data.Class;
-import com.myapp.Data.Coach;
 import com.myapp.db.TableContanst;
 
 import myapp.byy.com.myapp.R;
@@ -20,9 +19,9 @@ public class ShowClassActivity extends Activity {
         Intent intent = getIntent();
         Class aClass = (Class) intent.getSerializableExtra(TableContanst.CLASS_TABLE);
         ((TextView) findViewById(R.id.tv_cr_info_id)).setText(aClass.getId() + "");
-        ((TextView) findViewById(R.id.tv_cr_info_name)).setText(aClass.getName());
+        ((TextView) findViewById(R.id.tv_cr_info_name)).setText(aClass.getName() + "");
         ((TextView) findViewById(R.id.tv_cr_info_position)).setText(aClass.getPosition() + "");
-        ((TextView) findViewById(R.id.tv_cr_contain)).setText(aClass.getContain());
+        ((TextView) findViewById(R.id.tv_cr_info_contain)).setText(aClass.getContain());
     }
 
     public void goBack(View view) {

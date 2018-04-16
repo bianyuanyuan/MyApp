@@ -347,7 +347,7 @@ public class DataDao {
     }
 
     public Cursor findClass(String name) {
-        Cursor cursor = dbHelper.getWritableDatabase().query(TableContanst.COACH_TABLE, null, "name like ?",
+        Cursor cursor = dbHelper.getWritableDatabase().query(TableContanst.CLASS_TABLE, null, "name like ?",
                 new String[]{"%" + name + "%"}, null, null, null, null);
         return cursor;
     }
@@ -437,8 +437,8 @@ public class DataDao {
 
         String name = nameView.getText().toString();
         String position = positionView.getText().toString();
-        int concain = Integer.parseInt(containView.getText().toString());
-        Class cr = new Class(id, name, position, concain);
+        int contain = Integer.parseInt(containView.getText().toString());
+        Class cr = new Class(id, name, position, contain);
         return cr;
     }
 

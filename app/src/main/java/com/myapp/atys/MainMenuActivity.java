@@ -149,7 +149,7 @@ public class MainMenuActivity extends Activity {
         public void onClick(View v) {
             Intent intent = new Intent();
             // 场地信息管理
-            intent.setClass(MainMenuActivity.this, AddClassActivity.class);
+            intent.setClass(MainMenuActivity.this, ClassListActivity.class);
             startActivity(intent);
         }
     };

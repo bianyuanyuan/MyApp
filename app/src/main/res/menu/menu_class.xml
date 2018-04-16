@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="80dip"
+    android:layout_height="40dip">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/delete"
+            android:title="删除场地信息" />
+        <item
+            android:id="@+id/look"
+            android:title="详细信息" />
+        <item
+            android:id="@+id/write"
+            android:title="修改场地信息" />
+    </group>
+</menu>

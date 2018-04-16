@@ -21,7 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-import com.myapp.Data.Coach;
+import com.myapp.Data.Class;
 import com.myapp.dao.DataDao;
 import com.myapp.db.DBOpenHelper;
 import com.myapp.db.TableContanst;
@@ -31,11 +31,11 @@ import java.util.List;
 
 import myapp.byy.com.myapp.R;
 
-public class CoachListActivity extends ListActivity implements
+public class ClassListActivity extends ListActivity implements
         View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private static final String TAG = "TestSQLite";
-    private Button addCoach;
+    private Button addClass;
     private Cursor cursor;
     private SimpleCursorAdapter adapter;
     private ListView listView;
@@ -48,29 +48,29 @@ public class CoachListActivity extends ListActivity implements
     private Button canleButton;
     private LinearLayout layout;
     private DataDao dao;
-    private Coach coach;
+    private Class classroom;
     private Boolean isDeleteList = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.show_coach);////////////////////////
+        setContentView(R.layout.show_class);////////////////////////
         Log.e(TAG, "onCreate");
         list = new ArrayList<Long>();
-        coach = new Coach();
+        classroom = new Class();
         dao = new DataDao(new DBOpenHelper(this));
-        addCoach = (Button) findViewById(R.id.btn_add_coach);
-        searchButton = (Button) findViewById(R.id.bn_co_search_id);
-        selectButton = (Button) findViewById(R.id.bn_co_select);
-        deleteButton = (Button) findViewById(R.id.bn_co_delete);
-        selectAllButton = (Button) findViewById(R.id.bn_co_selectall);
-        canleButton = (Button) findViewById(R.id.bn_co_canel);
-        layout = (LinearLayout) findViewById(R.id.showLiner_coach);
-        relativeLayout = (RelativeLayout) findViewById(R.id.RelativeLayout_Coach);
+        addClass = (Button) findViewById(R.id.btn_add_class);
+        searchButton = (Button) findViewById(R.id.bn_cr_search_id);
+        selectButton = (Button) findViewById(R.id.bn_cr_select);
+        deleteButton = (Button) findViewById(R.id.bn_cr_select);
+        selectAllButton = (Button) findViewById(R.id.bn_cr_selectall);
+        canleButton = (Button) findViewById(R.id.bn_cr_canel);
+        layout = (LinearLayout) findViewById(R.id.showLiner_class);
+        relativeLayout = (RelativeLayout) findViewById(R.id.RelativeLayout_Class);
         listView = getListView();
 
         // 为按键设置监听
-        addCoach.setOnClickListener(this);
+        addClass.setOnClickListener(this);
         searchButton.setOnClickListener(this);
         selectButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
@@ -91,11 +91,11 @@ public class CoachListActivity extends ListActivity implements
 
     public void onClick(View v) {
         // 跳转到添加信息的界面
-        if (v == addCoach) {
-            startActivity(new Intent(CoachListActivity.this, AddCoachActivity.class));
+        if (v == addClass) {
+            startActivity(new Intent(ClassListActivity.this, AddClassActivity.class));
         } else if (v == searchButton) {
             // 跳转到查询界面
-            startActivity(new Intent(this,CoachSearch.class));
+                 startActivity(new Intent(this, ClassSearch.class));
         } else if (v == selectButton) {
             // 跳转到选择界面
             isDeleteList = !isDeleteList;
@@ -110,7 +110,7 @@ public class CoachListActivity extends ListActivity implements
                 for (int i = 0; i < list.size(); i++) {
                     long id = list.get(i);
                     Log.e(TAG, "delete id=" + id);
-                    int count = dao.deleteCoachById(id);
+                    int count = dao.deleteClassById(id);
                 }
                 dao.closeDB();
                 load();
@@ -129,34 +129,34 @@ public class CoachListActivity extends ListActivity implements
     // 创建菜单
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         MenuInflater inflater = new MenuInflater(this); //getMenuInflater();
-        inflater.inflate(R.menu.menu_coach, menu);
+        inflater.inflate(R.menu.menu_class, menu);
     }
 
     // 对菜单中的按钮添加响应时间
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         int item_id = item.getItemId();
-        coach = (Coach) listView.getTag();
-        Log.v(TAG, "TestSQLite++++coach+" + listView.getTag() + "");
-        final long coach_id = coach.getId();
+        classroom = (Class) listView.getTag();
+        Log.v(TAG, "TestSQLite++++class+" + listView.getTag() + "");
+        final long class_id = classroom.getId();
         Intent intent = new Intent();
-        Log.v(TAG, "TestSQLite+++++++id" + coach_id);
+        Log.v(TAG, "TestSQLite+++++++id" + class_id);
         switch (item_id) {
             // 删除
             case R.id.delete:
-                deleteCoachInformation(coach_id);
+                deleteClassInformation(class_id);
                 break;
             case R.id.look:
-                // 查看教练信息
-                Log.v(TAG, "TestSQLite+++++++look" + coach + "");
-                intent.putExtra("coach", coach);
-                intent.setClass(this, ShowCoachActivity.class);
+                // 查看场地信息
+                Log.v(TAG, "TestSQLite+++++++look" + classroom + "");
+                intent.putExtra("class", classroom);
+                intent.setClass(this, ShowClassActivity.class);
                 this.startActivity(intent);
                 break;
             case R.id.write:
-                // 修改教练信息
-                intent.putExtra("coach", coach);
-                intent.setClass(this, AddCoachActivity.class);
+                // 修改场地信息
+                intent.putExtra("class", classroom);
+                intent.setClass(this, AddClassActivity.class);
                 this.startActivity(intent);
                 break;
             default:
@@ -167,8 +167,8 @@ public class CoachListActivity extends ListActivity implements
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        Coach coach = (Coach) dao.getCoachFromView(view, id);
-        listView.setTag(coach);
+        Class aClass = (Class) dao.getClassFromView(view, id);
+        listView.setTag(aClass);
         registerForContextMenu(listView);
         return false;
     }
@@ -178,12 +178,12 @@ public class CoachListActivity extends ListActivity implements
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
         if (!isDeleteList) {
-            coach = dao.getCoachFromView(view, id);
-            Log.e(TAG, "coach*****" + dao.getCoachFromView(view, id));
+            classroom = dao.getClassFromView(view, id);
+            Log.e(TAG, "classroom*****" + dao.getClassFromView(view, id));
             Intent intent = new Intent();
-            intent.putExtra("coach", coach);
-            intent.setClass(this, ShowCoachActivity.class);
-           this.startActivity(intent);
+            intent.putExtra("classroom", classroom);
+            intent.setClass(this, ShowClassActivity.class);
+            this.startActivity(intent);
         } else {
             CheckBox box = (CheckBox) view.findViewById(R.id.cb_box);
             box.setChecked(!box.isChecked());
@@ -192,26 +192,21 @@ public class CoachListActivity extends ListActivity implements
         }
     }
 
+
     // 自定义一个加载数据库中的全部记录到当前页面的无参方法
     public void load() {
-        DBOpenHelper DBHelper = new  DBOpenHelper(
-                CoachListActivity.this);
+        DBOpenHelper DBHelper = new DBOpenHelper(
+                ClassListActivity.this);
         SQLiteDatabase database = DBHelper.getWritableDatabase();
-        cursor = database.query(TableContanst.COACH_TABLE, null, null, null,
-                null, null, TableContanst.CoachColumns.ID + " desc");
+        cursor = database.query(TableContanst.CLASS_TABLE, null, null, null,
+                null, null, TableContanst.ClassColumns.ID + " desc");
         startManagingCursor(cursor);
-        adapter = new SimpleCursorAdapter(this, R.layout.coach_list_item,
-                cursor, new String[]{TableContanst.CoachColumns.ID,
-                TableContanst.CoachColumns.NAME,
-                TableContanst.CoachColumns.AGE,
-                TableContanst.CoachColumns.SEX,
-                TableContanst.CoachColumns.PHONE_NUMBER,
-                TableContanst.CoachColumns.TEACH_YEAR,
-                TableContanst.CoachColumns.CHARGE,
-                TableContanst.CoachColumns.TEACH_COURSE}, new int[]{
-                R.id.tv_co_id, R.id.tv_co_name, R.id.tv_co_age,
-                R.id.tv_co_sex, R.id.tv_co_phone,
-                R.id.tv_co_teach_year,R.id.tv_co_charge,R.id.tv_co_teach_course});
+        adapter = new SimpleCursorAdapter(this, R.layout.class_list_item,
+                cursor, new String[]{TableContanst.ClassColumns.ID,
+                TableContanst.ClassColumns.NAME,
+                TableContanst.ClassColumns.POSITION,
+                TableContanst.ClassColumns.CONTAIN,}, new int[]{
+                R.id.tv_cr_id, R.id.tv_cr_name, R.id.tv_cr_position, R.id.tv_cr_contain});
         listView.setAdapter(adapter);
     }
 
@@ -247,23 +242,23 @@ public class CoachListActivity extends ListActivity implements
 
     // 自定义一个利用对话框形式进行数据的删除
 
-    private void deleteCoachInformation(final long delete_id) {
+    private void deleteClassInformation(final long delete_id) {
         // 利用对话框的形式删除数据
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("教练信息删除")
+        builder.setTitle("场地信息删除")
                 .setMessage("确定删除所选记录?")
                 .setCancelable(false)
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        int raws = dao.deleteCoachById(delete_id);
+                        int raws = dao.deleteClassById(delete_id);
                         layout.setVisibility(View.GONE);
                         isDeleteList = !isDeleteList;
                         load();
                         if (raws > 0) {
-                            Toast.makeText(CoachListActivity.this, "删除成功!",
+                            Toast.makeText(ClassListActivity.this, "删除成功!",
                                     Toast.LENGTH_LONG).show();
                         } else
-                            Toast.makeText(CoachListActivity.this, "删除失败!",
+                            Toast.makeText(ClassListActivity.this, "删除失败!",
                                     Toast.LENGTH_LONG).show();
                     }
                 })
