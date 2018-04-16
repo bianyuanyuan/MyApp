@@ -19,10 +19,6 @@ import java.io.Serializable;
 
 import myapp.byy.com.myapp.R;
 
-/**
- * Created by 540 on 2018/4/15.
- */
-
 public class AddCourseActivity extends Activity implements View.OnClickListener {
     private static final String TAG = "AddCourseActivity";
     private TextView idText;
@@ -81,7 +77,7 @@ public class AddCourseActivity extends Activity implements View.OnClickListener 
         nameText.setText(name + "");
         timesText.setText(times + "");
         timesweekText.setText(timesweek + "");
-        priceText.setText(priceText + "");
+        priceText.setText(price + "");
 
         setTitle("课程信息更新");
         restoreButton.setText("更新");
@@ -147,7 +143,7 @@ public class AddCourseActivity extends Activity implements View.OnClickListener 
         String message = null;
         View invadView = null;
         if (name.trim().length() == 0) {
-            message = "请输入姓名！";
+            message = "请输入课程名！";
             invadView = nameText;
         }
         if (message != null) {

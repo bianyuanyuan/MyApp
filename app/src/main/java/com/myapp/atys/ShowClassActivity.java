@@ -17,11 +17,11 @@ public class ShowClassActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_info);
         Intent intent = getIntent();
-        Class aClass = (Class) intent.getSerializableExtra(TableContanst.CLASS_TABLE);
-        ((TextView) findViewById(R.id.tv_cr_info_id)).setText(aClass.getId() + "");
-        ((TextView) findViewById(R.id.tv_cr_info_name)).setText(aClass.getName() + "");
-        ((TextView) findViewById(R.id.tv_cr_info_position)).setText(aClass.getPosition() + "");
-        ((TextView) findViewById(R.id.tv_cr_info_contain)).setText(aClass.getContain());
+        Class classroom = (Class) intent.getSerializableExtra(TableContanst.CLASS_TABLE);
+        ((TextView) findViewById(R.id.tv_cr_info_id)).setText(classroom.getId() + "");
+        ((TextView) findViewById(R.id.tv_cr_info_name)).setText(classroom.getName());
+        ((TextView) findViewById(R.id.tv_cr_info_position)).setText(classroom.getPosition());
+        ((TextView) findViewById(R.id.tv_cr_info_contain)).setText(classroom.getContain() + "");
     }
 
     public void goBack(View view) {

@@ -139,7 +139,7 @@ public class AddClassActivity extends Activity implements View.OnClickListener {
         String message = null;
         View invadView = null;
         if (name.trim().length() == 0) {
-            message = "请输入姓名！";
+            message = "请输入场地名！";
             invadView = nameText;
         }
         if (message != null) {

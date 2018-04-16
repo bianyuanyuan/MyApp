@@ -100,7 +100,6 @@
             android:layout_toRightOf="@id/tv_cs_times_text"
             android:hint="请输入周课时数"
             android:inputType="number"
-            android:maxLength="11"
             android:paddingLeft="20dip" />
 
         <TextView
@@ -124,7 +123,6 @@
             android:layout_toRightOf="@id/tv_cs_price_text"
             android:hint="请输入价格"
             android:inputType="number"
-            android:maxLength="11"
             android:paddingLeft="20dip" />
 
         <Button

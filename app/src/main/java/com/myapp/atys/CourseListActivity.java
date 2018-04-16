@@ -1,12 +1,5 @@
 package com.myapp.atys;
 
-/**
- * Created by 540 on 2018/3/14.
- */
-
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
@@ -16,14 +9,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -32,18 +21,22 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import com.myapp.Data.Course;
 import com.myapp.Data.Student;
-//import AddStudentActivity;
 import com.myapp.dao.DataDao;
 import com.myapp.db.DBOpenHelper;
 import com.myapp.db.TableContanst;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import myapp.byy.com.myapp.R;
 
-public class StudentListActivity extends ListActivity implements
-        OnClickListener, OnItemClickListener, OnItemLongClickListener {
+public class CourseListActivity extends ListActivity implements
+        View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private static final String TAG = "TestSQLite";
-    private Button addStudent;
+    private Button addCourse;
     private Cursor cursor;
     private SimpleCursorAdapter adapter;
     private ListView listView;
@@ -56,29 +49,29 @@ public class StudentListActivity extends ListActivity implements
     private Button canleButton;
     private LinearLayout layout;
     private DataDao dao;
-    private Student student;
+    private Course course;
     private Boolean isDeleteList = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.show_student);////////////////////////
+        setContentView(R.layout.show_course);////////////////////////
         Log.e(TAG, "onCreate");
         list = new ArrayList<Long>();
-        student = new Student();
+        course = new Course();
         dao = new DataDao(new DBOpenHelper(this));
-        addStudent = (Button) findViewById(R.id.btn_add_student);
-        searchButton = (Button) findViewById(R.id.bn_search_id);
-        selectButton = (Button) findViewById(R.id.bn_select);
-        deleteButton = (Button) findViewById(R.id.bn_delete);
-        selectAllButton = (Button) findViewById(R.id.bn_selectall);
-        canleButton = (Button) findViewById(R.id.bn_canel);
-        layout = (LinearLayout) findViewById(R.id.showLiner);
-        relativeLayout = (RelativeLayout) findViewById(R.id.RelativeLayout_Class);
+        addCourse = (Button) findViewById(R.id.btn_add_course);
+        searchButton = (Button) findViewById(R.id.bn_cs_search_id);
+        selectButton = (Button) findViewById(R.id.bn_cs_select);
+        deleteButton = (Button) findViewById(R.id.bn_cs_delete);
+        selectAllButton = (Button) findViewById(R.id.bn_cs_delete);
+        canleButton = (Button) findViewById(R.id.bn_cs_canel);
+        layout = (LinearLayout) findViewById(R.id.showLiner_course);
+        relativeLayout = (RelativeLayout) findViewById(R.id.RelativeLayout_Course);
         listView = getListView();
 
         // 为按键设置监听
-        addStudent.setOnClickListener(this);
+        addCourse.setOnClickListener(this);
         searchButton.setOnClickListener(this);
         selectButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
@@ -99,11 +92,11 @@ public class StudentListActivity extends ListActivity implements
 
     public void onClick(View v) {
         // 跳转到添加信息的界面
-        if (v == addStudent) {
-            startActivity(new Intent(StudentListActivity.this, AddStudentActivity.class));
+        if (v == addCourse) {
+            startActivity(new Intent(CourseListActivity.this, AddCourseActivity.class));
         } else if (v == searchButton) {
             // 跳转到查询界面
-            startActivity(new Intent(this, StudentSearch.class));
+            startActivity(new Intent(this, CourseSearch.class));
         } else if (v == selectButton) {
             // 跳转到选择界面
             isDeleteList = !isDeleteList;
@@ -118,7 +111,7 @@ public class StudentListActivity extends ListActivity implements
                 for (int i = 0; i < list.size(); i++) {
                     long id = list.get(i);
                     Log.e(TAG, "delete id=" + id);
-                    int count = dao.deleteStudentById(id);
+                    int count = dao.deleteCourseById(id);
                 }
                 dao.closeDB();
                 load();
@@ -135,40 +128,36 @@ public class StudentListActivity extends ListActivity implements
     }
 
     // 创建菜单
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         MenuInflater inflater = new MenuInflater(this); //getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        inflater.inflate(R.menu.menu_course, menu);
     }
 
     // 对菜单中的按钮添加响应时间
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         int item_id = item.getItemId();
-        student = (Student) listView.getTag();
-        Log.v(TAG, "TestSQLite++++student+" + listView.getTag() + "");
-        final long student_id = student.getId();
+        course = (Course) listView.getTag();
+        Log.v(TAG, "TestSQLite++++course+" + listView.getTag() + "");
+        final long course_id = course.getId();
         Intent intent = new Intent();
-        Log.v(TAG, "TestSQLite+++++++id" + student_id);
+        Log.v(TAG, "TestSQLite+++++++id" + course_id);
         switch (item_id) {
-            /* 添加
-            case R.id.add:
-                startActivity(new Intent(this, AddStudentActivity.class));
-                break;*/
             // 删除
             case R.id.delete:
-                deleteStudentInformation(student_id);
+                deleteCourseInformation(course_id);
                 break;
             case R.id.look:
-                // 查看学生信息
-                Log.v(TAG, "TestSQLite+++++++look" + student + "");
-                intent.putExtra("student", student);
-                intent.setClass(this, ShowStudentActivity.class);
+                // 查看课程信息
+                Log.v(TAG, "TestSQLite+++++++look" + course + "");
+                intent.putExtra("course", course);
+                intent.setClass(this, ShowCourseActivity.class);
                 this.startActivity(intent);
                 break;
             case R.id.write:
-                // 修改学生信息
-                intent.putExtra("student", student);
-                intent.setClass(this, AddStudentActivity.class);
+                // 修改课程信息
+                intent.putExtra("course", course);
+                intent.setClass(this, AddCourseActivity.class);
                 this.startActivity(intent);
                 break;
             default:
@@ -179,8 +168,8 @@ public class StudentListActivity extends ListActivity implements
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        Student student = (Student) dao.getStudentFromView(view, id);
-        listView.setTag(student);
+        Course course = (Course) dao.getCourseFromView(view, id);
+        listView.setTag(course);
         registerForContextMenu(listView);
         return false;
     }
@@ -190,11 +179,11 @@ public class StudentListActivity extends ListActivity implements
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
         if (!isDeleteList) {
-            student = dao.getStudentFromView(view, id);
-            Log.e(TAG, "student*****" + dao.getStudentFromView(view, id));
+            course = dao.getCourseFromView(view, id);
+            Log.e(TAG, "course*****" + dao.getCourseFromView(view, id));
             Intent intent = new Intent();
-            intent.putExtra("student", student);
-            intent.setClass(this, ShowStudentActivity.class);
+            intent.putExtra("course", course);
+            intent.setClass(this, ShowCourseActivity.class);
             this.startActivity(intent);
         } else {
             CheckBox box = (CheckBox) view.findViewById(R.id.cb_box);
@@ -206,23 +195,25 @@ public class StudentListActivity extends ListActivity implements
 
     // 自定义一个加载数据库中的全部记录到当前页面的无参方法
     public void load() {
-        DBOpenHelper studentDBHelper = new  DBOpenHelper(
-                StudentListActivity.this);
-        SQLiteDatabase database = studentDBHelper.getWritableDatabase();
-        cursor = database.query(TableContanst.STUDENT_TABLE, null, null, null,
-                null, null, TableContanst.StudentColumns.MODIFY_TIME + " desc");
+        DBOpenHelper DBHelper = new DBOpenHelper(
+                CourseListActivity.this);
+        SQLiteDatabase database = DBHelper.getWritableDatabase();
+        cursor = database.query(TableContanst.COURSE_TABLE, null, null, null,
+                null, null, TableContanst.CourseColumns.ID + " desc");
         startManagingCursor(cursor);
-        adapter = new SimpleCursorAdapter(this, R.layout.student_list_item,
-                cursor, new String[]{TableContanst.StudentColumns.ID,
-                TableContanst.StudentColumns.NAME,
-                TableContanst.StudentColumns.AGE,
-                TableContanst.StudentColumns.SEX,
-                TableContanst.StudentColumns.LIKES,
-                TableContanst.StudentColumns.PHONE_NUMBER,
-                TableContanst.StudentColumns.TRAIN_DATE}, new int[]{
-                R.id.tv_stu_id, R.id.tv_stu_name, R.id.tv_stu_age,
-                R.id.tv_stu_sex, R.id.tv_stu_likes, R.id.tv_stu_phone,
-                R.id.tv_stu_traindate});
+        adapter = new SimpleCursorAdapter(this, R.layout.course_list_item,
+                cursor, new String[]{TableContanst.CourseColumns.ID,
+                TableContanst.CourseColumns.NAME,
+                TableContanst.CourseColumns.TIMES,
+                TableContanst.CourseColumns.TIMESWEEK,
+                TableContanst.CourseColumns.PRICE,
+        }, new int[]{
+                R.id.tv_cs_id,
+                R.id.tv_cs_name,
+                R.id.tv_cs_times,
+                R.id.tv_cs_timesweek,
+                R.id.tv_cs_price,
+        });
         listView.setAdapter(adapter);
     }
 
@@ -258,23 +249,23 @@ public class StudentListActivity extends ListActivity implements
 
     // 自定义一个利用对话框形式进行数据的删除
 
-    private void deleteStudentInformation(final long delete_id) {
+    private void deleteCourseInformation(final long delete_id) {
         // 利用对话框的形式删除数据
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("学员信息删除")
+        builder.setTitle("课程信息删除")
                 .setMessage("确定删除所选记录?")
                 .setCancelable(false)
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        int raws = dao.deleteStudentById(delete_id);
+                        int raws = dao.deleteCourseById(delete_id);
                         layout.setVisibility(View.GONE);
                         isDeleteList = !isDeleteList;
                         load();
                         if (raws > 0) {
-                            Toast.makeText(StudentListActivity.this, "删除成功!",
+                            Toast.makeText(CourseListActivity.this, "删除成功!",
                                     Toast.LENGTH_LONG).show();
                         } else
-                            Toast.makeText(StudentListActivity.this, "删除失败!",
+                            Toast.makeText(CourseListActivity.this, "删除失败!",
                                     Toast.LENGTH_LONG).show();
                     }
                 })

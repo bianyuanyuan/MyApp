@@ -20,9 +20,9 @@ public class ShowCourseActivity extends Activity {
         Course course = (Course) intent.getSerializableExtra(TableContanst.COURSE_TABLE);
         ((TextView) findViewById(R.id.tv_cs_info_id)).setText(course.getId() + "");
         ((TextView) findViewById(R.id.tv_cs_info_name)).setText(course.getName());
-        ((TextView) findViewById(R.id.tv_cs_times)).setText(course.getTimes() + "");
-        ((TextView) findViewById(R.id.tv_cs_timesweek)).setText((int) course.getTimesweek());
-        ((TextView) findViewById(R.id.tv_cs_price)).setText((int) course.getPrice());
+        ((TextView) findViewById(R.id.tv_cs_info_times)).setText(course.getTimes() + "");
+        ((TextView) findViewById(R.id.tv_cs_info_timesweek)).setText(course.getTimesweek() + "");
+        ((TextView) findViewById(R.id.tv_cs_info_price)).setText(course.getPrice() + "");
     }
 
     public void goBack(View view) {

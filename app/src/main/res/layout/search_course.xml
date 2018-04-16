@@ -5,18 +5,18 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
     <EditText
-        android:id="@+id/et_cr_srarch"
+        android:id="@+id/et_cs_srarch"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="请输入场地名" />
+        android:hint="请输入课程名" />
     <Button
-        android:id="@+id/bn_cr_sure_search"
+        android:id="@+id/bn_cs_sure_search"
         android:gravity="center"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="确定"         />
     <Button
-        android:id="@+id/bn_cr_return"
+        android:id="@+id/bn_cs_return"
         android:gravity="center"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="ID     场地名      场地位置      可容纳人数（人）   "
+            android:text="ID     课程名    总课时数     周课时数    价格（元/节）"
             />
         <ListView
             android:id="@+id/searchListView"
