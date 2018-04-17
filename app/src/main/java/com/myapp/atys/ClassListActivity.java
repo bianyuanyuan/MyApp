@@ -182,7 +182,7 @@ public class ClassListActivity extends ListActivity implements
             Log.e(TAG, "classroom*****" + dao.getClassFromView(view, id));
             Intent intent = new Intent();
             intent.putExtra("classroom", classroom);
-            intent.setClass(this, ShowClassActivity.class);
+            intent.setClass(this, ShowClassActivity.class);/////////////something wrong
             this.startActivity(intent);
         } else {
             CheckBox box = (CheckBox) view.findViewById(R.id.cb_box);

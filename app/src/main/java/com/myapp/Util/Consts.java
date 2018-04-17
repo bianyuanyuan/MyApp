@@ -2,7 +2,7 @@ package com.myapp.Util;
 
 public class Consts {
     private static String URL = "http://39.108.183.228:10240/PregnantMonitor/";
-     //   public static String URL = "http://10.21.108.115:8080/MyApp/";
+    //   public static String URL = "http://10.21.108.115:8088/MyApp/";
 
     public static String URL_Register = URL + "RegisterServlet";
     public static String URL_Login = URL + "LoginServlet";
@@ -16,7 +16,7 @@ public class Consts {
     public static final int IMAGE_REQUEST_CODE = 0;
     public static final int CAMERA_REQUEST_CODE = 1;
     public static final int RESIZE_REQUEST_CODE = 2;
-    public static final String IMAGE_FILE_NAME="tmp_avatar.jpg";
+    public static final String IMAGE_FILE_NAME = "tmp_avatar.jpg";
 
     // 服务器代码
     public static String ERRORCODE_NULL = "200";
