@@ -81,9 +81,9 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent i = new Intent(this, LoginActivity2.class);
-       startActivity(i);
-     //  setContentView(R.layout.activity_main);////////////////////////////
+       // Intent i = new Intent(this, LoginActivity2.class);
+      // startActivity(i);
+      setContentView(R.layout.activity_main);////////////////////////////
 
         initView();
         //初始化

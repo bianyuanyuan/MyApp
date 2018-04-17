@@ -24,22 +24,25 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="613269e6-d6bc-4e46-9356-8b34f9fd86d6">
+      <connection connection-id="8674363a-aa0a-4619-8d6b-59d6d87d2802">
+        <schema name="main" object-types="column, constraint, index, table, dataset trigger, view" />
+      </connection>
+      <connection connection-id="ab9a1c00-0a1c-41be-ae25-12c292da2363">
         <schema name="main" object-types="column, constraint, index, table, dataset trigger, view" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="613269e6-d6bc-4e46-9356-8b34f9fd86d6">
-      <console name="Connection" type="STANDARD" />
-    </connection>
     <connection id="8674363a-aa0a-4619-8d6b-59d6d87d2802">
       <console name="register" type="STANDARD"><![CDATA[select * from user;]]></console>
     </connection>
+    <connection id="ab9a1c00-0a1c-41be-ae25-12c292da2363">
+      <console name="Connection" type="STANDARD"><![CDATA[select * from coach;]]></console>
+    </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="613269e6-d6bc-4e46-9356-8b34f9fd86d6" />
     <connection id="8674363a-aa0a-4619-8d6b-59d6d87d2802" />
+    <connection id="ab9a1c00-0a1c-41be-ae25-12c292da2363" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -64,9 +67,9 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="613269e6-d6bc-4e46-9356-8b34f9fd86d6" active="true">
+      <connection id="8674363a-aa0a-4619-8d6b-59d6d87d2802" active="true">
         <database>
-          <name value="Connection" />
+          <name value="register" />
           <description value="" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />
@@ -79,7 +82,7 @@
           <port value="" />
           <database value="" />
           <files>
-            <file path="E:\manager.db" schema="main" />
+            <file path="E:\LoginAndRegister.db" schema="main" />
           </files>
           <os-authentication value="false" />
           <empty-password value="false" />
@@ -144,9 +147,9 @@
           <object-name-filters />
         </object-filters>
       </connection>
-      <connection id="8674363a-aa0a-4619-8d6b-59d6d87d2802" active="true">
+      <connection id="ab9a1c00-0a1c-41be-ae25-12c292da2363" active="true">
         <database>
-          <name value="register" />
+          <name value="Connection" />
           <description value="" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />
@@ -159,7 +162,7 @@
           <port value="" />
           <database value="" />
           <files>
-            <file path="E:\LoginAndRegister.db" schema="main" />
+            <file path="E:\manager.db" schema="main" />
           </files>
           <os-authentication value="false" />
           <empty-password value="false" />
@@ -184,7 +187,7 @@
           <session-management value="true" />
           <ddl-file-binding value="true" />
           <database-logging value="false" />
-          <connect-automatically value="true" />
+          <connect-automatically value="false" />
           <restore-workspace value="true" />
           <restore-workspace-deep value="true" />
           <environment-type value="default" />

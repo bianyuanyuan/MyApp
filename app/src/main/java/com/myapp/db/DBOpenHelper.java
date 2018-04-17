@@ -48,7 +48,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "phone_number varchar(11)," +
                 "teach_year Integer," +
                 "charge Integer," +
-                "teach_course varchr(20)" +
+                "teach_course varchar(20)" +
                 ")");
 
         //创建场地表

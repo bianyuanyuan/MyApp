@@ -68,8 +68,9 @@ public class DataDao {
         values.put(TableContanst.CoachColumns.SEX, c.getSex());
         values.put(TableContanst.CoachColumns.PHONE_NUMBER, c.getPhoneNumber());
         values.put(TableContanst.CoachColumns.TEACH_YEAR, c.getTeach_year());
-        values.put(TableContanst.CoachColumns.TEACH_COURSE, c.getTeach_course());
         values.put(TableContanst.CoachColumns.CHARGE, c.getCharge());
+        values.put(TableContanst.CoachColumns.TEACH_COURSE, c.getTeach_course());
+
         return dbHelper.getWritableDatabase().insert(TableContanst.COACH_TABLE, null, values);
     }
 
@@ -145,7 +146,7 @@ public class DataDao {
                 TableContanst.StudentColumns.ID + "=?", new String[]{s.getId() + ""});
     }
 
-    // 更新一个id所对应数据库表course的记录
+    // 更新一个id所对应数据库表coach的记录
     public int updateCoach(Coach c) {
         ContentValues values = new ContentValues();
         values.put(TableContanst.CoachColumns.NAME, c.getName());
@@ -153,8 +154,9 @@ public class DataDao {
         values.put(TableContanst.CoachColumns.SEX, c.getSex());
         values.put(TableContanst.CoachColumns.PHONE_NUMBER, c.getPhoneNumber());
         values.put(TableContanst.CoachColumns.TEACH_YEAR, c.getTeach_year());
-        values.put(TableContanst.CoachColumns.TEACH_COURSE, c.getTeach_course());
+
         values.put(TableContanst.CoachColumns.CHARGE, c.getCharge());
+        values.put(TableContanst.CoachColumns.TEACH_COURSE, c.getTeach_course());
         return dbHelper.getWritableDatabase().update(TableContanst.COACH_TABLE, values,
                 TableContanst.CoachColumns.ID + "=?", new String[]{c.getId() + ""});
     }
@@ -252,11 +254,12 @@ public class DataDao {
             int teach_year = cursor.getInt(cursor.getColumnIndex(TableContanst.CoachColumns.TEACH_YEAR));
             map.put(TableContanst.CoachColumns.TEACH_YEAR, teach_year);
 
-            String teach_course = cursor.getString(cursor.getColumnIndex(TableContanst.CoachColumns.TEACH_COURSE));
-            map.put(TableContanst.CoachColumns.TEACH_COURSE, teach_course);
 
             int charge = cursor.getInt(cursor.getColumnIndex(TableContanst.CoachColumns.CHARGE));
             map.put(TableContanst.CoachColumns.CHARGE, charge);
+
+            String teach_course = cursor.getString(cursor.getColumnIndex(TableContanst.CoachColumns.TEACH_COURSE));
+            map.put(TableContanst.CoachColumns.TEACH_COURSE, teach_course);
             data.add(map);
         }
         return data;
