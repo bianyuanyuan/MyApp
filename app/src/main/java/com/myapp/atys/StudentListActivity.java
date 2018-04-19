@@ -37,6 +37,7 @@ import com.myapp.Data.Student;
 import com.myapp.dao.DataDao;
 import com.myapp.db.DBOpenHelper;
 import com.myapp.db.TableContanst;
+
 import myapp.byy.com.myapp.R;
 
 public class StudentListActivity extends ListActivity implements
@@ -150,10 +151,6 @@ public class StudentListActivity extends ListActivity implements
         Intent intent = new Intent();
         Log.v(TAG, "TestSQLite+++++++id" + student_id);
         switch (item_id) {
-            /* 添加
-            case R.id.add:
-                startActivity(new Intent(this, AddStudentActivity.class));
-                break;*/
             // 删除
             case R.id.delete:
                 deleteStudentInformation(student_id);
@@ -206,7 +203,7 @@ public class StudentListActivity extends ListActivity implements
 
     // 自定义一个加载数据库中的全部记录到当前页面的无参方法
     public void load() {
-        DBOpenHelper studentDBHelper = new  DBOpenHelper(
+        DBOpenHelper studentDBHelper = new DBOpenHelper(
                 StudentListActivity.this);
         SQLiteDatabase database = studentDBHelper.getWritableDatabase();
         cursor = database.query(TableContanst.STUDENT_TABLE, null, null, null,

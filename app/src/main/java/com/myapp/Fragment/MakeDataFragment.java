@@ -1,8 +1,10 @@
 package com.myapp.Fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.myapp.Data.Coach;
+import com.myapp.Data.Student;
 import com.myapp.atys.AddCoachActivity;
 import com.myapp.atys.ShowCoachActivity;
 import com.myapp.dao.DataDao;
@@ -85,34 +88,29 @@ public class MakeDataFragment extends Fragment implements View.OnClickListener,A
     private List<? extends Map<String,?>> getData() {
 
       dataList = new ArrayList<Map<String, Object>>();
-        coach= new Coach(1, "李永",31,"男","12011441144",2,200,"游泳");
+      //  dao = new DataDao(getContext());
+       coach= new Coach(1, "李永",31,"男","12011441144",2,200,"游泳");
         for (int i = 0; i < 10; i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("pic", R.drawable.icon_customer);
             map.put("text", coach.getName());
             dataList.add(map);
         }
+    // dataList=dao.getAllCoachs();
         return dataList;
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.account:
-                Data();
-        }
     }
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-
     }
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
     }
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
@@ -126,17 +124,6 @@ public class MakeDataFragment extends Fragment implements View.OnClickListener,A
             case 1:
               //  Toast.makeText(getActivity(), "进行宝贝中心", Toast.LENGTH_SHORT).show();
                 break;
-        }
-    }
-
-    private void Data() {
-        if(temp) {
-            image.setSelected(temp);
-            temp =false;
-        }
-        else{
-            image.setSelected(temp);
-            temp = true;
         }
     }
 }
