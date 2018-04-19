@@ -1,15 +1,35 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@android:color/white">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#3C3C3C"
-        android:gravity="center"
-        android:text="约课"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp" />
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#3C3C3C"
+            android:gravity="center"
+            android:text="约课"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+        <TextView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="教练选择"
+            android:padding="5pt"
+            android:textSize="10pt"/>
+
+        <ListView android:id="@+id/coachList"
+            android:layout_width="match_parent"
+            android:scrollbarSize="20dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</RelativeLayout>
