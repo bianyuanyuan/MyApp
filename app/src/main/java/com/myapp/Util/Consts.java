@@ -32,18 +32,12 @@ public class Consts {
 
     public static String SUCCESSCODE_LOGIN = "100";
     public static String SUCCESSCODE_REGISTER = "101";
-    public static String SUCCESSCODE_GDMANALYSE = "102";// GDM分析完成
     public static String SUCCESSCODE_MODIFYPWD = "103";
     public static String SUCCESSCODE_UPLOADIMG = "104";
     public static String SUCCESSCODE_DOWNLOADIMG = "105";
-    public static String SUCCESSCODE_GETINFO = "106";
-    public static String SUCCESSCODE_SETINFO = "107";
 
     public static String REQUESTCODE_NICKNAME = "1";
-    public static String REQUESTCODE_HEIGHT = "2";
-    public static String REQUESTCODE_BIRTHDATE = "3";
-    public static String REQUESTCODE_PREGNANTDATE = "4";
-    public static String REQUESTCODE_RECORD = "5";
+
 
     // 代码对应信息
     public static String ERRORMSG_NULL = "不能为空";

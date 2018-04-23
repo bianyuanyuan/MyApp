@@ -10,6 +10,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1" />
+    <TextView
+        android:id="@+id/tv_tt_periods"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1" />
+    <TextView
+        android:id="@+id/tv_tt_week"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1" />
 
     <TextView
         android:id="@+id/tv_tt_time"
@@ -19,18 +31,17 @@
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/tv_tt_week"
+        android:id="@+id/tv_tt_tstart"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1" />
 
-    <CheckBox
-        android:id="@+id/cb_box"
+    <TextView
+        android:id="@+id/tv_tt_tend"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:checked="false"
-        android:focusable="false"
-        android:visibility="gone" />
+        android:layout_gravity="center"
+        android:layout_weight="1" />
+
 </LinearLayout>

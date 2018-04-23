@@ -3,6 +3,7 @@ package com.myapp.dao;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class DataDao {
     public DataDao(Context context) {
         dbHelper = new DBOpenHelper(context);
     }
+
 
     public DataDao(DBOpenHelper dbHelper) {
         this.dbHelper = dbHelper;
@@ -98,6 +100,9 @@ public class DataDao {
         ContentValues values = new ContentValues();
         values.put(TableContanst.TimeTableColumns.TIME, tt.getTime());
         values.put(TableContanst.TimeTableColumns.WEEK, tt.getWeek());
+        values.put(TableContanst.TimeTableColumns.PERIODS, tt.getPeriods());
+        values.put(TableContanst.TimeTableColumns.T_START, tt.getT_start());
+        values.put(TableContanst.TimeTableColumns.T_END, tt.getT_end());
         return dbHelper.getWritableDatabase().insert(TableContanst.TIMETABLE_TABLE, null, values);
     }
 
@@ -187,6 +192,9 @@ public class DataDao {
         ContentValues values = new ContentValues();
         values.put(TableContanst.TimeTableColumns.TIME, tt.getTime());
         values.put(TableContanst.TimeTableColumns.WEEK, tt.getWeek());
+        values.put(TableContanst.TimeTableColumns.PERIODS, tt.getPeriods());
+        values.put(TableContanst.TimeTableColumns.T_START, tt.getT_start());
+        values.put(TableContanst.TimeTableColumns.T_END, tt.getT_end());
         return dbHelper.getWritableDatabase().update(TableContanst.TIMETABLE_TABLE, values,
                 TableContanst.TimeTableColumns.ID + "=?", new String[]{tt.getId() + ""});
     }
@@ -265,6 +273,32 @@ public class DataDao {
         return data;
     }
 
+    //显示所有coach的记录
+    public ArrayList<Coach> getAllcoachinfo() {
+        ArrayList<Coach> templist = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        //扫描数据库,将数据库信息放入templist
+        Cursor cursor = db.rawQuery("select * from coach",null);
+        while (cursor.moveToNext()){
+            String name = cursor.getString(cursor.getColumnIndex(TableContanst.CoachColumns.NAME));
+            int age = cursor.getInt(cursor.getColumnIndex(TableContanst.CoachColumns.AGE));
+            String sex = cursor.getString(cursor.getColumnIndex(TableContanst.CoachColumns.SEX));
+            String phone_number = cursor.getString(cursor.getColumnIndex(TableContanst.CoachColumns.PHONE_NUMBER));
+            int teach_year = cursor.getInt(cursor.getColumnIndex(TableContanst.CoachColumns.TEACH_YEAR));
+            int charge = cursor.getInt(cursor.getColumnIndex(TableContanst.CoachColumns.CHARGE));
+            String teach_course = cursor.getString(cursor.getColumnIndex(TableContanst.CoachColumns.TEACH_COURSE));
+
+            Coach coach = new Coach( name, age, sex, phone_number, teach_year, charge, teach_course);
+            templist.add(coach);
+        }
+        cursor.close();
+        db.close();
+
+        return templist;
+    }
+
+
     // 查询所有class的记录
     public List<Map<String, Object>> getAllClasses() {
         //id desc
@@ -323,15 +357,24 @@ public class DataDao {
         Cursor cursor = dbHelper.getWritableDatabase().query(TableContanst.TIMETABLE_TABLE, null, null, null,
                 null, null, TableContanst.TimeTableColumns.ID + " desc");
         while (cursor.moveToNext()) {
-            Map<String, Object> map = new HashMap<String, Object>(3);
+            Map<String, Object> map = new HashMap<String, Object>(6);
             long id = cursor.getInt(cursor.getColumnIndex(TableContanst.TimeTableColumns.ID));
             map.put(TableContanst.TimeTableColumns.ID, id);
+
+            String periods = cursor.getString(cursor.getColumnIndex(TableContanst.TimeTableColumns.PERIODS));
+            map.put(TableContanst.TimeTableColumns.PERIODS, periods);
 
             String week = cursor.getString(cursor.getColumnIndex(TableContanst.TimeTableColumns.WEEK));
             map.put(TableContanst.TimeTableColumns.WEEK, week);
 
-            String time = cursor.getString(cursor.getColumnIndex(TableContanst.TimeTableColumns.TIME));
+            long time = cursor.getInt(cursor.getColumnIndex(TableContanst.TimeTableColumns.TIME));
             map.put(TableContanst.TimeTableColumns.TIME, time);
+
+            String t_start = cursor.getString(cursor.getColumnIndex(TableContanst.TimeTableColumns.T_START));
+            map.put(TableContanst.TimeTableColumns.T_START, t_start);
+
+            String t_end = cursor.getString(cursor.getColumnIndex(TableContanst.TimeTableColumns.T_END));
+            map.put(TableContanst.TimeTableColumns.T_END, t_end);
         }
         return data;
     }
@@ -464,10 +507,16 @@ public class DataDao {
     public TimeTable getTimeTableFromView(View view, long id) {
         TextView timeView = (TextView) view.findViewById(R.id.tv_tt_time);
         TextView weekView = (TextView) view.findViewById(R.id.tv_tt_week);
+        TextView periodsView = (TextView) view.findViewById(R.id.tv_tt_periods);
+        TextView tstartView = (TextView) view.findViewById(R.id.tv_tt_tstart);
+        TextView tendView = (TextView) view.findViewById(R.id.tv_tt_tend);
 
-        String time = timeView.getText().toString();
+        long time = Integer.parseInt(timeView.getText().toString());
+        String periods = periodsView.getText().toString();
         String week = weekView.getText().toString();
-        TimeTable tb = new TimeTable(id, time, week);
+        String tstart = tstartView.getText().toString();
+        String tend = tendView.getText().toString();
+        TimeTable tb = new TimeTable(id, periods, week, time, tstart, tend);
         return tb;
     }
 

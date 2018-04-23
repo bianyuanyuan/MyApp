@@ -1,9 +1,11 @@
 package com.myapp.Data;
 
+import org.litepal.crud.DataSupport;
+
 import java.io.Serializable;
 
 //教练 类
-public class Coach implements Serializable {
+public class Coach  implements Serializable {
     private long id;
     private String name;
     private int age;

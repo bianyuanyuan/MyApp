@@ -9,7 +9,12 @@ public final class TableContanst {
     public static final String COACH_TABLE = "coach";//教练
     public static final String CLASS_TABLE = "class";//场地
     public static final String COURSE_TABLE = "course";//课程
-    public static final String TIMETABLE_TABLE = "timetable";//教练课程表
+    public static final String TIMETABLE_TABLE = "timetable";//时间表
+    public static final String COACH_TIME_TABLE = "coach_timetable";//教练时间分配表
+    public static final String CLASS_TIME_TABLE = "course_timetable";//场地时间分配表
+    public static final String CLASS_COURSE_TABLE = "class_timetable";//场地课程表
+    public static final String STUDENT_COURSE_TABLE = "sc_timetable";//学员课程表
+
 
     public static final class StudentColumns {
         public static final String ID = "_id";
@@ -30,7 +35,7 @@ public final class TableContanst {
         public static final String PHONE_NUMBER = "phone_number";
         public static final String TEACH_YEAR = "teach_year";
         public static final String CHARGE = "charge";
-        public static final String TEACH_COURSE= "teach_course";
+        public static final String TEACH_COURSE = "teach_course";
     }
 
     public static final class ClassColumns {
@@ -50,8 +55,35 @@ public final class TableContanst {
 
     public static final class TimeTableColumns {
         public static final String ID = "_id";
-        public static final String WEEK = "week";
-        public static final String TIME = "time";
+        public static final String PERIODS = "periods";//时间段
+        public static final String WEEK = "week";//星期
+        public static final String TIME = "time";//节数
+        public static final String T_START = "t_start";//开始时间
+        public static final String T_END = "t_end";//结束时间
     }
 
+    public static final class CoachTimeTableColumns {
+        public static final String ID = "_id";
+        public static final String PERIODS = "periods";//时间段
+        public static final String COACH_ID = "coach_id";
+    }
+
+    public static final class ClassTimeTableColumns {
+        public static final String ID = "_id";
+        public static final String PERIODS = "periods";//时间段
+        public static final String CLASS_ID = "class_id";
+    }
+
+    public static final class ClassCourseTableColumns {
+        public static final String ID = "_id";
+        public static final String CLASS_ID = "class_id";
+        public static final String COURSE_ID = "course_id";
+
+    }
+
+    public static final class StudentCourseTableColumns {
+        public static final String ID = "_id";
+        public static final String COACH_NAME = "coach_name";
+        public static final String COURSE_NAME = "course_name";
+    }
 }

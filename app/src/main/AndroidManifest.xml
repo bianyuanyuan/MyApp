@@ -48,7 +48,6 @@
             android:label="注册"></activity>
         <activity android:name="com.myapp.atys.MeActivity" />
         <activity android:name="com.myapp.atys.ModifyPwdActivity" />
-        <activity android:name="com.myapp.Fragment.MakeDataFragment" />
     </application>
 
 </manifest>

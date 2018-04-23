@@ -23,6 +23,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         this(context, DB_NAME, null, VERSION);
     }
 
+
+
     //创建数据库
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -68,13 +70,45 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "price Integer" +
                 ")");
 
-        //创建教练课表
+        //创建时间表
         db.execSQL("create table if not exists " + TableContanst.TIMETABLE_TABLE +
                 "(_id Integer primary key AUTOINCREMENT," +
+                "periods varchar(20)," +
                 "week varchar(20)," +
-                "time varchar(20)" +
+                "time Integer," +
+                "t_start varchar(10)," +
+                "t_end varchar(10)" +
+                ")");
+
+        //创建教练时间分配表
+        db.execSQL("create table if not exists " + TableContanst.COACH_TIME_TABLE +
+                "(_id Integer primary key AUTOINCREMENT," +
+                "periods varchar(20)," +
+                "coach_id Integer" +
+                ")");
+
+        //创建场地时间分配表
+        db.execSQL("create table if not exists " + TableContanst.CLASS_TIME_TABLE +
+                "(_id Integer primary key AUTOINCREMENT," +
+                "periods varchar(20)," +
+                "class_id Integer" +
+                ")");
+
+        //创建场地课程表
+        db.execSQL("create table if not exists " + TableContanst.CLASS_COURSE_TABLE +
+                "(_id Integer primary key AUTOINCREMENT," +
+                "class_id Integer," +
+                "course_id Integer" +
+                ")");
+
+        //创建学员课程表
+        db.execSQL("create table if not exists " + TableContanst.STUDENT_COURSE_TABLE +
+                "(_id Integer primary key AUTOINCREMENT," +
+                "coach_name varchar(20)," +
+                "course_name varchar(20)" +
                 ")");
     }
+
 
     //更新数据库
     @Override
@@ -85,6 +119,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists TableContanst.CLASS_TABLE ");
         db.execSQL("drop table if exists TableContanst.COURSE_TABLE");
         db.execSQL("drop table if exists TableContanst.TIMETABLE_TABLE ");
+        db.execSQL("drop table if exists TableContanst.COACH_TIME_TABLE ");
+        db.execSQL("drop table if exists TableContanst.CLASS_TIME_TABLE");
+        db.execSQL("drop table if exists TableContanst.CLASS_COURSE_TABLE ");
+        db.execSQL("drop table if exists TableContanst.STUDENT_COURSE_TABLE ");
         onCreate(db);
     }
 }

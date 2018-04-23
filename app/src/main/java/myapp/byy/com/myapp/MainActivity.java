@@ -1,7 +1,5 @@
 package myapp.byy.com.myapp;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -9,25 +7,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.icu.text.AlphabeticIndex;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.stetho.inspector.protocol.module.Database;
 import com.myapp.Data.User;
 import com.myapp.Fragment.HomeFragment;
 import com.myapp.Fragment.MakeDataFragment;
@@ -43,8 +33,6 @@ import com.myapp.Util.Server;
 import com.myapp.Util.UserManager;
 import com.myapp.atys.BaseActivity;
 import com.myapp.atys.LoginActivity2;
-import com.myapp.atys.MeActivity;
-import com.myapp.atys.StudentListActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -57,16 +45,6 @@ import okhttp3.Response;
 
 
 public class MainActivity extends BaseActivity {
-   /* @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Intent i = new Intent(this,LoginActivity2.class);
-        startActivity(i);
-
-
-        finish();//退出
-
-    }*/
 
     private RadioGroup mRgTab;
     private List<Fragment> mFragmentList = new ArrayList<>();
@@ -81,11 +59,13 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       // Intent i = new Intent(this, LoginActivity2.class);
-      // startActivity(i);
-      setContentView(R.layout.activity_main);////////////////////////////
 
-        initView();
+      //  LitePal.getDatabase();//创建"ManaerTest.db"
+        Intent i = new Intent(this, LoginActivity2.class);
+     startActivity(i);
+     // setContentView(R.layout.activity_main);////////////////////////////
+
+      //  initView();
         //初始化
        // setListeners();
      //   initData();
@@ -354,4 +334,5 @@ public class MainActivity extends BaseActivity {
             avatarImage.setImageBitmap(bitmap);
         }
     }
+
 }
