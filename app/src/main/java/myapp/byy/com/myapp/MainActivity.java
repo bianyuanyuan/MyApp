@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,9 @@ import okhttp3.Response;
 
 public class MainActivity extends BaseActivity {
 
+
+    private Button bn_student;
+    private Button bn_coach;
     private RadioGroup mRgTab;
     private List<Fragment> mFragmentList = new ArrayList<>();
 
@@ -59,16 +63,35 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+     /*   setContentView(R.layout.chosebutton);
+        bn_coach = findViewById(R.id.bn_coach);
+        bn_student = findViewById(R.id.bn_student);
 
-      //  LitePal.getDatabase();//创建"ManaerTest.db"
-        Intent i = new Intent(this, LoginActivity2.class);
-     startActivity(i);
-     // setContentView(R.layout.activity_main);////////////////////////////
 
-      //  initView();
+        bn_coach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  setContentView(R.layout.activity_main);
+            }
+        });
+
+
+        bn_student.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  Intent i = new Intent(MainActivity.this, LoginActivity2.class);
+             //   startActivity(i);
+            }
+        });*/
+        //  LitePal.getDatabase();//创建"ManaerTest.db"
+        Intent i = new Intent(this, LoginActivity2.class);//////进入教练端（管理员）///////
+        startActivity(i);
+     //   setContentView(R.layout.activity_main);////////学员端布局////////////////////
+
+        //  initView();
         //初始化
-       // setListeners();
-     //   initData();
+        // setListeners();
+        //   initData();
         mRgTab = (RadioGroup) findViewById(R.id.rg_main);
         mRgTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -92,7 +115,6 @@ public class MainActivity extends BaseActivity {
         if (savedInstanceState == null) {
             changeFragment(HomeFragment.class.getName());
         }
-
 
 
     }
