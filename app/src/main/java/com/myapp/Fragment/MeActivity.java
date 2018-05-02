@@ -1,4 +1,4 @@
-package com.myapp.atys;
+package com.myapp.Fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -7,9 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -32,6 +30,9 @@ import com.myapp.Util.Server;
 import com.myapp.Util.SharedPreferencesUtil;
 import com.myapp.Util.UserManager;
 import com.myapp.Util.Util;
+import com.myapp.atys.BaseActivity;
+import com.myapp.atys.LoginActivity2;
+import com.myapp.atys.ModifyPwdActivity;
 
 import java.io.IOException;
 import java.util.HashMap;

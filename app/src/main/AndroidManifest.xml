@@ -12,13 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.myapp.atys.WelcomeAcitvity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name="com.myapp.atys.AddStudentActivity" />
         <activity android:name="com.myapp.atys.AddCoachActivity" />
         <activity android:name="com.myapp.atys.AddClassActivity" />
@@ -40,13 +41,19 @@
         <activity android:name="com.myapp.atys.CourseListActivity" />
 
         <activity android:name="com.myapp.atys.MainMenuActivity" />
+        <activity android:name="com.myapp.atys.ChooseCoachActivity" />
         <activity
             android:name="com.myapp.atys.LoginActivity2"
-            android:label="登录"></activity>
+            android:label="登录">
+        </activity>
         <activity
             android:name="com.myapp.atys.RegisterActivity"
-            android:label="注册"></activity>
-        <activity android:name="com.myapp.atys.MeActivity" />
+            android:label="注册">
+        </activity>
+        <activity android:name="com.myapp.Fragment.MeActivity" />
+        <activity android:name="com.myapp.Fragment.MakeDataActiviry" />
+
+
         <activity android:name="com.myapp.atys.ModifyPwdActivity" />
     </application>
 

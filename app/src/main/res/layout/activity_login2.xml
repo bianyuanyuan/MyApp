@@ -68,6 +68,10 @@
         android:text="自动登录"
         android:textSize="15sp" />
 
+
+
+
+
     <!--登录注册按钮-->
     <Button
         android:id="@+id/register"
@@ -95,6 +99,26 @@
         android:text="登录"
         android:textColor="@color/white"
         android:textSize="20sp" />
+    <RadioGroup
+        android:layout_marginStart="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/login"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:text="教练"
+            android:id="@+id/rbt_coach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:layout_marginLeft="16dp"
+            android:text="学生"
+            android:id="@+id/rbt_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+
 
     <TextView
         android:id="@+id/visitor"

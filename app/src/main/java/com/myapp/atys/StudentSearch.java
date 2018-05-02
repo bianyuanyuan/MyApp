@@ -21,7 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
-public class StudentSearch extends Activity implements OnClickListener {
+public class StudentSearch extends BaseActivity implements OnClickListener {
     private EditText nameText;
     private Button button;
     private Button reButton;

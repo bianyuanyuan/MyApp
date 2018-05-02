@@ -1,6 +1,6 @@
 package com.myapp.Fragment;
 
-import android.app.Fragment;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,9 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.myapp.Data.Coach;
+import com.myapp.atys.BaseActivity;
 import com.myapp.atys.ChooseCoachActivity;
+import com.myapp.atys.CoachListActivity;
 import com.myapp.atys.ShowCoachActivity;
 import com.myapp.dao.DataDao;
 import com.myapp.db.DBOpenHelper;
@@ -26,48 +28,31 @@ import java.util.Map;
 
 import myapp.byy.com.myapp.R;
 
-public class MakeDataFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
-
+public class MakeDataActiviry extends BaseActivity {
     private ImageView image;
     private DBOpenHelper helper;
     private List<Coach> list;
+    private Coach coach;
     private DataDao dao;
     private ListView listview;
     private List<Map<String, Object>> dataList;
 
-    public MakeDataFragment() {
-    }
-
-    public static MakeDataFragment newInstance() {
-        MakeDataFragment fragment = new MakeDataFragment();
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_make_date, container, false);
+        setContentView(R.layout.fragment_make_date);
 
         //创建或打开数据库
-        dao = new DataDao(new DBOpenHelper(getActivity(), "manager.db", null, 1));
-        initlist(view, inflater, container);
-
-        return view;
+        dao = new DataDao(new DBOpenHelper(this, "manager.db", null, 2));
+        initlist();
     }
 
-
-    private void initlist(View view, LayoutInflater inflater, ViewGroup container) {
-        listview = (ListView) view.findViewById(R.id.coachList);
+    private void initlist() {
+        listview = (ListView) findViewById(R.id.coachList);
 
         //获取到集合数据
-        List<Coach> persons = dao.getAllcoachinfo();
+        final List<Coach> persons = dao.getAllcoachinfo();
 
    /*     helper= new DBOpenHelper(getActivity(),"manager.db",null,2);
 
@@ -87,7 +72,7 @@ public class MakeDataFragment extends Fragment implements View.OnClickListener, 
               Coach coach = new Coach( name, age, sex, phone_number, teach_year, charge, teach_course);
               persons.add(coach);
              }*/
-        //获取ListView,并通过Adapter把list的信息显示到ListView
+        //获取ListView,并通过Adapter把studentlist的信息显示到ListView
 
         // List<Coach> persons = DataSupport.findAll(Coach.class);//使用LitePal操作数据库，有问题：每次点击事件会重新建立新的数据
 
@@ -95,44 +80,40 @@ public class MakeDataFragment extends Fragment implements View.OnClickListener, 
         List<HashMap<String, Object>> data = new ArrayList<HashMap<String, Object>>();
         for (Coach person : persons) {
             HashMap<String, Object> item = new HashMap<String, Object>();
-            item.put("pic", R.drawable.icon_avatar);
+            item.put("pic", R.drawable.icon_customer);
             item.put("name", person.getName());
+            item.put("course",person.getTeach_course());
             data.add(item);
         }
 
 
         //创建SimpleAdapter适配器将数据绑定到item显示控件上
-        SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(), data, R.layout.make_data_item, new String[]{"pic", "name"}, new int[]{R.id.tv_co_image, R.id.tv_co_name});
+        SimpleAdapter simpleAdapter = new SimpleAdapter(this, data,
+                R.layout.make_data_item,
+                new String[]{"pic", "name"},
+                new int[]{R.id.tv_co_image, R.id.tv_co_name});
         //实现列表的显示
         listview.setAdapter(simpleAdapter);
         //条目点击事件
-        listview.setOnItemClickListener(this);
-        //   listview.setOnScrollListener(this);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ListView listView = (ListView) parent;
+                HashMap<String, Object> d = (HashMap<String, Object>) listView.getItemAtPosition(position);
+                String personid = d.get("name").toString();
+                String course=d.get("course").toString();
+                Toast.makeText(getApplication(), personid, Toast.LENGTH_SHORT).show();
 
-    }
+                   Intent i=new Intent(MakeDataActiviry.this,ChooseCoachActivity.class);
+                    i.putExtra("name",personid);
+                i.putExtra("course",course);
+                    startActivity(i);
 
-    @Override
-    public void onClick(View v) {
-    }
+                //autoStartActivity(CoachListActivity.class);
 
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-    }
 
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-    }
+            }
+        });
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ListView listView = (ListView) parent;
-        HashMap<String, Object> data = (HashMap<String, Object>) listView.getItemAtPosition(position);
-        String personid = data.get("name").toString();
-
-        Toast.makeText(getActivity(), personid, Toast.LENGTH_SHORT).show();
-
-        Intent i=new Intent(getActivity(),ChooseCoachActivity.class);
-        i.putExtra("name",personid);
-        startActivity(i);
     }
 }

@@ -13,7 +13,7 @@ import com.myapp.Data.Student;
 import com.myapp.db.TableContanst;
 import myapp.byy.com.myapp.R;
 
-public class ShowStudentActivity extends Activity {
+public class ShowStudentActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

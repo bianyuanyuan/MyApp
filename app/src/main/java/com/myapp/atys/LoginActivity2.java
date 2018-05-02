@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,16 +28,16 @@ import org.litepal.crud.DataSupport;
 
 import java.io.IOException;
 
+import myapp.byy.com.myapp.MainActivity;
 import myapp.byy.com.myapp.R;
 import okhttp3.Call;
 import okhttp3.Response;
+
 /**
  * login
  */
 public class LoginActivity2 extends BaseActivity {
     private ProgressBar progressBar;//进度条
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
     private Button loginBtn;//登录
     private Button registerBtn;//注册
     private EditText accountText;//账号
@@ -44,6 +45,10 @@ public class LoginActivity2 extends BaseActivity {
     private CheckBox isRememberPwd;//记住密码
     private CheckBox isAutoLogin;//自动登录
     private TextView visitorText;//游客登录
+
+
+    private RadioButton rbt_user;
+    private RadioButton rbt_coach;
 
     private String account;
     private String password;
@@ -54,8 +59,6 @@ public class LoginActivity2 extends BaseActivity {
         setContentView(R.layout.activity_login2);
         initComponents();//初始化组件
         setListeners();//设置响应
-
-        // pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         /*
         *自动 填充
@@ -87,6 +90,10 @@ public class LoginActivity2 extends BaseActivity {
 
         loginBtn = (Button) findViewById(R.id.login);
         registerBtn = (Button) findViewById(R.id.register);
+
+        rbt_user = (RadioButton) findViewById(R.id.rbt_user);
+    //    rbt_user.setChecked(true);
+        rbt_coach = (RadioButton) findViewById(R.id.rbt_coach);
 
         LitePal.getDatabase();// 建立数据库
         UserManager.clear();
@@ -122,7 +129,7 @@ public class LoginActivity2 extends BaseActivity {
                     visitor.save();
                 }
                 UserManager.setCurrentUser(visitor);
-                autoStartActivity(MainMenuActivity.class);////////////////游客进入的主界面活动
+                autoStartActivity(MainActivity.class);//////游客进入的活动
             }
         });
     }
@@ -151,6 +158,7 @@ public class LoginActivity2 extends BaseActivity {
         request.addRequestParam("account", account);
         request.addRequestParam("pwd", password);
 
+
         // POST请求
         HttpUtil.sendPost(Consts.URL_Login, request.getJsonStr(), new okhttp3.Callback() {
             @Override
@@ -170,8 +178,14 @@ public class LoginActivity2 extends BaseActivity {
                         user.save();
                     }
                     UserManager.setCurrentUser(user);// 设置当前用户
-
-                    autoStartActivity(MainMenuActivity.class);///////////进入主界面活动//////////////
+                    if (rbt_coach.isChecked()) {
+                        // go(AdminMainActivity.class);
+                        autoStartActivity(MainMenuActivity.class);
+                    }else if (rbt_user.isChecked()) {
+                        //  go(MainActivity.class);
+                        autoStartActivity(MainActivity.class);
+                    }
+                    //    autoStartActivity(MainMenuActivity.class);///////////进入主界面活动//////////////
                 }
                 showResponse(resMsg);
             }

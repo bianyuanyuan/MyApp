@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 import myapp.byy.com.myapp.R;
 
-public class MainMenuActivity extends Activity {
+public class MainMenuActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

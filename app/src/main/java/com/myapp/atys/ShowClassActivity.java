@@ -11,7 +11,7 @@ import com.myapp.db.TableContanst;
 
 import myapp.byy.com.myapp.R;
 
-public class ShowClassActivity extends Activity {
+public class ShowClassActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

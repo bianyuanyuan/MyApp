@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.myapp.Util.CommonRequest;
@@ -22,7 +23,7 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 
-public class RegisterActivity extends BaseActivity{
+public class RegisterActivity extends BaseActivity {
 
     private ImageView back;
     private Button registerBtn;
@@ -30,7 +31,9 @@ public class RegisterActivity extends BaseActivity{
     private EditText accountText;
     private EditText pwdText;
     private EditText confirmPwdText;
-    private ProgressDialog progressDialog;
+
+    private RadioButton rbt_user;
+    private RadioButton rbt_coach;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,19 +42,24 @@ public class RegisterActivity extends BaseActivity{
 
         initComponents();
         setListeners();
+
+        rbt_user.setChecked(true);
+
     }
 
-    void initComponents(){
+    void initComponents() {
         back = findViewById(R.id.back);
         registerBtn = findViewById(R.id.register_confirm);
         cancelBtn = findViewById(R.id.register_cancel);
         accountText = findViewById(R.id.register_account);
         pwdText = findViewById(R.id.register_pwd);
         confirmPwdText = findViewById(R.id.register_pwd_confirm);
-        progressDialog = new ProgressDialog(RegisterActivity.this);
+
+        rbt_coach = (RadioButton) findViewById(R.id.rbt_coach);
+        rbt_user = (RadioButton) findViewById(R.id.rbt_user);
     }
 
-    void setListeners(){
+    void setListeners() {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +81,7 @@ public class RegisterActivity extends BaseActivity{
     }
 
     /**
-     *  POST方式Register
+     * POST方式Register
      */
     private void register() {
         // 创建请求体对象
@@ -85,15 +93,15 @@ public class RegisterActivity extends BaseActivity{
         String pwd_confirm = Util.StringHandle(confirmPwdText.getText().toString());
 
         // 检查数据格式是否正确
-        String resMsg = checkDataValid(account,pwd,pwd_confirm);
-        if(!resMsg.equals("")){
+        String resMsg = checkDataValid(account, pwd, pwd_confirm);
+        if (!resMsg.equals("")) {
             showResponse(resMsg);
             return;
         }
 
         // 填充参数
-        request.addRequestParam("account",account);
-        request.addRequestParam("pwd",pwd);
+        request.addRequestParam("account", account);
+        request.addRequestParam("pwd", pwd);
 
         // POST请求
         HttpUtil.sendPost(Consts.URL_Register, request.getJsonStr(), new okhttp3.Callback() {
@@ -122,17 +130,17 @@ public class RegisterActivity extends BaseActivity{
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-             Toast.makeText(RegisterActivity.this, msg, Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private String checkDataValid(String account,String pwd,String pwd_confirm){
-        if(TextUtils.isEmpty(account) | TextUtils.isEmpty(pwd) | TextUtils.isEmpty(pwd_confirm))
+    private String checkDataValid(String account, String pwd, String pwd_confirm) {
+        if (TextUtils.isEmpty(account) | TextUtils.isEmpty(pwd) | TextUtils.isEmpty(pwd_confirm))
             return getResources().getString(R.string.null_hint);
-        if(!pwd.equals(pwd_confirm))
+        if (!pwd.equals(pwd_confirm))
             return getResources().getString(R.string.not_equal_hint);
-        if(account.length() != 11 && !account.contains("@"))
+        if (account.length() != 11 && !account.contains("@"))
             return getResources().getString(R.string.account_invalid_hint);
         return "";
     }

@@ -19,7 +19,7 @@ import java.io.Serializable;
 
 import myapp.byy.com.myapp.R;
 
-public class AddCourseActivity extends Activity implements View.OnClickListener {
+public class AddCourseActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "AddCourseActivity";
     private TextView idText;
     private EditText nameText;

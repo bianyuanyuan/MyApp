@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.myapp.Data.Class;
-import com.myapp.Data.Coach;
 import com.myapp.dao.DataDao;
 import com.myapp.db.DBOpenHelper;
 import com.myapp.db.TableContanst;
@@ -21,7 +20,8 @@ import java.io.Serializable;
 
 import myapp.byy.com.myapp.R;
 
-public class AddClassActivity extends Activity implements View.OnClickListener {
+
+public class AddClassActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "AddClassActivity";
     private TextView idText;
     private EditText nameText;

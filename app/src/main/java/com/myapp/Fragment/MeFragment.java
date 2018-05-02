@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,9 +44,7 @@ import okhttp3.Response;
  */
 public class MeFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
-
     public MeFragment() {
-
     }
 
     public static MeFragment newInstance() {
@@ -65,10 +64,7 @@ public class MeFragment extends Fragment implements View.OnClickListener, Adapte
 
         View view = inflater.inflate(R.layout.fragment_me,container,false);
 
-
         return view;
-       // return inflater.inflate(R.layout.fragment_me, container, false);
-
     }
 
 

@@ -17,7 +17,7 @@ import com.myapp.db.TableContanst;
 
 import myapp.byy.com.myapp.R;
 
-public class ClassSearch extends Activity implements View.OnClickListener {
+public class ClassSearch extends BaseActivity implements View.OnClickListener {
     private EditText nameText;
     private Button button;
     private Button reButton;

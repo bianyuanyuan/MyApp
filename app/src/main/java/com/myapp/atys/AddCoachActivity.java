@@ -26,7 +26,7 @@ import myapp.byy.com.myapp.R;
  * Created by 540 on 2018/4/11.
  */
 
-public class AddCoachActivity extends Activity implements View.OnClickListener {
+public class AddCoachActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "AddCoachActivity";
     private TextView idText;
     private EditText nameText;

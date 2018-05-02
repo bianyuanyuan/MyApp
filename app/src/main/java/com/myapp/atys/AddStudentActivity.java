@@ -31,7 +31,7 @@ import com.myapp.db.DBOpenHelper;
 import com.myapp.db.TableContanst;
 import myapp.byy.com.myapp.R;
 
-public class AddStudentActivity extends Activity implements OnClickListener {
+public class AddStudentActivity extends BaseActivity implements OnClickListener {
     private static final String TAG = "AddStudentActivity";
     private final static int DATE_DIALOG = 1;
     private static final int DATE_PICKER_ID = 1;
