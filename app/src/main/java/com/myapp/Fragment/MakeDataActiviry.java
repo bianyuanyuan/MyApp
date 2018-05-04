@@ -110,8 +110,6 @@ public class MakeDataActiviry extends BaseActivity {
                     startActivity(i);
 
                 //autoStartActivity(CoachListActivity.class);
-
-
             }
         });
 
