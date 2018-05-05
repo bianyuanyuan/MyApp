@@ -54,7 +54,6 @@
         <activity android:name="com.myapp.Fragment.MeActivity" />
         <activity android:name="com.myapp.Fragment.MakeDataActiviry" />
 
-
         <activity android:name="com.myapp.atys.ModifyPwdActivity" />
     </application>
 

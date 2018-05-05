@@ -148,13 +148,12 @@
         android:gravity="center_vertical|left" />
 
     <Button
-        android:id="@+id/back_to_list_id"
+        android:id="@+id/choose"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@id/tv_co_info_tcourse"
-        android:onClick="goBack"
-        android:text="返回列表界面">
+        android:text="预约教练">
     </Button>
 </RelativeLayout>

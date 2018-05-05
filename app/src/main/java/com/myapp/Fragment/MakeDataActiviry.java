@@ -44,7 +44,7 @@ public class MakeDataActiviry extends BaseActivity {
         setContentView(R.layout.fragment_make_date);
 
         //创建或打开数据库
-        dao = new DataDao(new DBOpenHelper(this, "manager.db", null, 2));
+        dao = new DataDao(new DBOpenHelper(this, "manager.db", null, 1));
         initlist();
     }
 

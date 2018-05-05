@@ -132,8 +132,6 @@ public class MakeDataFragment extends Fragment implements View.OnClickListener, 
         Toast.makeText(getActivity(), personid, Toast.LENGTH_SHORT).show();
 
         Intent i = new Intent(getActivity(), ChooseCoachActivity.class);
-        i.putExtra("name", personid);
-        i.putExtra("course", course);
         i.putExtra("coach",coach);
         startActivity(i);
     }
