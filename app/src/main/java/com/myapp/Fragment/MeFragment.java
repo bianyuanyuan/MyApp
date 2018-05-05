@@ -55,6 +55,7 @@ import okhttp3.Response;
 public class MeFragment extends Fragment implements View.OnClickListener {
     private CircleImageView avatarImage;
     private TextView accountText;
+    private TextView nickname;
     private Button nicknameBtn;
     private Button pwdBtn;
 
@@ -93,6 +94,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
 
         avatarImage = view.findViewById(R.id.center_avatar);
         accountText = view.findViewById(R.id.center_account);
+        nickname=view.findViewById(R.id.nav_nickname);
         nicknameBtn = view.findViewById(R.id.center_nickname_btn);
         pwdBtn = view.findViewById(R.id.center_pwd_btn);
         exitBtn = view.findViewById(R.id.center_exit_btn);
@@ -133,6 +135,8 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                             server.setNickname(nickname);
                         // 更改显示
                         //       collapsingToolbar.setTitle(nickname);
+                        getActivity().setTitle(nickname);
+                        getActivity().setTitle(nickname);
                         Util.makeToast(getActivity(), getResources().getString(R.string.modify_success));
                         // 通知MainActivity更新昵称
                         Message message = new Message();

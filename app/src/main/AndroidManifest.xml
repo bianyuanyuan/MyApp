@@ -42,6 +42,7 @@
 
         <activity android:name="com.myapp.atys.MainMenuActivity" />
         <activity android:name="com.myapp.atys.ChooseCoachActivity" />
+        <activity android:name="com.myapp.atys.ShowCourseAty" />
         <activity
             android:name="com.myapp.atys.LoginActivity2"
             android:label="登录">

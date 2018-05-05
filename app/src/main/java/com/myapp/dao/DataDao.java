@@ -298,6 +298,30 @@ public class DataDao {
         return templist;
     }
 
+    //显示所有course的记录
+    public ArrayList<Course> getAllcourseinfo() {
+        ArrayList<Course> templist = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        //扫描数据库,将数据库信息放入templist
+        Cursor cursor = db.rawQuery("select * from course",null);
+        while (cursor.moveToNext()){
+                      String name = cursor.getString(cursor.getColumnIndex(TableContanst.CourseColumns.NAME));
+            long times = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.TIMES));
+            long timesweek  = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.TIMESWEEK));
+            long price  = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.PRICE));
+
+            Course course = new Course( name, times,timesweek,price);
+            templist.add(course);
+        }
+        cursor.close();
+        db.close();
+
+        return templist;
+    }
+
+
+
 
     // 查询所有class的记录
     public List<Map<String, Object>> getAllClasses() {

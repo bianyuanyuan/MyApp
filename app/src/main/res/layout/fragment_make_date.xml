@@ -15,16 +15,9 @@
             android:layout_height="50dp"
             android:background="#3C3C3C"
             android:gravity="center"
-            android:text="约课"
+            android:text="教练选择"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
-
-        <TextView android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="教练选择"
-            android:padding="5pt"
-            android:textSize="10pt"/>
 
         <ListView android:id="@+id/coachList"
             android:layout_width="match_parent"

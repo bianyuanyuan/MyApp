@@ -23,6 +23,13 @@
             app:layout_collapseParallaxMultiplier="0.7">
 
         </de.hdodenhof.circleimageview.CircleImageView>
+        <TextView
+            android:id="@+id/nav_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="UserName"
+            android:textSize="14sp" />
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout

@@ -113,7 +113,7 @@
             android:layout_height="wrap_content" />
         <RadioButton
             android:layout_marginLeft="16dp"
-            android:text="学生"
+            android:text="学员"
             android:id="@+id/rbt_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

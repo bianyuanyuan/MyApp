@@ -28,13 +28,8 @@ import myapp.byy.com.myapp.R;
 
 public class MakeDataFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
 
-    private ImageView image;
-    private DBOpenHelper helper;
-    private List<Coach> list;
     private DataDao dao;
     private ListView listview;
-    private List<Map<String, Object>> dataList;
-
     public MakeDataFragment() {
     }
 
@@ -69,7 +64,7 @@ public class MakeDataFragment extends Fragment implements View.OnClickListener, 
         //获取到集合数据
         List<Coach> persons = dao.getAllcoachinfo();
 
-   /*     helper= new DBOpenHelper(getActivity(),"manager.db",null,2);
+   /*     helper= new DBOpenHelper(getActivity(),"manager.db",null,1);
 
         SQLiteDatabase dd=helper.getReadableDatabase();
         List<Coach> persons =new ArrayList<>();
@@ -97,6 +92,9 @@ public class MakeDataFragment extends Fragment implements View.OnClickListener, 
             HashMap<String, Object> item = new HashMap<String, Object>();
             item.put("pic", R.drawable.icon_avatar);
             item.put("name", person.getName());
+            item.put("course", person.getTeach_course());
+
+            item.put("coach",person);
             data.add(item);
         }
 
@@ -128,11 +126,15 @@ public class MakeDataFragment extends Fragment implements View.OnClickListener, 
         ListView listView = (ListView) parent;
         HashMap<String, Object> data = (HashMap<String, Object>) listView.getItemAtPosition(position);
         String personid = data.get("name").toString();
+        String course = data.get("course").toString();
 
+        Coach coach= (Coach) data.get("coach");
         Toast.makeText(getActivity(), personid, Toast.LENGTH_SHORT).show();
 
-        Intent i=new Intent(getActivity(),ChooseCoachActivity.class);
-        i.putExtra("name",personid);
+        Intent i = new Intent(getActivity(), ChooseCoachActivity.class);
+        i.putExtra("name", personid);
+        i.putExtra("course", course);
+        i.putExtra("coach",coach);
         startActivity(i);
     }
 }
