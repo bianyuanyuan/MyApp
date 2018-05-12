@@ -63,10 +63,10 @@ public class MainMenuActivity extends BaseActivity {
         private Context mContext;
         // 图片资源数组
         private Integer[] mThumbIds = {
-                R.drawable.operateicon,
-                R.drawable.operateicon,
-                R.drawable.operateicon,
-                R.drawable.operateicon,
+                R.drawable.img1,
+                R.drawable.coach,
+                R.drawable.space,
+                R.drawable.pool,
             /*    R.drawable.operateicon,*/
         };
         private String[] menuString = {

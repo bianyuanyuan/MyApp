@@ -53,6 +53,20 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "teach_course varchar(20)" +
                 ")");
 
+
+        //选课表
+        db.execSQL("create table if not exists " + TableContanst.COACH_TABLE +
+                "(_id Integer primary key AUTOINCREMENT," +
+                "name varchar(20)," +
+                "age Integer, " +
+                "sex varchar(2), " +
+                "phone_number varchar(11)," +
+                "teach_year Integer," +
+                "charge Integer," +
+                "teach_course varchar(20)" +
+                ")");
+
+
         //创建场地表
         db.execSQL("create table if not exists " + TableContanst.CLASS_TABLE +
                 "(_id Integer primary key AUTOINCREMENT," +

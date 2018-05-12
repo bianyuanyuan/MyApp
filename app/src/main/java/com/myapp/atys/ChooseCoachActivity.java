@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.myapp.Data.Coach;
 import com.myapp.db.DBOpenHelper;
@@ -40,8 +41,9 @@ public class ChooseCoachActivity extends BaseActivity {
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(ChooseCoachActivity.this,WelcomeAcitvity.class);//////////////////
-                startActivity(i);
+             //   Intent i=new Intent(ChooseCoachActivity.this,WelcomeAcitvity.class);//////////////////
+             //   startActivity(i);
+                Toast.makeText(ChooseCoachActivity.this, "预约成功", Toast.LENGTH_SHORT).show();
             }
         });
 
