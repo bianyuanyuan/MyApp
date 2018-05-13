@@ -14,6 +14,24 @@ public class Coach  implements Serializable {
     private long teach_year;
     private long charge;
     private String teach_course;
+    private String time_two;
+    private String time_four;
+
+    public String getTime_two() {
+        return time_two;
+    }
+
+    public void setTime_two(String time_two) {
+        this.time_two = time_two;
+    }
+
+    public String getTime_four() {
+        return time_four;
+    }
+
+    public void setTime_four(String time_four) {
+        this.time_four = time_four;
+    }
 
     public Coach() {
         super();

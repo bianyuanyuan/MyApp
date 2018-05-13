@@ -24,7 +24,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     }
 
 
-
     //创建数据库
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -50,20 +49,31 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "phone_number varchar(11)," +
                 "teach_year Integer," +
                 "charge Integer," +
-                "teach_course varchar(20)" +
+                "teach_course varchar(20)," +
+                "time_two varchar(10)," +
+                "time_four varchar(10)" +
+                ")");
+        //用户表
+
+        db.execSQL("create table if not exists " + TableContanst.USER +
+                "(_id Integer primary key AUTOINCREMENT," +
+                "nickname varchar(20)," +
+                "avatarImage byte, " +
+                "account varchar(20), " +
+                "password varchar(20)," +
+                "isVisitor boolean" +
                 ")");
 
 
-        //选课表
-        db.execSQL("create table if not exists " + TableContanst.COACH_TABLE +
+      //选课表
+        db.execSQL("create table if not exists " + TableContanst.SELECT_TABLE +
                 "(_id Integer primary key AUTOINCREMENT," +
-                "name varchar(20)," +
-                "age Integer, " +
-                "sex varchar(2), " +
-                "phone_number varchar(11)," +
-                "teach_year Integer," +
-                "charge Integer," +
-                "teach_course varchar(20)" +
+                "userid Integer, " +
+                "coachid Integer, " +
+                "t1 varchar(20)," +
+                "t2 varchar(20)," +
+                " FOREIGN KEY (userid ) REFERENCES user(_id),"+
+                " FOREIGN KEY (coachid ) REFERENCES coach(_id)"+
                 ")");
 
 
@@ -137,6 +147,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists TableContanst.CLASS_TIME_TABLE");
         db.execSQL("drop table if exists TableContanst.CLASS_COURSE_TABLE ");
         db.execSQL("drop table if exists TableContanst.STUDENT_COURSE_TABLE ");
+        db.execSQL("drop table if exists TableContanst.SELECT_TABLE ");
         onCreate(db);
     }
 }

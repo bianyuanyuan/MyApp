@@ -15,6 +15,28 @@ public final class TableContanst {
     public static final String CLASS_COURSE_TABLE = "class_timetable";//场地课程表
     public static final String STUDENT_COURSE_TABLE = "sc_timetable";//学员课程表
 
+    public static final String SELECT_TABLE = "select_table";//选课表
+    public static final String USER="user";//用户表
+
+    public static final class SelectColumns {
+        public static final String ID = "_id";
+        public static final String NAME = "name";
+        public static final String AGE = "age";
+        public static final String SEX = "sex";
+        public static final String LIKES = "likes";
+        public static final String PHONE_NUMBER = "phone_number";
+        public static final String TRAIN_DATE = "train_date";
+        public static final String MODIFY_TIME = "modify_time";
+    }
+
+    public static final class UserColumns {
+        public static final String ID = "_id";
+        public static final String NICKNAME = "nickname";
+        public static final String AVATARIMAGE= "avatarimage";
+        public static final String ACCOUNT= "account";
+        public static final String PSW = "password";
+        public static final String ISVISITOR= "isvisitor";
+    }
 
     public static final class StudentColumns {
         public static final String ID = "_id";
@@ -36,6 +58,8 @@ public final class TableContanst {
         public static final String TEACH_YEAR = "teach_year";
         public static final String CHARGE = "charge";
         public static final String TEACH_COURSE = "teach_course";
+        public static final String TIME_TWO="time_two";
+        public static final String TIME_FOUR="time_four";
     }
 
     public static final class ClassColumns {

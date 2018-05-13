@@ -73,6 +73,8 @@ public class DataDao {
         values.put(TableContanst.CoachColumns.CHARGE, c.getCharge());
         values.put(TableContanst.CoachColumns.TEACH_COURSE, c.getTeach_course());
 
+        values.put(TableContanst.CoachColumns.TIME_TWO, "2:00-4:00");
+        values.put(TableContanst.CoachColumns.TIME_FOUR,"4:00-6:00");
         return dbHelper.getWritableDatabase().insert(TableContanst.COACH_TABLE, null, values);
     }
 
@@ -162,6 +164,10 @@ public class DataDao {
 
         values.put(TableContanst.CoachColumns.CHARGE, c.getCharge());
         values.put(TableContanst.CoachColumns.TEACH_COURSE, c.getTeach_course());
+
+
+        values.put(TableContanst.CoachColumns.TIME_TWO, "2:00-4:00");
+        values.put(TableContanst.CoachColumns.TIME_FOUR,"4:00-6:00");
         return dbHelper.getWritableDatabase().update(TableContanst.COACH_TABLE, values,
                 TableContanst.CoachColumns.ID + "=?", new String[]{c.getId() + ""});
     }

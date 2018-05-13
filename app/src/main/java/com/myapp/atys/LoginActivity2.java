@@ -22,6 +22,8 @@ import com.myapp.Util.HttpUtil;
 import com.myapp.Util.SharedPreferencesUtil;
 import com.myapp.Util.UserManager;
 import com.myapp.Util.Util;
+import com.myapp.dao.DataDao;
+import com.myapp.db.DBOpenHelper;
 
 import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
@@ -45,7 +47,7 @@ public class LoginActivity2 extends BaseActivity {
     private CheckBox isRememberPwd;//记住密码
     private CheckBox isAutoLogin;//自动登录
     private TextView visitorText;//游客登录
-
+    private DataDao dao;//数据库操作
 
     private RadioButton rbt_user;
     private RadioButton rbt_coach;
@@ -95,7 +97,9 @@ public class LoginActivity2 extends BaseActivity {
     //    rbt_user.setChecked(true);
         rbt_coach = (RadioButton) findViewById(R.id.rbt_coach);
 
-        LitePal.getDatabase();// 建立数据库
+        dao = new DataDao(new DBOpenHelper(this)); // 设置监听 78
+       // LitePal.getDatabase();// 建立数据库
+
         UserManager.clear();
     }
 
