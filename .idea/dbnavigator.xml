@@ -22,13 +22,10 @@
   <component name="DBNavigator.Project.DatabaseBrowserManager">
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
-    <show-object-properties value="true" />
+    <show-object-properties value="false" />
     <loaded-nodes>
       <connection connection-id="f4b04cef-1761-4859-9464-7e487c52522f">
-        <schema name="main" object-types="column, constraint, index, table, dataset trigger, view" />
-      </connection>
-      <connection connection-id="4cffd767-0c68-477f-b3b6-2dcfb3d9f5a0">
-        <schema name="main" object-types="column, constraint, index, table, dataset trigger, view" />
+        <schema name="main" object-types="table, view" />
       </connection>
     </loaded-nodes>
   </component>
@@ -37,19 +34,16 @@
       <console name="register" type="STANDARD"><![CDATA[select * from user;]]></console>
     </connection>
     <connection id="f4b04cef-1761-4859-9464-7e487c52522f">
-      <console name="Test" type="STANDARD"><![CDATA[select * from coach;]]></console>
+      <console name="Test" type="STANDARD"><![CDATA[select * from select_table;]]></console>
     </connection>
-    <connection id="4cffd767-0c68-477f-b3b6-2dcfb3d9f5a0">
-      <console name="Connection " type="STANDARD"><![CDATA[select * from user;]]></console>
+    <connection id="d6030fa8-b75d-4f06-8c7b-696d17b7402f">
+      <console name="Connection" type="STANDARD"><![CDATA[select *from select_table;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="8674363a-aa0a-4619-8d6b-59d6d87d2802" />
     <connection id="f4b04cef-1761-4859-9464-7e487c52522f" />
-    <connection id="4cffd767-0c68-477f-b3b6-2dcfb3d9f5a0" />
-  </component>
-  <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-list connection-id="4cffd767-0c68-477f-b3b6-2dcfb3d9f5a0" dataset="main.user" active-filter-id="" />
+    <connection id="d6030fa8-b75d-4f06-8c7b-696d17b7402f" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -234,9 +228,9 @@
           <object-name-filters />
         </object-filters>
       </connection>
-      <connection id="4cffd767-0c68-477f-b3b6-2dcfb3d9f5a0" active="true">
+      <connection id="d6030fa8-b75d-4f06-8c7b-696d17b7402f" active="true">
         <database>
-          <name value="Connection " />
+          <name value="Connection" />
           <description value="" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />

@@ -32,7 +32,7 @@ public final class TableContanst {
     public static final class UserColumns {
         public static final String ID = "_id";
         public static final String NICKNAME = "nickname";
-        public static final String AVATARIMAGE= "avatarimage";
+       // public static final String AVATARIMAGE= "avatarimage";
         public static final String ACCOUNT= "account";
         public static final String PSW = "password";
         public static final String ISVISITOR= "isvisitor";

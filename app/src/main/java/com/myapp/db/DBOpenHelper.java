@@ -1,9 +1,12 @@
 package com.myapp.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import myapp.byy.com.myapp.R;
 
 /**
  * Created by 540 on 2018/4/8.
@@ -13,6 +16,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     private static final String TAG = "DBOpenHelper";
     public static final String DB_NAME = "manager.db";
     public static final int VERSION = 1;    //构造方法
+    ContentValues values = new ContentValues();
 
     public DBOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -39,7 +43,12 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "train_date date, " +
                 "modify_time DATETIME" +
                 ")");
-
+        values.put("name", "王纷纷");
+        values.put("age", 15);
+        values.put("sex", "女");
+        values.put("likes", "唱歌");
+        db.insert("student", null, values);//插入第一条数据
+        values.clear();
         //创建教练表
         db.execSQL("create table if not exists " + TableContanst.COACH_TABLE +
                 "(_id Integer primary key AUTOINCREMENT," +
@@ -53,27 +62,54 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "time_two varchar(10)," +
                 "time_four varchar(10)" +
                 ")");
+
+        values.put("name", "王伟");
+        values.put("age", 30);
+        values.put("sex", "男");
+        values.put("phone_number", "13012345678");
+        values.put("teach_year", 2);
+        values.put("charge", 220);
+        values.put("teach_course", "游泳");
+        values.put("time_two", "2:00-4:00");
+        values.put("time_four", "4:00-6:00");
+
+        db.insert("coach", null, values);//插入第一条数据
+        values.clear();
+
+        values.put("name", "李婷");
+        values.put("age", 25);
+        values.put("sex", "女");
+        values.put("phone_number", "13011111111");
+        values.put("teach_year", 1);
+        values.put("charge", 200);
+        values.put("teach_course", "游泳");
+        values.put("time_two", "2:00-4:00");
+        values.put("time_four", "4:00-6:00");
+        db.insert("coach", null, values);//插入第二条数据
+        values.clear();
+
         //用户表
 
         db.execSQL("create table if not exists " + TableContanst.USER +
                 "(_id Integer primary key AUTOINCREMENT," +
                 "nickname varchar(20)," +
-                "avatarImage byte, " +
                 "account varchar(20), " +
                 "password varchar(20)," +
                 "isVisitor boolean" +
                 ")");
+       db.execSQL("insert into user (nickname,account, password, isVisitor) values(?, ?, ?, ?)",
+                new String[]{"文文", "13012341234", "123", "0"});
 
 
-      //选课表
+        //选课表
         db.execSQL("create table if not exists " + TableContanst.SELECT_TABLE +
                 "(_id Integer primary key AUTOINCREMENT," +
                 "userid Integer, " +
                 "coachid Integer, " +
                 "t1 varchar(20)," +
                 "t2 varchar(20)," +
-                " FOREIGN KEY (userid ) REFERENCES user(_id),"+
-                " FOREIGN KEY (coachid ) REFERENCES coach(_id)"+
+                " FOREIGN KEY (userid ) REFERENCES user(_id)," +
+                " FOREIGN KEY (coachid ) REFERENCES coach(_id)" +
                 ")");
 
 
@@ -148,6 +184,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists TableContanst.CLASS_COURSE_TABLE ");
         db.execSQL("drop table if exists TableContanst.STUDENT_COURSE_TABLE ");
         db.execSQL("drop table if exists TableContanst.SELECT_TABLE ");
+        db.execSQL("drop table if exists TableContanst.USER ");
         onCreate(db);
     }
 }

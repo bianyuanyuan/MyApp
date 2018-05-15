@@ -1,7 +1,10 @@
 package com.myapp.atys;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -47,7 +50,7 @@ public class LoginActivity2 extends BaseActivity {
     private CheckBox isRememberPwd;//记住密码
     private CheckBox isAutoLogin;//自动登录
     private TextView visitorText;//游客登录
-    private DataDao dao;//数据库操作
+    private DBOpenHelper helper;
 
     private RadioButton rbt_user;
     private RadioButton rbt_coach;
@@ -94,11 +97,11 @@ public class LoginActivity2 extends BaseActivity {
         registerBtn = (Button) findViewById(R.id.register);
 
         rbt_user = (RadioButton) findViewById(R.id.rbt_user);
-    //    rbt_user.setChecked(true);
+        //    rbt_user.setChecked(true);
         rbt_coach = (RadioButton) findViewById(R.id.rbt_coach);
 
-        dao = new DataDao(new DBOpenHelper(this)); // 设置监听 78
-       // LitePal.getDatabase();// 建立数据库
+        helper = new DBOpenHelper(this, "manager.db", null, 1);
+        // LitePal.getDatabase();// 建立数据库
 
         UserManager.clear();
     }
@@ -123,7 +126,7 @@ public class LoginActivity2 extends BaseActivity {
             @Override
             public void onClick(View v) {
                 // 若已有游客账号则以游客身份登录，不存在则新建游客账号
-                User visitor = DataSupport.where("isVisitor = ?", "1")
+          /*      User visitor = DataSupport.where("isVisitor = ?", "1")
                         .findFirst(User.class);
                 if (visitor == null) {
                     visitor = new User();
@@ -131,8 +134,24 @@ public class LoginActivity2 extends BaseActivity {
                     visitor.setPassword("Visitor");
                     visitor.setVisitor(true);
                     visitor.save();
+                }*/
+                //  User visitor;//////////////////////////////
+                SQLiteDatabase db = helper.getWritableDatabase();
+                String Query = "Select * from user where isVisitor =? limit 1";
+                Cursor cursor = db.rawQuery(Query, new String[]{"1"});
+                if (cursor.getCount() == 0) {
+                    ContentValues values = new ContentValues();
+                    values.put("account", "Visitor");
+                    values.put("password", "Visitor");
+                    values.put("isVisitor", 1);
+                    db.insert("user", null, values);
+                    //   User visitor=new User();
+                    db.close();////////////////////////////////////
+                    cursor.close();
                 }
-                UserManager.setCurrentUser(visitor);
+
+
+                //  UserManager.setCurrentUser(visitor);
                 autoStartActivity(MainActivity.class);//////游客进入的活动
             }
         });
@@ -173,19 +192,34 @@ public class LoginActivity2 extends BaseActivity {
                 // 登录成功
                 if (resCode.equals(Consts.SUCCESSCODE_LOGIN)) {
                     // 查找本地数据库中是否已存在当前用户,不存在则新建用户并写入
-                    User user = DataSupport.where("account=?", account).findFirst(User.class);
+               /*     User user = DataSupport.where("account=?", account).findFirst(User.class);
                     if (user == null) {
                         user = new User();
                         user.setAccount(account);
                         user.setPassword(password);
                         user.setVisitor(false);
                         user.save();
-                    }
-                    UserManager.setCurrentUser(user);// 设置当前用户
+                    }*/
+
+                    SQLiteDatabase db = helper.getReadableDatabase();//////////////////
+                    String Query = "Select * from user where account =? limit 1";
+                    Cursor cursor = db.rawQuery(Query, new String[]{"account"});
+                    if (cursor.getCount() == 0) {
+                        ContentValues values = new ContentValues();
+                        values.put("account", account);
+                        values.put("password", password);
+                        values.put("isVisitor", 0);
+                        db.insert("user", null, values);
+                        //  User user=new User();
+                        db.close();
+                        cursor.close();
+                    }//////////////////////////////////////////////////////////////////
+
+                    // UserManager.setCurrentUser(user);// 设置当前用户
                     if (rbt_coach.isChecked()) {
                         // go(AdminMainActivity.class);
                         autoStartActivity(MainMenuActivity.class);
-                    }else if (rbt_user.isChecked()) {
+                    } else if (rbt_user.isChecked()) {
                         //  go(MainActivity.class);
                         autoStartActivity(MainActivity.class);
                     }

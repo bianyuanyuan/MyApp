@@ -1,10 +1,13 @@
 package com.myapp.Data;
 
 import org.litepal.crud.DataSupport;
+
+import java.io.Serializable;
+
 /*
 *用户类
  */
-public class User extends DataSupport {
+public class User extends DataSupport implements Serializable {
     private int id;
     private String nickname;
     private byte[] avatarImage;

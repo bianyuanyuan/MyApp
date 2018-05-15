@@ -6,19 +6,3 @@
         <mapping class="com.myapp.Data.User"/>
     </list>
 </litepal>
-
-<litepal>
-<dbname value="ManagerTest" />
-<version value="1" />
-<list>
-    <mapping class="com.myapp.Data.Student"/>
-    <mapping class="com.myapp.Data.Coach"/>
-    <mapping class="com.myapp.Data.Class"/>
-    <mapping class="com.myapp.Data.Course"/>
-    <mapping class="com.myapp.Data.TimeTable"/>
-    <mapping class="com.myapp.Data.CoachTimeTable"/>
-    <mapping class="com.myapp.Data.ClassTimeTable"/>
-    <mapping class="com.myapp.Data.ClassCourseTable"/>
-    <mapping class="com.myapp.Data.StudentCourseTable"/>
-</list>
-</litepal>

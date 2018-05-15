@@ -154,6 +154,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@id/tv_co_info_tcourse"
-        android:text="预约教练">
+        android:text="2:00-4:00">
+    </Button>
+    <Button
+        android:id="@+id/choose2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/choose"
+        android:text="4:00-6:00">
     </Button>
 </RelativeLayout>

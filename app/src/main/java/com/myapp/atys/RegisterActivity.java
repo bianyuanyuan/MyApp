@@ -1,6 +1,7 @@
 package com.myapp.atys;
 
 import android.app.ProgressDialog;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.myapp.Util.CommonResponse;
 import com.myapp.Util.Consts;
 import com.myapp.Util.HttpUtil;
 import com.myapp.Util.Util;
+import com.myapp.db.DBOpenHelper;
 
 import java.io.IOException;
 
@@ -34,6 +36,7 @@ public class RegisterActivity extends BaseActivity {
 
     private RadioButton rbt_user;
     private RadioButton rbt_coach;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,8 @@ public class RegisterActivity extends BaseActivity {
 
         rbt_coach = (RadioButton) findViewById(R.id.rbt_coach);
         rbt_user = (RadioButton) findViewById(R.id.rbt_user);
+
+
     }
 
     void setListeners() {

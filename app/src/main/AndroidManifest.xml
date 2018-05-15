@@ -45,12 +45,14 @@
         <activity android:name="com.myapp.atys.ShowCourseAty" />
         <activity
             android:name="com.myapp.atys.LoginActivity2"
-            android:label="登录">
-        </activity>
+            android:label="登录"></activity>
         <activity
             android:name="com.myapp.atys.RegisterActivity"
-            android:label="注册">
-        </activity>
+            android:label="注册"></activity>
+
+        <activity android:name="com.myapp.atys.LoginActivity" />
+        <activity android:name="com.myapp.atys.RegActivity" />
+
         <activity android:name="com.myapp.Fragment.MeActivity" />
         <activity android:name="com.myapp.Fragment.MakeDataActiviry" />
 

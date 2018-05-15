@@ -30,6 +30,7 @@ public class MakeDataFragment extends Fragment implements View.OnClickListener, 
 
     private DataDao dao;
     private ListView listview;
+
     public MakeDataFragment() {
     }
 
@@ -94,7 +95,10 @@ public class MakeDataFragment extends Fragment implements View.OnClickListener, 
             item.put("name", person.getName());
             item.put("course", person.getTeach_course());
 
-            item.put("coach",person);
+            item.put("coach", person);
+
+
+          //  item.put("coadhid", person.getId());
             data.add(item);
         }
 
@@ -128,11 +132,18 @@ public class MakeDataFragment extends Fragment implements View.OnClickListener, 
         String personid = data.get("name").toString();
         String course = data.get("course").toString();
 
-        Coach coach= (Coach) data.get("coach");
-        Toast.makeText(getActivity(), personid, Toast.LENGTH_SHORT).show();
 
+        Coach coach = (Coach) data.get("coach");
+
+      // long coachid=(long)data.get("coachid");
+
+        Toast.makeText(getActivity(), personid, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "预约成功", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(getActivity(), ChooseCoachActivity.class);
-        i.putExtra("coach",coach);
+        i.putExtra("coach", coach);
+
+     //  i.putExtra("coachid", coachid+"");// id+"" 这样是把int转成String类型, 否则会报错
+
         startActivity(i);
     }
 }

@@ -74,7 +74,7 @@ public class DataDao {
         values.put(TableContanst.CoachColumns.TEACH_COURSE, c.getTeach_course());
 
         values.put(TableContanst.CoachColumns.TIME_TWO, "2:00-4:00");
-        values.put(TableContanst.CoachColumns.TIME_FOUR,"4:00-6:00");
+        values.put(TableContanst.CoachColumns.TIME_FOUR, "4:00-6:00");
         return dbHelper.getWritableDatabase().insert(TableContanst.COACH_TABLE, null, values);
     }
 
@@ -167,7 +167,7 @@ public class DataDao {
 
 
         values.put(TableContanst.CoachColumns.TIME_TWO, "2:00-4:00");
-        values.put(TableContanst.CoachColumns.TIME_FOUR,"4:00-6:00");
+        values.put(TableContanst.CoachColumns.TIME_FOUR, "4:00-6:00");
         return dbHelper.getWritableDatabase().update(TableContanst.COACH_TABLE, values,
                 TableContanst.CoachColumns.ID + "=?", new String[]{c.getId() + ""});
     }
@@ -285,8 +285,10 @@ public class DataDao {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         //扫描数据库,将数据库信息放入templist
-        Cursor cursor = db.rawQuery("select * from coach",null);
-        while (cursor.moveToNext()){
+        Cursor cursor = db.rawQuery("select * from coach", null);
+        while (cursor.moveToNext()) {
+            long coachid = cursor.getLong(cursor.getColumnIndex(TableContanst.CoachColumns.ID));
+
             String name = cursor.getString(cursor.getColumnIndex(TableContanst.CoachColumns.NAME));
             int age = cursor.getInt(cursor.getColumnIndex(TableContanst.CoachColumns.AGE));
             String sex = cursor.getString(cursor.getColumnIndex(TableContanst.CoachColumns.SEX));
@@ -295,7 +297,9 @@ public class DataDao {
             int charge = cursor.getInt(cursor.getColumnIndex(TableContanst.CoachColumns.CHARGE));
             String teach_course = cursor.getString(cursor.getColumnIndex(TableContanst.CoachColumns.TEACH_COURSE));
 
-            Coach coach = new Coach( name, age, sex, phone_number, teach_year, charge, teach_course);
+            //  String t1 = cursor.getString(cursor.getColumnIndex(TableContanst.CoachColumns.TIME_TWO));
+            //  String t2 = cursor.getString(cursor.getColumnIndex(TableContanst.CoachColumns.TIME_FOUR));
+            Coach coach = new Coach(coachid, name, age, sex, phone_number, teach_year, charge, teach_course);
             templist.add(coach);
         }
         cursor.close();
@@ -310,14 +314,14 @@ public class DataDao {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         //扫描数据库,将数据库信息放入templist
-        Cursor cursor = db.rawQuery("select * from course",null);
-        while (cursor.moveToNext()){
-                      String name = cursor.getString(cursor.getColumnIndex(TableContanst.CourseColumns.NAME));
+        Cursor cursor = db.rawQuery("select * from course", null);
+        while (cursor.moveToNext()) {
+            String name = cursor.getString(cursor.getColumnIndex(TableContanst.CourseColumns.NAME));
             long times = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.TIMES));
-            long timesweek  = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.TIMESWEEK));
-            long price  = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.PRICE));
+            long timesweek = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.TIMESWEEK));
+            long price = cursor.getInt(cursor.getColumnIndex(TableContanst.CourseColumns.PRICE));
 
-            Course course = new Course( name, times,timesweek,price);
+            Course course = new Course(name, times, timesweek, price);
             templist.add(course);
         }
         cursor.close();
@@ -325,8 +329,6 @@ public class DataDao {
 
         return templist;
     }
-
-
 
 
     // 查询所有class的记录
