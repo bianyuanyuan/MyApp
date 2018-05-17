@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.myapp.BmobData.MyUser;
 import com.myapp.Data.Coach;
 import com.myapp.dao.DataDao;
 import com.myapp.db.DBOpenHelper;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.bmob.v3.BmobUser;
 import myapp.byy.com.myapp.R;
 
 public class ChooseCoachActivity extends BaseActivity{
@@ -28,6 +30,7 @@ public class ChooseCoachActivity extends BaseActivity{
     private Button choose2;
     private DBOpenHelper helper;
     private AlertDialog.Builder dialog = null;
+    private MyUser user= BmobUser.getCurrentUser(MyUser.class);
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,7 @@ public class ChooseCoachActivity extends BaseActivity{
         Intent intent = getIntent();
         choose = findViewById(R.id.choose);
         choose2 = findViewById(R.id.choose2);
+
         final Coach coach = (Coach) intent.getSerializableExtra("coach");
       //  final String coachid = intent.getStringExtra("coachid");
 
@@ -65,7 +69,7 @@ public class ChooseCoachActivity extends BaseActivity{
                         SQLiteDatabase db = helper.getWritableDatabase();
                         db.execSQL("insert into select_table (userid,coachid, t1,t2) " +
                                         "values(?, ?, ?, ?)",
-                                new String[]{"", String.valueOf(coach.getId()), "2:00-4:00", null});
+                                new String[]{user.getObjectId(), String.valueOf(coach.getId()), "2:00-4:00", null});
                         db.close();
                         Toast.makeText(ChooseCoachActivity.this, "预约成功", Toast.LENGTH_SHORT).show();
 
@@ -100,7 +104,7 @@ public class ChooseCoachActivity extends BaseActivity{
                         SQLiteDatabase db = helper.getWritableDatabase();
                         db.execSQL("insert into select_table (userid,coachid, t1,t2) " +
                                         "values(?, ?, ?, ?)",
-                                new String[]{"", String.valueOf(coach.getId()), null, "4:00-6:00"});
+                                new String[]{user.getObjectId(), String.valueOf(coach.getId()), null, "4:00-6:00"});
                         db.close();
                         Toast.makeText(ChooseCoachActivity.this, "预约成功", Toast.LENGTH_SHORT).show();
 
