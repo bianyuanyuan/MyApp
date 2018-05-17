@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.myapp.Activity.LoginActivity;
 import com.myapp.Data.User;
 import com.myapp.Util.CommonRequest;
 import com.myapp.Util.CommonResponse;
@@ -221,7 +221,7 @@ public class LoginActivity2 extends BaseActivity {
                         autoStartActivity(MainMenuActivity.class);
                     } else if (rbt_user.isChecked()) {
                         //  go(MainActivity.class);
-                        autoStartActivity(MainActivity.class);
+                        autoStartActivity(LoginActivity.class);
                     }
                     //    autoStartActivity(MainMenuActivity.class);///////////进入主界面活动//////////////
                 }

@@ -1,68 +1,68 @@
 package com.myapp.Fragment;
 
 
-import android.app.AlertDialog;
+import android.Manifest;
+import android.app.Dialog;
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Message;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
-import android.util.Base64;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.myapp.Data.User;
-import com.myapp.Util.ACache;
-import com.myapp.Util.ActivityController;
-import com.myapp.Util.CommonRequest;
-import com.myapp.Util.CommonResponse;
-import com.myapp.Util.Consts;
-import com.myapp.Util.HttpUtil;
-import com.myapp.Util.PhotoUtil;
-import com.myapp.Util.Server;
-import com.myapp.Util.SharedPreferencesUtil;
-import com.myapp.Util.UserManager;
-import com.myapp.Util.Util;
-import com.myapp.atys.LoginActivity2;
-import com.myapp.atys.ModifyPwdActivity;
+import com.myapp.Activity.LoginActivity;
+import com.myapp.BmobData.MyUser;
+import com.myapp.Util.CameraUtil;
+import com.myapp.Util.CustomDialog;
+import com.myapp.Util.L;
+import com.myapp.Util.StaticClass;
+import com.myapp.Util.UtilTools;
+import java.io.File;
 
-import java.io.IOException;
-import java.util.HashMap;
-
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
 import de.hdodenhof.circleimageview.CircleImageView;
-import myapp.byy.com.myapp.MainActivity;
 import myapp.byy.com.myapp.R;
-import okhttp3.Call;
-import okhttp3.Response;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 /**
  * 个人中心
  */
 public class MeFragment extends Fragment implements View.OnClickListener {
-    private CircleImageView avatarImage;
-    private TextView accountText;
-    private TextView nickname;
-    private Button nicknameBtn;
-    private Button pwdBtn;
+    private Button btn_exit_user;
+    private TextView edit_user;
+    private EditText et_username;
+    private EditText et_sex;
+    private EditText et_age;
+    private EditText et_desc;
+    private Button btn_update_ok;
+    private Button btn_update_no;
+    private CircleImageView profile_image;
+    private Dialog dialog;
+    private Button btn_camera;
+    private Button btn_picture;
+    private Button btn_cancel;
 
-    private Button exitBtn;
-    private ACache aCache;
-    private PhotoUtil photoUtil = new PhotoUtil();
-    private Server server = new Server(getActivity());
+    public static File tempFile;
+    public static final int REQUEST_CODE_WRITE = 9;
+    public static final int REQUEST_CODE_CAMERA = 10;
 
     public MeFragment() {
     }
@@ -77,314 +77,298 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
     }
-
+    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_me, container, false);
-        initView(view, inflater, container);
-        setListeners();
-        initData();
+
+        initView(view);
         return view;
-    }
 
-    void initView(View view, LayoutInflater inflater, ViewGroup container) {
-        aCache = ACache.get(getActivity());
-
-        avatarImage = view.findViewById(R.id.center_avatar);
-        accountText = view.findViewById(R.id.center_account);
-        nickname=view.findViewById(R.id.nav_nickname);
-        nicknameBtn = view.findViewById(R.id.center_nickname_btn);
-        pwdBtn = view.findViewById(R.id.center_pwd_btn);
-        exitBtn = view.findViewById(R.id.center_exit_btn);
-        //   collapsingToolbar = findViewById(R.id.collapsing_toolbar);
 
     }
 
+    private void initView(View view) {
+        btn_exit_user = (Button) view.findViewById(R.id.btn_exit_user);
+        btn_exit_user.setOnClickListener(this);
+        edit_user = (TextView) view.findViewById(R.id.edit_user);
+        edit_user.setOnClickListener(this);
+        et_username = (EditText) view.findViewById(R.id.et_username);
+        et_sex = (EditText) view.findViewById(R.id.et_sex);
+        et_age = (EditText) view.findViewById(R.id.et_age);
+        et_desc = (EditText) view.findViewById(R.id.et_desc);
+        btn_update_ok = (Button) view.findViewById(R.id.btn_update_ok);
+        btn_update_ok.setOnClickListener(this);
+        btn_update_no = (Button) view.findViewById(R.id.btn_update_no);
+        btn_update_no.setOnClickListener(this);
+        profile_image = (CircleImageView) view.findViewById(R.id.profile_image);
+        profile_image.setOnClickListener(this);
 
-    void setListeners() {
-        // 更换头像
-        avatarImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPhotoDialog();
-            }
-        });
 
-        // 修改昵称
-        nicknameBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                View nicknameView = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_edittext, null);
-                final EditText nicknameEdit = nicknameView.findViewById(R.id.edit);
-                // 弹昵称修改框
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setView(nicknameView);
-                builder.setTitle(getResources().getString(R.string.Nickname));
-                builder.setNegativeButton(getResources().getString(R.string.cancel), null);
-                builder.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // 保存昵称
-                        String nickname = nicknameEdit.getText().toString();
-                        User user = UserManager.getCurrentUser();
-                        user.setNickname(nickname);
-                        user.save();
-                        if (!user.isVisitor())
-                            server.setNickname(nickname);
-                        // 更改显示
-                        //       collapsingToolbar.setTitle(nickname);
-                        getActivity().setTitle(nickname);
-                        getActivity().setTitle(nickname);
-                        Util.makeToast(getActivity(), getResources().getString(R.string.modify_success));
-                        // 通知MainActivity更新昵称
-                        Message message = new Message();
-                        message.what = 2;
-                        message.obj = nickname;
-                        //handler.sendMessage(message);
+
+        //参数分别是   上下文，宽，高，内容布局，样式，居中显示，动画样式
+        dialog = new CustomDialog(getActivity(), MATCH_PARENT, MATCH_PARENT, R.layout.dialog_photo, R.style.Theme_Dialog, Gravity.CENTER);
+        //屏幕外点击无效
+        dialog.setCancelable(false);
+
+        btn_camera = (Button) dialog.findViewById(R.id.btn_camera);
+        btn_picture = (Button) dialog.findViewById(R.id.btn_picture);
+        btn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
+
+        btn_camera.setOnClickListener(this);
+        btn_picture.setOnClickListener(this);
+        btn_cancel.setOnClickListener(this);
+
+        //设置默认不可以输入
+        setEnabled(false);
+        //设置具体的值
+        MyUser userInfo = BmobUser.getCurrentUser(MyUser.class);
+        if (userInfo != null) {
+            et_username.setText(userInfo.getUsername());
+            et_age.setText(userInfo.getAge() + "");
+            et_sex.setText(userInfo.isSex() ? "男" : "女");
+            et_desc.setText(userInfo.getDesc());
+        }
+
+
+    }
+
+    //控制是否可以显示
+    private void setEnabled(boolean is) {
+
+        et_username.setEnabled(is);
+        et_sex.setEnabled(is);
+        et_age.setEnabled(is);
+        et_desc.setEnabled(is);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_exit_user:
+                //退出登录
+                MyUser.logOut();
+                BmobUser currentUser = MyUser.getCurrentUser();
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                getActivity().finish();
+                break;
+            case R.id.edit_user:
+                //设置显示
+                setEnabled(true);
+                btn_update_ok.setVisibility(View.VISIBLE);
+                btn_update_no.setVisibility(View.VISIBLE);
+          //      setEnabled(false);
+          //      btn_exit_user.setVisibility(View.GONE);
+                break;
+            case R.id.btn_update_ok:
+             //   setEnabled(true);
+             //   btn_exit_user.setVisibility(View.VISIBLE);
+
+                //拿到输入框的值
+                String username = et_username.getText().toString().trim();
+                String age = et_age.getText().toString().trim();
+                String sex = et_sex.getText().toString().trim();
+                String desc = et_desc.getText().toString().trim();
+                //判断是否为空
+                if (!TextUtils.isEmpty(username) & !TextUtils.isEmpty(age) & !TextUtils.isEmpty(sex)) {
+                    //3.更新属性
+                    MyUser user = new MyUser();
+                    user.setUsername(username);
+                    user.setAge(Integer.parseInt(age));
+                    if (sex.equals("男")) {
+                        user.setSex(true);
+                    } else {
+                        user.setSex(false);
                     }
-                });
-                builder.show();
-            }
-        });
-
-        // 修改密码
-        pwdBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                User user = UserManager.getCurrentUser();
-                if (!user.isVisitor()) {
-                    Intent i = new Intent(getActivity(), ModifyPwdActivity.class);
-                    startActivity(i);
-                    // autoStartActivity(ModifyPwdActivity.class);
-                } else {
-                    showResponse("游客不开放此功能");
-                }
-
-            }
-        });
-        // 更换头像
-        avatarImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPhotoDialog();
-            }
-        });
-
-        // 退出登录
-        exitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferencesUtil spu = new SharedPreferencesUtil(getActivity());
-                spu.setParam("isAutoLogin", false);
-                ActivityController.finishAll(LoginActivity2.class);
-                ActivityController.clearAcache();
-                UserManager.clear();
-            }
-        });
-
-        // 头像工具类回调
-        photoUtil.setOnPhotoResultListener(new PhotoUtil.OnPhotoResultListener() {
-            // 当选择图片或者拍摄图片拿到结果之后
-            @Override
-            public void onPhotoResult(final Uri uri) {
-                if (uri != null && !TextUtils.isEmpty(uri.getPath())) {
-                    final Bitmap bitmap = PhotoUtil.decodeUriAsBitmap(getActivity(), uri);
-                    if (UserManager.getCurrentUser().isVisitor()) {// 游客不进行服务器端头像存储
-                        avatarImage.setImageBitmap(bitmap);
-                        return;
+                    if (!TextUtils.isEmpty(desc)) {
+                        user.setDesc(desc);
+                    } else {
+                        user.setDesc("这个人很懒，什么都没留下！");
                     }
-                    // 上传头像
-                    HttpUtil.uploadImage(Consts.URL_UploadImg, bitmap, new okhttp3.Callback() {
+
+                    BmobUser bmobUser = BmobUser.getCurrentUser();
+                    user.update(bmobUser.getObjectId(), new UpdateListener() {
                         @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            CommonResponse res = new CommonResponse(response.body().string());
-                            String resCode = res.getResCode();
-                            String resMsg = res.getResMsg();
-                            // 上传成功
-                            if (resCode.equals(Consts.SUCCESSCODE_UPLOADIMG)) {
-                                saveAvatar(bitmap);
-                                // 通知MainActivity更新头像
-                                Message msg = new Message();
-                                msg.obj = bitmap;
-                                msg.what = 1;
-                                //     handler.sendMessage(msg);
+                        public void done(BmobException e) {
+                            if (e == null) {
+                                //修改成功
+                                setEnabled(false);
+                                btn_update_ok.setVisibility(View.GONE);
+                            //    btn_update_no.setVisibility(View.GONE);
+
+                                UtilTools.showShrotToast(getActivity(), "修改成功");
+
+                            } else {
+                                UtilTools.showShrotToast(getActivity(), "修改失败");
                             }
-                            showResponse(resMsg);
-                        }
-
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            e.printStackTrace();
-                            showResponse("Network ERROR!");
                         }
                     });
+
+                } else {
+                    UtilTools.showShrotToast(getActivity(), "输入框不能为空");
                 }
-            }
+                break;
+            case R.id.btn_update_no:
+                setEnabled(false);
+                btn_update_ok.setVisibility(View.GONE);
+                btn_update_no.setVisibility(View.GONE);
 
-            @Override
-            public void onPhotoCancel() {
-
-            }
-        });
+              //  setEnabled(true);
+              //  btn_exit_user.setVisibility(View.VISIBLE);
+                break;
+            case R.id.profile_image:
+                dialog.show();
+                break;
+            case R.id.btn_cancel:
+                dialog.dismiss();
+                break;
+            case R.id.btn_camera:
+                //相机
+                toCamera();
+                break;
+            case R.id.btn_picture:
+                //相册
+                toPicture();
+                break;
+        }
     }
 
-    void initData() {
+    //跳转相册
+    private void toPicture() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, StaticClass.PICTURE_REQUEST_CODE);
+        dialog.dismiss();
+    }
 
-        // 初始化昵称
-        User user = UserManager.getCurrentUser();
-        if (user.getNickname() != null)
-            //    collapsingToolbar.setTitle(user.getNickname());
-            getActivity().setTitle(user.getNickname());
-        else
-            //    collapsingToolbar.setTitle(getResources().getString(R.string.Center));
-            getActivity().setTitle(getResources().getString(R.string.Center));
-        // 初始化用户名
-        accountText.setText(user.getAccount());
+    //跳转相机
+    private void toCamera() {
 
+        permission(Manifest.permission.WRITE_EXTERNAL_STORAGE, REQUEST_CODE_WRITE);
+       CameraUtil.openCamera(getActivity());
+        dialog.dismiss();
+    }
 
-        // 初始化头像：缓存->本地数据库->服务器
-        Bitmap bitmap;
-        if ((bitmap = aCache.getAsBitmap("avatar")) == null) {// cache加载失败
-            // 数据库加载失败则从服务器加载（仅非游客有效）
-            if (user.isVisitor()) {
-                if (user.getAvatarImage() != null) {
-                    // 数据库加载
-                    bitmap = BitmapFactory.decodeByteArray(user.getAvatarImage(), 0,
-                            user.getAvatarImage().length);
-                    avatarImage.setImageBitmap(bitmap);
+    public void permission(String permision, int code) {
+        String[] permissions = {permision};
+        //验证是否许可权限
+        if (ContextCompat.checkSelfPermission(getActivity(), permision) != PackageManager.PERMISSION_GRANTED) {
+            //申请权限
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                MeFragment.this.requestPermissions(permissions, code);
+            }
+        } else {
+            if (code == REQUEST_CODE_WRITE) {
+                permission(Manifest.permission.CAMERA, REQUEST_CODE_CAMERA);
+            }
+            if (code == REQUEST_CODE_CAMERA) {
+                //申请权限
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //判断内存卡是否可用,可以的话进行储存
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(), StaticClass.PHOTO_IMAGE_FILE_NAME)));
+                startActivityForResult(intent, StaticClass.CAMERA_REQUEST_CODE);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_WRITE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // 权限被用户同意，可以做你要做的事情了。
+                    permission(Manifest.permission.CAMERA, REQUEST_CODE_CAMERA);
                 } else {
-                    avatarImage.setImageResource(R.drawable.icon_avatar);// 默认头像
+                    // 权限被用户拒绝了，可以提示用户,关闭界面等等。
+                    UtilTools.showShrotToast(getActivity(), "没有权限不能打开相机");
                 }
                 return;
             }
-            // 非游客
-            if (user.getAvatarImage() == null) {
-                CommonRequest request = new CommonRequest();
-                request.addRequestParam("account", user.getAccount());
-                HttpUtil.sendPost(Consts.URL_DownloadImg, request.getJsonStr(), new okhttp3.Callback() {
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        CommonResponse res = new CommonResponse(response.body().string());
-                        String resCode = res.getResCode();
-                        String resMsg = res.getResMsg();
-                        HashMap<String, String> property = res.getPropertyMap();
-                        String imgStr = property.get("avatar");
-                        loadAvatar(resCode, imgStr);
-                    }
 
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        e.printStackTrace();
-                        showResponse("Network ERROR");
-                    }
-                });
-            } else {// 数据库加载
-                bitmap = BitmapFactory.decodeByteArray(user.getAvatarImage(), 0,
-                        user.getAvatarImage().length);
-                avatarImage.setImageBitmap(bitmap);
-            }
-        } else {
-            avatarImage.setImageBitmap(bitmap);
+            case REQUEST_CODE_CAMERA:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // 权限被用户同意，可以做你要做的事情了。
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    //判断内存卡是否可用,可以的话进行储存
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(), StaticClass.PHOTO_IMAGE_FILE_NAME)));
+                    startActivityForResult(intent, StaticClass.CAMERA_REQUEST_CODE);
+                } else {
+                    // 权限被用户拒绝了，可以提示用户,关闭界面等等。
+                    UtilTools.showShrotToast(getActivity(), "没有权限不能打开相机");
+                }
+                break;
+
+
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case PhotoUtil.INTENT_CROP:
-            case PhotoUtil.INTENT_TAKE:
-            case PhotoUtil.INTENT_SELECT:
-                photoUtil.onActivityResult(getActivity(), requestCode, resultCode, data);
-                break;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
 
-    void showPhotoDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("上传头像");
-        final String[] choices = {"拍照", "从相册选择"};
-        // 设置一个下拉的列表选择项
-        builder.setItems(choices, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0:// 相机
-                        photoUtil.takePicture(getActivity());
-                        break;
-                    case 1:// 本地相册
-                        photoUtil.selectPicture(getActivity());
-                        break;
-                }
+        if (resultCode != getActivity().RESULT_CANCELED) {
+            switch (requestCode) {
+                //相册
+                case StaticClass.PICTURE_REQUEST_CODE:
+                    startPhotoZoom(data.getData());
+                    break;
+                //相机
+                case StaticClass.CAMERA_REQUEST_CODE:
+                    tempFile = new File(Environment.getExternalStorageDirectory(), StaticClass.PHOTO_IMAGE_FILE_NAME);
+                    L.e(Uri.fromFile(tempFile).toString());
+                    startPhotoZoom(Uri.fromFile(tempFile));
+                    break;
+                case StaticClass.RESULT_REQUEST_CODE:
+                    //有可能舍弃
+                    if (data != null) {
+                        //拿到图片设置
+                        setImageToView(data);
+                        //设置了图片，就删除原先的
+                        if (tempFile != null) {
+                            tempFile.delete();
+                        }
+                    }
+                    break;
+
             }
-        });
-        builder.show();
-    }
-
-    private void saveAvatar(final Bitmap bitmap) {
-        // 设置头像
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                avatarImage.setImageBitmap(bitmap);
-            }
-        });
-        // 保存头像到本地数据库
-        User user = UserManager.getCurrentUser();
-        user.setAvatarImage(PhotoUtil.bitmap2Bytes(bitmap));
-        user.save();
-    }
-
-    private void loadAvatar(String resCode, String imgStr) {
-        if (resCode.equals(Consts.SUCCESSCODE_DOWNLOADIMG) && !imgStr.equals("null") && !imgStr.equals("")) {
-            // 获取头像成功
-            byte[] bytes = Base64.decode(imgStr, Base64.DEFAULT);
-            final Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    avatarImage.setImageBitmap(bitmap);
-                }
-            });
-        } else {
-            // 使用默认头像
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    avatarImage.setImageResource(R.drawable.icon_avatar);
-                }
-            });
         }
     }
 
-    private void showResponse(final String msg) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-            }
-        });
+    //裁剪
+    private void startPhotoZoom(Uri uri) {
+        if (uri == null) {
+            return;
+        }
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        //设置裁剪
+        intent.putExtra("crop", "true");
+        //宽高
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        //裁剪的质量
+        intent.putExtra("outputX", 320);
+        intent.putExtra("outputY", 320);
+        //发送数据
+        intent.putExtra("return-data", true);
+        startActivityForResult(intent, StaticClass.RESULT_REQUEST_CODE);
+    }
+
+    private void setImageToView(Intent data) {
+        Bundle bundle = data.getExtras();
+        if (bundle != null) {
+            Bitmap bitmap = bundle.getParcelable("data");
+            profile_image.setImageBitmap(bitmap);
+        }
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                getActivity().finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+    public void onDestroy() {
+        super.onDestroy();
+        //保存
+        UtilTools.putImageToShare(getActivity(), profile_image);
 
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            //  case R.id.datebutton:
-            //      break;
-        }
     }
 
 }

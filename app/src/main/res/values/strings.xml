@@ -68,6 +68,19 @@
     <string name="spinner">请选择</string>
     <string name="title_activity_login2">Sign in</string>
 
+
+    <string name="text_editor_password">修改密码</string>
+    <string name="text_now_password">旧密码</string>
+    <string name="text_new_password">新密码</string>
+    <string name="text_password_again">再次输入</string>
+    <string name="text_forget_password">忘记密码</string>
+    <string name="text_email">邮箱</string>
+    <string name="courier_title">物流查询</string>
+    <string name="phone">归属地查询</string>
+    <string name="forgetpwd">忘记密码</string>
+
+
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
