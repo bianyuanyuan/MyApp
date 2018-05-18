@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class AddStudentActivity extends BaseActivity implements OnClickListener 
     private static final String TAG = "AddStudentActivity";
     private final static int DATE_DIALOG = 1;
     private static final int DATE_PICKER_ID = 1;
+    private ImageView back;
     private TextView idText;
     private EditText nameText;
     private EditText ageText;
@@ -70,10 +72,18 @@ public class AddStudentActivity extends BaseActivity implements OnClickListener 
         box3 = (CheckBox) findViewById(R.id.box3);
         restoreButton = (Button) findViewById(R.id.btn_save);
         resetButton = (Button) findViewById(R.id.btn_clear);
+
+        back=(ImageView)findViewById(R.id.back);
         dao = new DataDao(new DBOpenHelper(this)); // 设置监听 78
         restoreButton.setOnClickListener(this);
         resetButton.setOnClickListener(this);
         dataText.setOnClickListener(this);
+        back.setOnClickListener(new OnClickListener() {//back
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         checkIsAddStudent();
     }
 

@@ -83,10 +83,7 @@
             android:name="com.myapp.atys.RegisterActivity"
             android:label="注册"></activity>
 
-        <activity android:name="com.myapp.Fragment.MeActivity" />
         <activity android:name="com.myapp.Fragment.MakeDataActiviry" />
-
-        <activity android:name="com.myapp.atys.ModifyPwdActivity" />
 
         <activity android:name="com.myapp.Activity.LoginActivity" />
         <activity android:name="com.myapp.Activity.RegisterActivity" />

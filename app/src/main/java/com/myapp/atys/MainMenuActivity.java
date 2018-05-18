@@ -1,6 +1,5 @@
 package com.myapp.atys;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,16 +19,29 @@ import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.myapp.Util.PublishDialog;
 
 import myapp.byy.com.myapp.R;
 
 public class MainMenuActivity extends BaseActivity {
+    LinearLayout llBtnMenu;
+
+    PublishDialog pDialog;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("运动帮");
         setContentView(R.layout.main_menu);
+
+
+
+
         GridView gridview = (GridView) findViewById(R.id.gridview);
 
         AnimationSet set = new AnimationSet(false);
@@ -54,6 +66,50 @@ public class MainMenuActivity extends BaseActivity {
         gridview.setLayoutAnimation(controller);
 
         gridview.setAdapter(new ImageAdapter(this));
+
+
+        //
+        llBtnMenu = (LinearLayout) findViewById(R.id.llBtnMenu);
+        llBtnMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (pDialog == null) {
+                    pDialog = new PublishDialog(MainMenuActivity.this);
+                    pDialog.setArticleBtnClickListener(new View.OnClickListener() {//新增学员
+
+                        @Override
+                        public void onClick(View v) {
+
+                            autoStartActivity(AddStudentActivity.class);
+                        }
+                    });
+                    pDialog.setMiniBlogBtnClickListener(new View.OnClickListener() {//新增教练
+
+                        @Override
+                        public void onClick(View v) {
+                            autoStartActivity(AddCoachActivity.class);
+                        }
+                    });
+                    pDialog.setPhotoBtnClickListener(new View.OnClickListener() {//新增场地
+
+                        @Override
+                        public void onClick(View v) {
+                            autoStartActivity(AddClassActivity.class);
+                        }
+                    });
+                    pDialog.setLetterBtnClickListener(new View.OnClickListener() {//新增课程
+
+                        @Override
+                        public void onClick(View v) {
+
+                            autoStartActivity(AddCourseActivity.class);
+                        }
+                    });
+                }
+                pDialog.show();
+            }
+        });
+
     }
 
     // 继承BaseAdapter
