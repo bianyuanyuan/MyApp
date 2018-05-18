@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class AddClassActivity extends BaseActivity implements View.OnClickListen
     private EditText nameText;
     private EditText positionText;
     private EditText containText;
+    private ImageView back;
 
     private Button restoreButton;
     private Button resetButton;
@@ -45,6 +47,13 @@ public class AddClassActivity extends BaseActivity implements View.OnClickListen
         restoreButton = (Button) findViewById(R.id.btn_cr_save);
         resetButton = (Button) findViewById(R.id.btn_cr_clear);
 
+        back=(ImageView)findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {//
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         dao = new DataDao(new DBOpenHelper(this)); // 设置监听 78
         restoreButton.setOnClickListener(this);
         resetButton.setOnClickListener(this);

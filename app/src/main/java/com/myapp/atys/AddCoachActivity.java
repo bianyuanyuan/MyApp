@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class AddCoachActivity extends BaseActivity implements View.OnClickListen
     private RadioGroup group;
     private RadioButton button1;
     private RadioButton button2;
+    private ImageView back;
 
     private EditText teachyearText;
     private EditText chargeText;
@@ -63,10 +65,17 @@ public class AddCoachActivity extends BaseActivity implements View.OnClickListen
         teachyearText = (EditText) findViewById(R.id.et_co_teach_year);
         chargeText = (EditText) findViewById(R.id.et_co_charge);
         teachcourseText = (EditText) findViewById(R.id.et_co_teach_course);
+        back=(ImageView)findViewById(R.id.back);
 
         dao = new DataDao(new DBOpenHelper(this)); // 设置监听 78
         restoreButton.setOnClickListener(this);
         resetButton.setOnClickListener(this);
+        back.setOnClickListener(new View.OnClickListener() {//
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         checkIsAddCoach();
     }
 
