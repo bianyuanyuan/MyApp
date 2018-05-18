@@ -26,6 +26,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -44,17 +45,16 @@ public class StudentListActivity extends ListActivity implements
         OnClickListener, OnItemClickListener, OnItemLongClickListener {
 
     private static final String TAG = "TestSQLite";
-    private Button addStudent;
     private Cursor cursor;
     private SimpleCursorAdapter adapter;
     private ListView listView;
     private List<Long> list;
     private RelativeLayout relativeLayout;
     private Button searchButton;
-    private Button selectButton;
-    private Button deleteButton;
-    private Button selectAllButton;
-    private Button canleButton;
+
+    private ImageView back;
+    private ImageView add;
+
     private LinearLayout layout;
     private DataDao dao;
     private Student student;
@@ -68,23 +68,30 @@ public class StudentListActivity extends ListActivity implements
         list = new ArrayList<Long>();
         student = new Student();
         dao = new DataDao(new DBOpenHelper(this));
-        addStudent = (Button) findViewById(R.id.btn_add_student);
         searchButton = (Button) findViewById(R.id.bn_search_id);
-        selectButton = (Button) findViewById(R.id.bn_select);
-        deleteButton = (Button) findViewById(R.id.bn_delete);
-        selectAllButton = (Button) findViewById(R.id.bn_selectall);
-        canleButton = (Button) findViewById(R.id.bn_canel);
+
+        back=(ImageView)findViewById(R.id.back);
+        add=(ImageView)findViewById(R.id.add);
+
         layout = (LinearLayout) findViewById(R.id.showLiner);
         relativeLayout = (RelativeLayout) findViewById(R.id.RelativeLayout_Class);
         listView = getListView();
 
         // 为按键设置监听
-        addStudent.setOnClickListener(this);
         searchButton.setOnClickListener(this);
-        selectButton.setOnClickListener(this);
-        deleteButton.setOnClickListener(this);
-        canleButton.setOnClickListener(this);
-        selectAllButton.setOnClickListener(this);
+        back.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        add.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StudentListActivity.this, AddStudentActivity.class));
+            }
+        });
+
         listView.setOnItemClickListener(this);
         listView.setOnItemLongClickListener(this);
         listView.setOnCreateContextMenuListener(this);
@@ -100,39 +107,11 @@ public class StudentListActivity extends ListActivity implements
 
     public void onClick(View v) {
         // 跳转到添加信息的界面
-        if (v == addStudent) {
-            startActivity(new Intent(StudentListActivity.this, AddStudentActivity.class));
-        } else if (v == searchButton) {
+       if (v == searchButton) {
             // 跳转到查询界面
             startActivity(new Intent(this, StudentSearch.class));
-        } else if (v == selectButton) {
-            // 跳转到选择界面
-            isDeleteList = !isDeleteList;
-            if (isDeleteList) {
-                checkOrClearAllCheckboxs(true);
-            } else {
-                showOrHiddenCheckBoxs(false);
-            }
-        } else if (v == deleteButton) {
-            // 删除数据
-            if (list.size() > 0) {
-                for (int i = 0; i < list.size(); i++) {
-                    long id = list.get(i);
-                    Log.e(TAG, "delete id=" + id);
-                    int count = dao.deleteStudentById(id);
-                }
-                dao.closeDB();
-                load();
-            }
-        } else if (v == canleButton) {
-            // 点击取消，回到初始界面
-            load();
-            layout.setVisibility(View.GONE);
-            isDeleteList = !isDeleteList;
-        } else if (v == selectAllButton) {
-            // 全选，如果当前全选按钮显示是全选，则在点击后变为取消全选，如果当前为取消全选，则在点击后变为全选
-            selectAllMethods();
         }
+
     }
 
     // 创建菜单
@@ -193,11 +172,6 @@ public class StudentListActivity extends ListActivity implements
             intent.putExtra("student", student);
             intent.setClass(this, ShowStudentActivity.class);
             this.startActivity(intent);
-        } else {
-            CheckBox box = (CheckBox) view.findViewById(R.id.cb_box);
-            box.setChecked(!box.isChecked());
-            list.add(id);
-            deleteButton.setEnabled(box.isChecked());
         }
     }
 
@@ -248,7 +222,6 @@ public class StudentListActivity extends ListActivity implements
                 int visible = b ? View.VISIBLE : View.GONE;
                 box.setVisibility(visible);
                 layout.setVisibility(visible);
-                deleteButton.setEnabled(false);
             }
         }
     }
@@ -282,26 +255,5 @@ public class StudentListActivity extends ListActivity implements
                 });
         AlertDialog alert = builder.create();
         alert.show();
-    }
-
-    // 点击全选事件时所触发的响应
-    private void selectAllMethods() {
-        // 全选，如果当前全选按钮显示是全选，则在点击后变为取消全选，如果当前为取消全选，则在点击后变为全选
-        if (selectAllButton.getText().toString().equals("全选")) {
-            int childCount = listView.getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                View view = listView.getChildAt(i);
-                if (view != null) {
-                    CheckBox box = (CheckBox) view.findViewById(R.id.cb_box);
-                    box.setChecked(true);
-                    deleteButton.setEnabled(true);
-                    selectAllButton.setText("取消全选");
-                }
-            }
-        } else if (selectAllButton.getText().toString().equals("取消全选")) {
-            checkOrClearAllCheckboxs(true);
-            deleteButton.setEnabled(false);
-            selectAllButton.setText("全选");
-        }
     }
 }

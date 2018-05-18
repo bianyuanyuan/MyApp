@@ -3,32 +3,41 @@
     android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
-    <ImageView android:layout_width="fill_parent"
-        android:layout_height="130px"
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_weight="1"
-        android:background="@drawable/icon" />
-    <TextView android:id="@+id/tv_stu_id"
-        android:layout_width="fill_parent"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
-    <TextView android:id="@+id/tv_stu_name"
-        android:layout_width="fill_parent"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:background="@mipmap/icon_student_manager" />
 
-    <TextView android:id="@+id/tv_stu_age"
+    <TextView
+        android:id="@+id/tv_stu_id"
         android:layout_width="fill_parent"
+        android:layout_height="65dp"
         android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
-    <TextView android:id="@+id/tv_stu_sex"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_stu_name"
         android:layout_width="fill_parent"
+        android:layout_height="65dp"
         android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_stu_age"
+        android:layout_width="fill_parent"
+        android:layout_height="65dp"
+        android:layout_gravity="center"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_stu_sex"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1" />
 
     <TextView android:id="@+id/tv_stu_likes"
         android:layout_width="fill_parent"
