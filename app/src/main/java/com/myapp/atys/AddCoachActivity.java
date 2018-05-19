@@ -29,7 +29,7 @@ import myapp.byy.com.myapp.R;
 
 public class AddCoachActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "AddCoachActivity";
-    private TextView idText;
+ //   private TextView idText;
     private EditText nameText;
     private EditText ageText;
     private EditText phoneText;
@@ -53,7 +53,7 @@ public class AddCoachActivity extends BaseActivity implements View.OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_coach);//////////////////////////////////////////something wrong
-        idText = (TextView) findViewById(R.id.tv_co_id);
+       // idText = (TextView) findViewById(R.id.tv_co_id);
         nameText = (EditText) findViewById(R.id.et_co_name);
         ageText = (EditText) findViewById(R.id.et_co_age);
         button1 = (RadioButton) findViewById(R.id.rb_co_sex_female);
@@ -110,7 +110,7 @@ public class AddCoachActivity extends BaseActivity implements View.OnClickListen
         String teachcourse = coach.getTeach_course();
 
         // 还原数据
-        idText.setText(coach_id + "");
+    //    idText.setText(coach_id + "");
         nameText.setText(name1 + "");
         ageText.setText(age1 + "");
         phoneText.setText(phone1 + "");
@@ -176,7 +176,7 @@ public class AddCoachActivity extends BaseActivity implements View.OnClickListen
         String teachcourse = teachcourseText.getText().toString();
         Coach c = new Coach(name, age, sex, phoneNumber, teachyear, charge, teachcourse);
         if (!isAdd) {
-            c.setId(Integer.parseInt(idText.getText().toString()));
+       //     c.setId(Integer.parseInt(idText.getText().toString()));
             dao.deleteCoachById(coach_id);
         }
         return c;

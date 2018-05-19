@@ -155,8 +155,8 @@ public class ClassListActivity extends ListActivity implements
         classroom = dao.getClassFromView(view, id);
         Log.e(TAG, "classroom*****" + dao.getClassFromView(view, id));
         Intent intent = new Intent();
-        intent.putExtra("classroom", classroom);
-        intent.setClass(this, ShowClassActivity.class);/////////////something wrong
+        intent.putExtra("class", classroom);
+        intent.setClass(this, ShowClassActivity.class);
         this.startActivity(intent);
     }
 

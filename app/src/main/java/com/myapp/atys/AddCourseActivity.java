@@ -20,7 +20,7 @@ import myapp.byy.com.myapp.R;
 
 public class AddCourseActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "AddCourseActivity";
-    private TextView idText;
+   // private TextView idText;
     private EditText nameText;
     private EditText timesText;
     private EditText timesweekText;
@@ -37,7 +37,7 @@ public class AddCourseActivity extends BaseActivity implements View.OnClickListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_course);//////////////something wrong
-        idText = (TextView) findViewById(R.id.tv_cs_id);
+     //   idText = (TextView) findViewById(R.id.tv_cs_id);
         nameText = (EditText) findViewById(R.id.et_cs_name);
         timesText = (EditText) findViewById(R.id.et_cs_times);
         timesweekText = (EditText) findViewById(R.id.et_cs_timesweek);
@@ -80,7 +80,7 @@ public class AddCourseActivity extends BaseActivity implements View.OnClickListe
         long timesweek = course.getTimesweek();
         long price = course.getPrice();
         // 还原数据
-        idText.setText(course_id + "");
+       // idText.setText(course_id + "");
         nameText.setText(name + "");
         timesText.setText(times + "");
         timesweekText.setText(timesweek + "");
@@ -137,7 +137,7 @@ public class AddCourseActivity extends BaseActivity implements View.OnClickListe
         long price = Integer.parseInt(priceText.getText().toString());
         Course cs = new Course(name, times, timesweek, price);
         if (!isAdd) {
-            cs.setId(Integer.parseInt(idText.getText().toString()));
+         //   cs.setId(Integer.parseInt(idText.getText().toString()));
             dao.deleteCourseById(course_id);
         }
         return cs;

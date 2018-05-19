@@ -24,7 +24,7 @@ import myapp.byy.com.myapp.R;
 
 public class AddClassActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "AddClassActivity";
-    private TextView idText;
+  //  private TextView idText;
     private EditText nameText;
     private EditText positionText;
     private EditText containText;
@@ -40,7 +40,7 @@ public class AddClassActivity extends BaseActivity implements View.OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_class);//////////////something wrong
-        idText = (TextView) findViewById(R.id.tv_cr_id);
+   //     idText = (TextView) findViewById(R.id.tv_cr_id);
         nameText = (EditText) findViewById(R.id.et_cr_name);
         positionText = (EditText) findViewById(R.id.et_cr_position);
         containText = (EditText) findViewById(R.id.et_cr_contain);
@@ -81,7 +81,7 @@ public class AddClassActivity extends BaseActivity implements View.OnClickListen
         String position = classroom.getPosition();
         int contain = classroom.getContain();
         // 还原数据
-        idText.setText(class_id + "");
+     //   idText.setText(class_id + "");
         nameText.setText(name + "");
         positionText.setText(position + "");
         containText.setText(contain + "");
@@ -135,7 +135,7 @@ public class AddClassActivity extends BaseActivity implements View.OnClickListen
         int contain= Integer.parseInt(containText.getText().toString());
         Class cr = new Class(name, position,contain);
         if (!isAdd) {
-            cr.setId(Integer.parseInt(idText.getText().toString()));
+     //       cr.setId(Integer.parseInt(idText.getText().toString()));
             dao.deleteClassById(class_id);
         }
         return cr;

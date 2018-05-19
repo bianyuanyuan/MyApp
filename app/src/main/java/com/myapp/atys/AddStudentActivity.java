@@ -37,7 +37,7 @@ public class AddStudentActivity extends BaseActivity implements OnClickListener 
     private final static int DATE_DIALOG = 1;
     private static final int DATE_PICKER_ID = 1;
     private ImageView back;
-    private TextView idText;
+  //  private TextView idText;
     private EditText nameText;
     private EditText ageText;
     private EditText phoneText;
@@ -61,7 +61,7 @@ public class AddStudentActivity extends BaseActivity implements OnClickListener 
         setContentView(R.layout.add_student);
 
 
-        idText = (TextView) findViewById(R.id.tv_stu_id);
+      //  idText = (TextView) findViewById(R.id.tv_stu_id);
         nameText = (EditText) findViewById(R.id.et_name);
         ageText = (EditText) findViewById(R.id.et_age);
         button1 = (RadioButton) findViewById(R.id.rb_sex_female);
@@ -130,7 +130,7 @@ public class AddStudentActivity extends BaseActivity implements OnClickListener 
             }
         }
         // 还原数据
-        idText.setText(student_id + "");
+      //  idText.setText(student_id + "");
         nameText.setText(name + "");
         ageText.setText(age + "");
         phoneText.setText(phone + "");
@@ -211,7 +211,7 @@ public class AddStudentActivity extends BaseActivity implements OnClickListener 
         Student s = new Student(name, age, sex, likes, phoneNumber, trainDate,
                 modifyDateTime);
         if (!isAdd) {
-            s.setId(Integer.parseInt(idText.getText().toString()));
+           // s.setId(Integer.parseInt(idText.getText().toString()));
             dao.deleteStudentById(student_id);
         }
         return s;
