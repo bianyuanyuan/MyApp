@@ -2,182 +2,209 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:padding="5dip">
+    android:orientation="vertical">
+    <!--标题栏-->
+    <LinearLayout
+        android:id="@+id/layout_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/id2_co_text_id"
-        android:layout_width="80dip"
-        android:layout_height="40dip"
-        android:layout_marginBottom="5dip"
-        android:layout_marginRight="5dip"
-        android:layout_marginTop="5dip"
-        android:gravity="left|center_vertical"
-        android:text="教练ID："
-        android:textSize="16sp" />
+        <TextView
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="课程信息"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_co_info_id"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/id2_co_text_id"
-        android:layout_toRightOf="@id/id2_co_text_id"
-        android:gravity="left|center_vertical" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="3dip">
 
-    <TextView
-        android:id="@+id/name2_co_text_id"
-        android:layout_width="80dip"
-        android:layout_height="40dip"
-        android:layout_alignLeft="@id/id2_co_text_id"
-        android:layout_below="@id/id2_co_text_id"
-        android:layout_marginBottom="5dip"
-        android:layout_marginRight="5dip"
-        android:layout_marginTop="5dip"
-        android:gravity="left|center_vertical"
-        android:text="姓名："
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/id2_co_text_id"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginTop="50dip"
+            android:gravity="left|center_vertical"
+            android:text="教练ID："
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tv_co_info_name"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/name2_co_text_id"
-        android:layout_toRightOf="@id/name2_co_text_id"
-        android:gravity="left|center_vertical" />
+        <TextView
+            android:id="@+id/tv_co_info_id"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/id2_co_text_id"
+            android:layout_toRightOf="@id/id2_co_text_id"
+            android:gravity="left|center_vertical" />
 
-    <TextView
-        android:id="@+id/age2_co_text_id"
-        android:layout_width="80dip"
-        android:layout_height="40dip"
-        android:layout_below="@id/name2_co_text_id"
-        android:layout_marginBottom="5dip"
-        android:layout_marginRight="5dip"
-        android:gravity="left|center_vertical"
-        android:text="年龄："
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/name2_co_text_id"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_alignLeft="@id/id2_co_text_id"
+            android:layout_below="@id/id2_co_text_id"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginTop="5dip"
+            android:gravity="left|center_vertical"
+            android:text="姓名："
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tv_co_info_age"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/age2_co_text_id"
-        android:layout_toRightOf="@id/age2_co_text_id"
-        android:gravity="left|center_vertical" />
+        <TextView
+            android:id="@+id/tv_co_info_name"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/name2_co_text_id"
+            android:layout_toRightOf="@id/name2_co_text_id"
+            android:gravity="left|center_vertical" />
 
-    <TextView
-        android:id="@+id/sex2_co_text_id"
-        android:layout_width="80dip"
-        android:layout_height="40dip"
-        android:layout_alignLeft="@id/age2_co_text_id"
-        android:layout_below="@id/age2_co_text_id"
-        android:layout_marginBottom="5dip"
-        android:layout_marginRight="5dip"
-        android:gravity="left|center_vertical"
-        android:text="性别："
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/age2_co_text_id"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_below="@id/name2_co_text_id"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:gravity="left|center_vertical"
+            android:text="年龄："
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tv_co_info_sex"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/sex2_co_text_id"
-        android:layout_toRightOf="@id/sex2_co_text_id"
-        android:gravity="left|center_vertical" />
+        <TextView
+            android:id="@+id/tv_co_info_age"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/age2_co_text_id"
+            android:layout_toRightOf="@id/age2_co_text_id"
+            android:gravity="left|center_vertical" />
 
+        <TextView
+            android:id="@+id/sex2_co_text_id"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_alignLeft="@id/age2_co_text_id"
+            android:layout_below="@id/age2_co_text_id"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:gravity="left|center_vertical"
+            android:text="性别："
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/contact2_co_text_id"
-        android:layout_width="80dip"
-        android:layout_height="40dip"
-        android:layout_below="@id/tv_co_info_sex"
-        android:layout_marginBottom="5dip"
-        android:layout_marginRight="5dip"
-        android:gravity="center_vertical|left"
-        android:text="联系电话："
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/tv_co_info_phone"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/contact2_co_text_id"
-        android:layout_toRightOf="@id/contact2_co_text_id"
-        android:gravity="center_vertical|left" />
+        <TextView
+            android:id="@+id/tv_co_info_sex"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/sex2_co_text_id"
+            android:layout_toRightOf="@id/sex2_co_text_id"
+            android:gravity="left|center_vertical" />
 
 
-    <TextView
-        android:id="@+id/tyear_co_text_id"
-        android:layout_width="80dip"
-        android:layout_height="40dip"
-        android:layout_below="@id/tv_co_info_phone"
-        android:layout_marginBottom="5dip"
-        android:layout_marginRight="5dip"
-        android:gravity="center_vertical|left"
-        android:text="教龄(年)："
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/contact2_co_text_id"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_below="@id/tv_co_info_sex"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:gravity="center_vertical|left"
+            android:text="联系电话："
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tv_co_info_tyear"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/tyear_co_text_id"
-        android:layout_toRightOf="@id/tyear_co_text_id"
-        android:gravity="center_vertical|left" />
+        <TextView
+            android:id="@+id/tv_co_info_phone"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/contact2_co_text_id"
+            android:layout_toRightOf="@id/contact2_co_text_id"
+            android:gravity="center_vertical|left" />
 
-    <TextView
-        android:id="@+id/charge_co_text_id"
-        android:layout_width="80dip"
-        android:layout_height="40dip"
-        android:layout_below="@id/tv_co_info_tyear"
-        android:layout_marginBottom="5dip"
-        android:layout_marginRight="5dip"
-        android:gravity="center_vertical|left"
-        android:text="收费(元/时)："
-        android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tv_co_info_charge"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/charge_co_text_id"
-        android:layout_toRightOf="@id/charge_co_text_id"
-        android:gravity="center_vertical|left" />
+        <TextView
+            android:id="@+id/tyear_co_text_id"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_below="@id/tv_co_info_phone"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:gravity="center_vertical|left"
+            android:text="教龄(年)："
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tcourse_co_text_id"
-        android:layout_width="80dip"
-        android:layout_height="40dip"
-        android:layout_below="@id/tv_co_info_charge"
-        android:layout_marginBottom="5dip"
-        android:layout_marginRight="5dip"
-        android:gravity="center_vertical|left"
-        android:text="课程："
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tv_co_info_tyear"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tyear_co_text_id"
+            android:layout_toRightOf="@id/tyear_co_text_id"
+            android:gravity="center_vertical|left" />
 
-    <TextView
-        android:id="@+id/tv_co_info_tcourse"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/tcourse_co_text_id"
-        android:layout_toRightOf="@id/tcourse_co_text_id"
-        android:gravity="center_vertical|left" />
+        <TextView
+            android:id="@+id/charge_co_text_id"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_below="@id/tv_co_info_tyear"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:gravity="center_vertical|left"
+            android:text="收费(元/时)："
+            android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/back_to_list_id"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/tv_co_info_tcourse"
-        android:onClick="goBack"
-        android:text="返回列表界面">
-    </Button>
+        <TextView
+            android:id="@+id/tv_co_info_charge"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/charge_co_text_id"
+            android:layout_toRightOf="@id/charge_co_text_id"
+            android:gravity="center_vertical|left" />
+
+        <TextView
+            android:id="@+id/tcourse_co_text_id"
+            android:layout_width="80dip"
+            android:layout_height="40dip"
+            android:layout_below="@id/tv_co_info_charge"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:gravity="center_vertical|left"
+            android:text="课程："
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_co_info_tcourse"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tcourse_co_text_id"
+            android:layout_toRightOf="@id/tcourse_co_text_id"
+            android:gravity="center_vertical|left" />
+
+        <Button
+            android:id="@+id/back_to_list_id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_co_info_tcourse"
+            android:onClick="goBack"
+            android:text="返回列表界面"></Button>
+    </RelativeLayout>
 </RelativeLayout>

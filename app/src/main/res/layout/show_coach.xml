@@ -3,49 +3,63 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@drawable/background">
+    android:background="@color/white">
 
+    <!--标题栏-->
+    <LinearLayout
+        android:id="@+id/layout_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true"
+        android:orientation="horizontal">
 
-    <RelativeLayout
-        android:id="@+id/RelativeLayout_Coach"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/bn_co_search_id"
+        <ImageView
+            android:id="@+id/back"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:text="搜索" />
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:src="@mipmap/arrow_back_white"
+            android:visibility="visible" />
 
-        <Button
-            android:id="@+id/btn_add_coach"
+        <TextView
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:gravity="center_horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="教练管理"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/add"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="14dp"
-            android:layout_toEndOf="@+id/bn_co_search_id"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:text="添加教练信息"
-            android:textSize="20dp" />
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:src="@mipmap/icon_add"
+            android:visibility="visible" />
+    </LinearLayout>
 
-        <Button
-            android:id="@+id/bn_co_select"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:gravity="center"
-            android:text="选择"></Button>
-    </RelativeLayout>
 
-    <TextView
-        android:layout_width="fill_parent"
+
+
+
+    <Button
+        android:id="@+id/bn_search_id"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="        ID            姓 名                年 龄         性 别        " />
+        android:gravity="center_vertical"
+        android:text="搜索教练" />
 
     <ListView
         android:id="@android:id/list"
@@ -60,27 +74,5 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:visibility="gone">
-
-        <Button
-            android:id="@+id/bn_co_delete"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:enabled="false"
-            android:text="删除" />
-
-        <Button
-            android:id="@+id/bn_co_selectall"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="全选" />
-
-        <Button
-            android:id="@+id/bn_co_canel"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="取消" />
     </LinearLayout>
 </LinearLayout>

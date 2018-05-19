@@ -16,6 +16,7 @@
         android:layout_width="fill_parent"
         android:layout_height="65dp"
         android:layout_gravity="center"
+        android:gravity="center"
         android:layout_weight="1" />
 
     <TextView
@@ -23,17 +24,20 @@
         android:layout_width="fill_parent"
         android:layout_height="65dp"
         android:layout_gravity="center"
+        android:gravity="center"
         android:layout_weight="1" />
 
     <TextView
         android:id="@+id/tv_stu_age"
         android:layout_width="fill_parent"
+        android:gravity="center"
         android:layout_height="65dp"
         android:layout_gravity="center"
         android:layout_weight="1" />
 
     <TextView
         android:id="@+id/tv_stu_sex"
+        android:gravity="center"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -42,17 +46,20 @@
     <TextView android:id="@+id/tv_stu_likes"
         android:layout_width="fill_parent"
         android:layout_gravity="center"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:visibility="gone"/>
     <TextView android:id="@+id/tv_stu_phone"
         android:layout_width="fill_parent"
         android:layout_gravity="center"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:visibility="gone"/>
     <TextView android:id="@+id/tv_stu_traindate"
         android:layout_width="fill_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
@@ -60,6 +67,7 @@
     <TextView android:id="@+id/tv_stu_modifyDateTime"
         android:layout_width="fill_parent"
         android:layout_gravity="center"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:visibility="gone"/>
@@ -67,6 +75,7 @@
     <CheckBox
         android:id="@+id/cb_box"
         android:layout_width="fill_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:visibility="gone"

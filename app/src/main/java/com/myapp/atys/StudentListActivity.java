@@ -49,7 +49,7 @@ public class StudentListActivity extends ListActivity implements
     private SimpleCursorAdapter adapter;
     private ListView listView;
     private List<Long> list;
-    private RelativeLayout relativeLayout;
+    // private RelativeLayout relativeLayout;
     private Button searchButton;
 
     private ImageView back;
@@ -58,7 +58,6 @@ public class StudentListActivity extends ListActivity implements
     private LinearLayout layout;
     private DataDao dao;
     private Student student;
-    private Boolean isDeleteList = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,11 +69,11 @@ public class StudentListActivity extends ListActivity implements
         dao = new DataDao(new DBOpenHelper(this));
         searchButton = (Button) findViewById(R.id.bn_search_id);
 
-        back=(ImageView)findViewById(R.id.back);
-        add=(ImageView)findViewById(R.id.add);
+        back = (ImageView) findViewById(R.id.back);
+        add = (ImageView) findViewById(R.id.add);
 
         layout = (LinearLayout) findViewById(R.id.showLiner);
-        relativeLayout = (RelativeLayout) findViewById(R.id.RelativeLayout_Class);
+        //  relativeLayout = (RelativeLayout) findViewById(R.id.RelativeLayout_Class);
         listView = getListView();
 
         // 为按键设置监听
@@ -106,8 +105,7 @@ public class StudentListActivity extends ListActivity implements
     }
 
     public void onClick(View v) {
-        // 跳转到添加信息的界面
-       if (v == searchButton) {
+        if (v == searchButton) {
             // 跳转到查询界面
             startActivity(new Intent(this, StudentSearch.class));
         }
@@ -165,14 +163,13 @@ public class StudentListActivity extends ListActivity implements
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
-        if (!isDeleteList) {
-            student = dao.getStudentFromView(view, id);
-            Log.e(TAG, "student*****" + dao.getStudentFromView(view, id));
-            Intent intent = new Intent();
-            intent.putExtra("student", student);
-            intent.setClass(this, ShowStudentActivity.class);
-            this.startActivity(intent);
-        }
+        student = dao.getStudentFromView(view, id);
+        Log.e(TAG, "student*****" + dao.getStudentFromView(view, id));
+        Intent intent = new Intent();
+        intent.putExtra("student", student);
+        intent.setClass(this, ShowStudentActivity.class);
+        this.startActivity(intent);
+
     }
 
     // 自定义一个加载数据库中的全部记录到当前页面的无参方法
@@ -197,34 +194,6 @@ public class StudentListActivity extends ListActivity implements
         listView.setAdapter(adapter);
     }
 
-    // 全选或者取消全选
-    private void checkOrClearAllCheckboxs(boolean b) {
-        int childCount = listView.getChildCount();
-        Log.e(TAG, "list child size=" + childCount);
-        for (int i = 0; i < childCount; i++) {
-            View view = listView.getChildAt(i);
-            if (view != null) {
-                CheckBox box = (CheckBox) view.findViewById(R.id.cb_box);
-                box.setChecked(!b);
-            }
-        }
-        showOrHiddenCheckBoxs(true);
-    }
-
-    // 显示或者隐藏自定义菜单
-    private void showOrHiddenCheckBoxs(boolean b) {
-        int childCount = listView.getChildCount();
-        Log.e(TAG, "list child size=" + childCount);
-        for (int i = 0; i < childCount; i++) {
-            View view = listView.getChildAt(i);
-            if (view != null) {
-                CheckBox box = (CheckBox) view.findViewById(R.id.cb_box);
-                int visible = b ? View.VISIBLE : View.GONE;
-                box.setVisibility(visible);
-                layout.setVisibility(visible);
-            }
-        }
-    }
 
     // 自定义一个利用对话框形式进行数据的删除
 
@@ -238,7 +207,6 @@ public class StudentListActivity extends ListActivity implements
                     public void onClick(DialogInterface dialog, int id) {
                         int raws = dao.deleteStudentById(delete_id);
                         layout.setVisibility(View.GONE);
-                        isDeleteList = !isDeleteList;
                         load();
                         if (raws > 0) {
                             Toast.makeText(StudentListActivity.this, "删除成功!",

@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -36,21 +37,17 @@ public class CourseListActivity extends ListActivity implements
         View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private static final String TAG = "TestSQLite";
-    private Button addCourse;
     private Cursor cursor;
     private SimpleCursorAdapter adapter;
     private ListView listView;
     private List<Long> list;
-    private RelativeLayout relativeLayout;
     private Button searchButton;
-    private Button selectButton;
-    private Button deleteButton;
-    private Button selectAllButton;
-    private Button canleButton;
+
+    private ImageView back;
+    private ImageView add;
     private LinearLayout layout;
     private DataDao dao;
     private Course course;
-    private Boolean isDeleteList = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,23 +57,26 @@ public class CourseListActivity extends ListActivity implements
         list = new ArrayList<Long>();
         course = new Course();
         dao = new DataDao(new DBOpenHelper(this));
-        addCourse = (Button) findViewById(R.id.btn_add_course);
-        searchButton = (Button) findViewById(R.id.bn_cs_search_id);
-        selectButton = (Button) findViewById(R.id.bn_cs_select);
-        deleteButton = (Button) findViewById(R.id.bn_cs_delete);
-        selectAllButton = (Button) findViewById(R.id.bn_cs_delete);
-        canleButton = (Button) findViewById(R.id.bn_cs_canel);
+        searchButton = (Button) findViewById(R.id.bn_search_id);
+        back=(ImageView)findViewById(R.id.back);
+        add=(ImageView)findViewById(R.id.add);
         layout = (LinearLayout) findViewById(R.id.showLiner_course);
-        relativeLayout = (RelativeLayout) findViewById(R.id.RelativeLayout_Course);
         listView = getListView();
 
         // 为按键设置监听
-        addCourse.setOnClickListener(this);
         searchButton.setOnClickListener(this);
-        selectButton.setOnClickListener(this);
-        deleteButton.setOnClickListener(this);
-        canleButton.setOnClickListener(this);
-        selectAllButton.setOnClickListener(this);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CourseListActivity.this, AddCourseActivity.class));
+            }
+        });
         listView.setOnItemClickListener(this);
         listView.setOnItemLongClickListener(this);
         listView.setOnCreateContextMenuListener(this);
@@ -91,39 +91,9 @@ public class CourseListActivity extends ListActivity implements
     }
 
     public void onClick(View v) {
-        // 跳转到添加信息的界面
-        if (v == addCourse) {
-            startActivity(new Intent(CourseListActivity.this, AddCourseActivity.class));
-        } else if (v == searchButton) {
+        if (v == searchButton) {
             // 跳转到查询界面
             startActivity(new Intent(this, CourseSearch.class));
-        } else if (v == selectButton) {
-            // 跳转到选择界面
-            isDeleteList = !isDeleteList;
-            if (isDeleteList) {
-                checkOrClearAllCheckboxs(true);
-            } else {
-                showOrHiddenCheckBoxs(false);
-            }
-        } else if (v == deleteButton) {
-            // 删除数据
-            if (list.size() > 0) {
-                for (int i = 0; i < list.size(); i++) {
-                    long id = list.get(i);
-                    Log.e(TAG, "delete id=" + id);
-                    int count = dao.deleteCourseById(id);
-                }
-                dao.closeDB();
-                load();
-            }
-        } else if (v == canleButton) {
-            // 点击取消，回到初始界面
-            load();
-            layout.setVisibility(View.GONE);
-            isDeleteList = !isDeleteList;
-        } else if (v == selectAllButton) {
-            // 全选，如果当前全选按钮显示是全选，则在点击后变为取消全选，如果当前为取消全选，则在点击后变为全选
-            selectAllMethods();
         }
     }
 
@@ -178,19 +148,13 @@ public class CourseListActivity extends ListActivity implements
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
-        if (!isDeleteList) {
+
             course = dao.getCourseFromView(view, id);
             Log.e(TAG, "course*****" + dao.getCourseFromView(view, id));
             Intent intent = new Intent();
             intent.putExtra("course", course);
             intent.setClass(this, ShowCourseActivity.class);
             this.startActivity(intent);
-        } else {
-            CheckBox box = (CheckBox) view.findViewById(R.id.cb_box);
-            box.setChecked(!box.isChecked());
-            list.add(id);
-            deleteButton.setEnabled(box.isChecked());
-        }
     }
 
     // 自定义一个加载数据库中的全部记录到当前页面的无参方法
@@ -217,35 +181,6 @@ public class CourseListActivity extends ListActivity implements
         listView.setAdapter(adapter);
     }
 
-    // 全选或者取消全选
-    private void checkOrClearAllCheckboxs(boolean b) {
-        int childCount = listView.getChildCount();
-        Log.e(TAG, "list child size=" + childCount);
-        for (int i = 0; i < childCount; i++) {
-            View view = listView.getChildAt(i);
-            if (view != null) {
-                CheckBox box = (CheckBox) view.findViewById(R.id.cb_box);
-                box.setChecked(!b);
-            }
-        }
-        showOrHiddenCheckBoxs(true);
-    }
-
-    // 显示或者隐藏自定义菜单
-    private void showOrHiddenCheckBoxs(boolean b) {
-        int childCount = listView.getChildCount();
-        Log.e(TAG, "list child size=" + childCount);
-        for (int i = 0; i < childCount; i++) {
-            View view = listView.getChildAt(i);
-            if (view != null) {
-                CheckBox box = (CheckBox) view.findViewById(R.id.cb_box);
-                int visible = b ? View.VISIBLE : View.GONE;
-                box.setVisibility(visible);
-                layout.setVisibility(visible);
-                deleteButton.setEnabled(false);
-            }
-        }
-    }
 
     // 自定义一个利用对话框形式进行数据的删除
 
@@ -259,7 +194,6 @@ public class CourseListActivity extends ListActivity implements
                     public void onClick(DialogInterface dialog, int id) {
                         int raws = dao.deleteCourseById(delete_id);
                         layout.setVisibility(View.GONE);
-                        isDeleteList = !isDeleteList;
                         load();
                         if (raws > 0) {
                             Toast.makeText(CourseListActivity.this, "删除成功!",
@@ -278,24 +212,4 @@ public class CourseListActivity extends ListActivity implements
         alert.show();
     }
 
-    // 点击全选事件时所触发的响应
-    private void selectAllMethods() {
-        // 全选，如果当前全选按钮显示是全选，则在点击后变为取消全选，如果当前为取消全选，则在点击后变为全选
-        if (selectAllButton.getText().toString().equals("全选")) {
-            int childCount = listView.getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                View view = listView.getChildAt(i);
-                if (view != null) {
-                    CheckBox box = (CheckBox) view.findViewById(R.id.cb_box);
-                    box.setChecked(true);
-                    deleteButton.setEnabled(true);
-                    selectAllButton.setText("取消全选");
-                }
-            }
-        } else if (selectAllButton.getText().toString().equals("取消全选")) {
-            checkOrClearAllCheckboxs(true);
-            deleteButton.setEnabled(false);
-            selectAllButton.setText("全选");
-        }
-    }
 }

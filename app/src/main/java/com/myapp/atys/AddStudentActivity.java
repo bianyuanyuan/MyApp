@@ -59,6 +59,8 @@ public class AddStudentActivity extends BaseActivity implements OnClickListener 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_student);
+
+
         idText = (TextView) findViewById(R.id.tv_stu_id);
         nameText = (EditText) findViewById(R.id.et_name);
         ageText = (EditText) findViewById(R.id.et_age);
