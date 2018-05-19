@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white">
+
+    <!--标题栏-->
+    <LinearLayout
+        android:id="@+id/layout_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:gravity="center_horizontal"
+            android:text="教练端登录"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+    </LinearLayout>
+
 
     <ProgressBar
         android:id="@+id/progressbar"
@@ -18,8 +40,9 @@
         android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginStart="30dp"
+
         android:layout_marginTop="70dp"
         android:drawableStart="@android:drawable/ic_menu_myplaces"
         android:drawableTint="@color/colorPrimary"
@@ -30,11 +53,12 @@
     <EditText
         android:id="@+id/password"
         android:layout_width="400dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginStart="30dp"
         android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/account"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
+
         android:drawableStart="@android:drawable/ic_lock_idle_lock"
         android:drawableTint="@color/colorPrimary"
         android:ems="10"
@@ -60,8 +84,9 @@
         android:id="@+id/login_auto"
         android:layout_width="150dp"
         android:layout_height="20dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginStart="30dp"
         android:layout_above="@+id/login"
-        android:layout_marginStart="20dp"
         android:layout_toEndOf="@+id/login"
         android:backgroundTint="@color/colorPrimary"
         android:checked="false"
@@ -69,17 +94,15 @@
         android:textSize="15sp" />
 
 
-
-
-
     <!--登录注册按钮-->
     <Button
         android:id="@+id/register"
         android:layout_width="120dp"
         android:layout_height="40dp"
+        android:layout_marginStart="30dp"
         android:layout_alignEnd="@+id/password"
         android:layout_alignTop="@+id/login"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="0dp"
         android:background="#19ee92"
         android:gravity="center"
         android:text="注册"
@@ -90,6 +113,7 @@
         android:id="@+id/login"
         android:layout_width="120dp"
         android:layout_height="40dp"
+        android:layout_marginEnd="35dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/login_remember"
         android:layout_marginStart="30dp"
@@ -99,26 +123,43 @@
         android:text="登录"
         android:textColor="@color/white"
         android:textSize="20sp" />
-    <RadioGroup
-        android:layout_marginStart="30dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/login"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RadioButton
-            android:text="教练"
-            android:id="@+id/rbt_coach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <RadioButton
-            android:layout_marginLeft="16dp"
-            android:text="学员"
-            android:id="@+id/rbt_user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RadioGroup>
 
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:id="@+id/xian"
+        android:layout_marginTop="80dp"
+        android:layout_below="@+id/login"
+        android:layout_marginEnd="35dp"
+        android:layout_marginStart="30dp"
+        android:gravity="center_horizontal"
+        android:text="--------------------或--------------------"
+        android:textSize="18dp" />
+
+    <ImageView
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="35dp"
+        android:id="@+id/user"
+        android:layout_marginStart="150dp"
+        android:layout_below="@+id/xian"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:background="@mipmap/icon_student_manager"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/user"
+        android:layout_marginEnd="35dp"
+        android:layout_marginStart="30dp"
+        android:gravity="center_horizontal"
+        android:text="学员端"
+        android:layout_centerVertical="true"
+        android:textSize="10dp" />
 
     <TextView
         android:id="@+id/visitor"
@@ -129,6 +170,6 @@
         android:gravity="center"
         android:text="@string/VisitorHint"
         android:textColor="@android:color/holo_green_dark"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
 
 </RelativeLayout>

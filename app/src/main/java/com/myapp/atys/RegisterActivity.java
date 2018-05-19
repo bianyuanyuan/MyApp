@@ -34,8 +34,6 @@ public class RegisterActivity extends BaseActivity {
     private EditText pwdText;
     private EditText confirmPwdText;
 
-    private RadioButton rbt_user;
-    private RadioButton rbt_coach;
 
 
     @Override
@@ -46,7 +44,7 @@ public class RegisterActivity extends BaseActivity {
         initComponents();
         setListeners();
 
-        rbt_user.setChecked(true);
+
 
     }
 
@@ -58,8 +56,6 @@ public class RegisterActivity extends BaseActivity {
         pwdText = findViewById(R.id.register_pwd);
         confirmPwdText = findViewById(R.id.register_pwd_confirm);
 
-        rbt_coach = (RadioButton) findViewById(R.id.rbt_coach);
-        rbt_user = (RadioButton) findViewById(R.id.rbt_user);
 
 
     }

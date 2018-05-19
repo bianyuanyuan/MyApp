@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -52,8 +53,7 @@ public class LoginActivity2 extends BaseActivity {
     private TextView visitorText;//游客登录
     private DBOpenHelper helper;
 
-    private RadioButton rbt_user;
-    private RadioButton rbt_coach;
+    private ImageView myuser;
 
     private String account;
     private String password;
@@ -96,9 +96,8 @@ public class LoginActivity2 extends BaseActivity {
         loginBtn = (Button) findViewById(R.id.login);
         registerBtn = (Button) findViewById(R.id.register);
 
-        rbt_user = (RadioButton) findViewById(R.id.rbt_user);
-        //    rbt_user.setChecked(true);
-        rbt_coach = (RadioButton) findViewById(R.id.rbt_coach);
+
+        myuser=(ImageView)findViewById(R.id.user);
 
         helper = new DBOpenHelper(this, "manager.db", null, 1);
         // LitePal.getDatabase();// 建立数据库
@@ -122,6 +121,13 @@ public class LoginActivity2 extends BaseActivity {
             }
         });
 
+
+        myuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                autoStartActivity(LoginActivity.class);//用户端
+            }
+        });
         visitorText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,17 +219,11 @@ public class LoginActivity2 extends BaseActivity {
                         //  User user=new User();
                         db.close();
                         cursor.close();
-                    }//////////////////////////////////////////////////////////////////
+                    }
 
                     // UserManager.setCurrentUser(user);// 设置当前用户
-                    if (rbt_coach.isChecked()) {
-                        // go(AdminMainActivity.class);
+
                         autoStartActivity(MainMenuActivity.class);
-                    } else if (rbt_user.isChecked()) {
-                        //  go(MainActivity.class);
-                        autoStartActivity(LoginActivity.class);
-                    }
-                    //    autoStartActivity(MainMenuActivity.class);///////////进入主界面活动//////////////
                 }
                 showResponse(resMsg);
             }
