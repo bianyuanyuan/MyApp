@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +26,13 @@ import java.util.Map;
 import cn.bmob.v3.BmobUser;
 import myapp.byy.com.myapp.R;
 
-public class ChooseCoachActivity extends BaseActivity{
+public class ChooseCoachActivity extends BaseActivity {
     private Button choose;
     private Button choose2;
     private DBOpenHelper helper;
     private AlertDialog.Builder dialog = null;
-    private MyUser user= BmobUser.getCurrentUser(MyUser.class);
+    private MyUser user = BmobUser.getCurrentUser(MyUser.class);
+    private ImageView back;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +40,14 @@ public class ChooseCoachActivity extends BaseActivity{
 
         //创建或打开数据库
         helper = new DBOpenHelper(this, "manager.db", null, 1);
-
+        back = (ImageView) findViewById(R.id.back);
 
         Intent intent = getIntent();
         choose = findViewById(R.id.choose);
         choose2 = findViewById(R.id.choose2);
 
         final Coach coach = (Coach) intent.getSerializableExtra("coach");
-      //  final String coachid = intent.getStringExtra("coachid");
+        //  final String coachid = intent.getStringExtra("coachid");
 
         ((TextView) findViewById(R.id.tv_co_info_name)).setText(coach.getName());
         ((TextView) findViewById(R.id.tv_co_info_age)).setText(coach.getAge() + "");
@@ -55,6 +57,12 @@ public class ChooseCoachActivity extends BaseActivity{
         ((TextView) findViewById(R.id.tv_co_info_charge)).setText(coach.getCharge() + "");
         ((TextView) findViewById(R.id.tv_co_info_tcourse)).setText(coach.getTeach_course());
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

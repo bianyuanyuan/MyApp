@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.myapp.BmobData.MyUser;
@@ -37,6 +38,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private AppCompatCheckBox keep_login;
     private CustomDialog dialog;
 
+    private ImageView back;
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +55,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         et_password = (EditText) findViewById(R.id.et_password);
         keep_login = (AppCompatCheckBox) findViewById(R.id.keep_login);
 
+        back=(ImageView)findViewById(R.id.back);
         btn_register.setOnClickListener(this);
         btn_login.setOnClickListener(this);
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //参数分别是   上下文，宽，高，内容布局，样式，居中显示，动画样式
         dialog = new CustomDialog(this,WRAP_CONTENT,WRAP_CONTENT,R.layout.dialog_loding,R.style.Theme_Dialog, Gravity.CENTER,R.style.pop_anim_style);
         //屏幕外点击无效

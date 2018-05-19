@@ -55,6 +55,7 @@ public class LoginActivity2 extends BaseActivity {
 
     private ImageView myuser;
 
+    private ImageView back;
     private String account;
     private String password;
 
@@ -97,8 +98,8 @@ public class LoginActivity2 extends BaseActivity {
         registerBtn = (Button) findViewById(R.id.register);
 
 
-        myuser=(ImageView)findViewById(R.id.user);
-
+        myuser = (ImageView) findViewById(R.id.user);
+        back = (ImageView) findViewById(R.id.back);
         helper = new DBOpenHelper(this, "manager.db", null, 1);
         // LitePal.getDatabase();// 建立数据库
 
@@ -106,6 +107,12 @@ public class LoginActivity2 extends BaseActivity {
     }
 
     void setListeners() {
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {//登录
@@ -223,7 +230,7 @@ public class LoginActivity2 extends BaseActivity {
 
                     // UserManager.setCurrentUser(user);// 设置当前用户
 
-                        autoStartActivity(MainMenuActivity.class);
+                    autoStartActivity(MainMenuActivity.class);
                 }
                 showResponse(resMsg);
             }
