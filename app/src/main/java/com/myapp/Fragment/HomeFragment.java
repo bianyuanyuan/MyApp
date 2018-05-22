@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         List<HashMap<String, Object>> data = new ArrayList<HashMap<String, Object>>();
         for (Course course : courses) {
             HashMap<String, Object> item = new HashMap<String, Object>();
-            item.put("pic", R.drawable.logo);
+            item.put("pic", R.mipmap.icon_course);
             item.put("name", course.getName());
 
             item.put("course", course);

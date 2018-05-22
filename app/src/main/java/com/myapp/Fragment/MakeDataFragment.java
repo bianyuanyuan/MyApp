@@ -91,7 +91,7 @@ public class MakeDataFragment extends Fragment implements View.OnClickListener, 
         List<HashMap<String, Object>> data = new ArrayList<HashMap<String, Object>>();
         for (Coach person : persons) {
             HashMap<String, Object> item = new HashMap<String, Object>();
-            item.put("pic", R.drawable.icon_avatar);
+            item.put("pic", R.mipmap.icon_coach);
             item.put("name", person.getName());
             item.put("course", person.getTeach_course());
 

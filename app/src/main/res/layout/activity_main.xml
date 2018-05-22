@@ -57,20 +57,20 @@
             android:textColor="@color/main_tab_text_selector_tab"
             android:textSize="10sp" />
 
-        <RadioButton
-            android:id="@+id/rb_table"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:button="@null"
-            android:drawablePadding="3dp"
-            android:drawableTop="@drawable/rb_table"
-            android:gravity="center"
-            android:text="课表"
-            android:textColor="@color/main_tab_text_selector_tab"
-            android:textSize="10sp" />
-
+        <!-- <RadioButton
+              android:id="@+id/rb_table"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:background="@android:color/transparent"
+              android:button="@null"
+              android:drawablePadding="3dp"
+              android:drawableTop="@drawable/rb_table"
+              android:gravity="center"
+              android:text="课表"
+              android:textColor="@color/main_tab_text_selector_tab"
+              android:textSize="10sp" />
+  -->
         <RadioButton
             android:id="@+id/rb_me"
             android:layout_width="0dp"

@@ -62,9 +62,9 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         //  LitePal.getDatabase();//创建"ManaerTest.db"
-      //  Intent i = new Intent(this, LoginActivity2.class);//////进入教练端（管理员）///////
-      //  startActivity(i);
-      setContentView(R.layout.activity_main);////////学员端布局////////////////////
+        //  Intent i = new Intent(this, LoginActivity2.class);//////进入教练端（管理员）///////
+        //  startActivity(i);
+        setContentView(R.layout.activity_main);////////学员端布局////////////////////
 
         //  initView();
         //初始化
@@ -81,9 +81,9 @@ public class MainActivity extends BaseActivity {
                     case R.id.rb_make_date:
                         changeFragment(MakeDataFragment.class.getName());
                         break;
-                    case R.id.rb_table:
-                        changeFragment(TableFragment.class.getName());
-                        break;
+                    //      case R.id.rb_table:
+                    //          changeFragment(TableFragment.class.getName());
+                    //         break;
                     case R.id.rb_me:
                         changeFragment(MeFragment.class.getName());
                         break;
@@ -113,9 +113,10 @@ public class MainActivity extends BaseActivity {
                 fragment = HomeFragment.newInstance();
             } else if (tag.equals(MakeDataFragment.class.getName())) {
                 fragment = MakeDataFragment.newInstance();
-            } else if (tag.equals(TableFragment.class.getName())) {
-                fragment = TableFragment.newInstance();
-            } else if (tag.equals(MeFragment.class.getName())) {
+            }// else if (tag.equals(TableFragment.class.getName())) {
+              //  fragment = TableFragment.newInstance();
+           // }
+            else if (tag.equals(MeFragment.class.getName())) {
                 fragment = MeFragment.newInstance();
             }
             mFragmentList.add(fragment);
