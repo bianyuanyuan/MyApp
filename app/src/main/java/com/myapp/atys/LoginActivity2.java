@@ -13,12 +13,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.myapp.Activity.CLoginActivity;
 import com.myapp.Activity.LoginActivity;
-import com.myapp.Data.User;
 import com.myapp.Util.CommonRequest;
 import com.myapp.Util.CommonResponse;
 import com.myapp.Util.Consts;
@@ -26,11 +25,7 @@ import com.myapp.Util.HttpUtil;
 import com.myapp.Util.SharedPreferencesUtil;
 import com.myapp.Util.UserManager;
 import com.myapp.Util.Util;
-import com.myapp.dao.DataDao;
 import com.myapp.db.DBOpenHelper;
-
-import org.litepal.LitePal;
-import org.litepal.crud.DataSupport;
 
 import java.io.IOException;
 
@@ -54,6 +49,7 @@ public class LoginActivity2 extends BaseActivity {
     private DBOpenHelper helper;
 
     private ImageView myuser;
+    private ImageView cuser;
 
     private ImageView back;
     private String account;
@@ -99,6 +95,8 @@ public class LoginActivity2 extends BaseActivity {
 
 
         myuser = (ImageView) findViewById(R.id.user);
+        cuser = (ImageView) findViewById(R.id.cuser);
+
         back = (ImageView) findViewById(R.id.back);
         helper = new DBOpenHelper(this, "manager.db", null, 1);
         // LitePal.getDatabase();// 建立数据库
@@ -132,7 +130,14 @@ public class LoginActivity2 extends BaseActivity {
         myuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                autoStartActivity(LoginActivity.class);//用户端
+                autoStartActivity(LoginActivity.class);//学员用户端
+            }
+        });
+
+        cuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                autoStartActivity(CLoginActivity.class);//教练用户端
             }
         });
         visitorText.setOnClickListener(new View.OnClickListener() {

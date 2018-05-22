@@ -15,7 +15,7 @@
             android:layout_height="50dp"
             android:background="#3C3C3C"
             android:gravity="center"
-            android:text="首页"
+            android:text="浏览课程"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 

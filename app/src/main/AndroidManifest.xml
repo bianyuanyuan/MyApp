@@ -87,7 +87,12 @@
 
         <activity android:name="com.myapp.Activity.LoginActivity" />
         <activity android:name="com.myapp.Activity.RegisterActivity" />
+        <activity android:name="com.myapp.Activity.CLoginActivity" />
+        <activity android:name="com.myapp.Activity.CRegisterActivity" />
+        <activity android:name="com.myapp.Activity.CInfoActivity" />
 
+        <activity android:name="com.myapp.Activity.SeeStudent" />
+        <activity android:name="com.myapp.atys.MainCoach" />
     </application>
 
 </manifest>

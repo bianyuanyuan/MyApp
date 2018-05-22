@@ -30,6 +30,7 @@ import myapp.byy.com.myapp.R;
 public class MainMenuActivity extends BaseActivity {
     LinearLayout llBtnMenu;
 
+    private ImageView back;
     PublishDialog pDialog;
 
 
@@ -40,8 +41,13 @@ public class MainMenuActivity extends BaseActivity {
         setContentView(R.layout.main_menu);
 
 
-
-
+        back = (ImageView) findViewById(R.id.back);
+        back.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         GridView gridview = (GridView) findViewById(R.id.gridview);
 
         AnimationSet set = new AnimationSet(false);

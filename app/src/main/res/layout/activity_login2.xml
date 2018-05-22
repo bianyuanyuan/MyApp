@@ -23,16 +23,26 @@
             android:paddingRight="18dp"
             android:src="@mipmap/arrow_back_white"
             android:visibility="visible" />
+
         <TextView
-            android:layout_width="310dp"
+            android:layout_width="276dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="#00000000"
             android:gravity="center_horizontal"
-            android:text="教练端登录"
+            android:text="管理端登录"
             android:textColor="#ffffff"
             android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:visibility="visible" />
     </LinearLayout>
 
 
@@ -153,24 +163,50 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="35dp"
         android:id="@+id/user"
-        android:layout_marginStart="150dp"
+        android:layout_marginStart="100dp"
         android:layout_below="@+id/xian"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
+        android:layout_gravity="left"
+        android:gravity="center_horizontal"
         android:background="@mipmap/icon_student_manager"/>
 
+    <ImageView
+        android:id="@+id/cuser"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_above="@+id/textView"
+        android:layout_alignStart="@+id/register"
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/icon_coach"
+        android:gravity="center_horizontal" />
+
+
     <TextView
-        android:layout_width="fill_parent"
+        android:layout_width="100dp"
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
         android:layout_below="@+id/user"
         android:layout_marginEnd="35dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="80dp"
         android:gravity="center_horizontal"
         android:text="学员端"
         android:textColor="#f1ecea"
         android:layout_centerVertical="true"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:id="@+id/textView" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/user"
+        android:layout_marginEnd="35dp"
+        android:layout_marginStart="200dp"
+        android:gravity="center_horizontal"
+        android:text="教练端"
+        android:textColor="#f1ecea"
+        android:layout_centerVertical="true"
+        android:textSize="20dp"
+       />
 
     <TextView
         android:id="@+id/visitor"
